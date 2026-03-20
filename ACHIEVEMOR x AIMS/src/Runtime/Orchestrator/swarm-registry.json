@@ -197,7 +197,8 @@
     "mcpTelegram": "ACHIEVEMOR x AIMS/src/Runtime/Skills/mcp-telegram-bridge.skill.json",
     "mcpWeb3": "ACHIEVEMOR x AIMS/src/Runtime/Skills/mcp-web3-bridge.skill.json",
     "designTool": "skills/SME_DesignTool_Antigravity/SKILL.md",
-    "autoResearch": "skills/SME_AutoResearch/SKILL.md"
+    "autoResearch": "skills/SME_AutoResearch/SKILL.md",
+    "openmaic": "okai/skills/openmaic/SKILL.md"
   },
   "infrastructure": {
     "vps": {

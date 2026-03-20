@@ -35,12 +35,12 @@
       "id": "openklass",
       "name": "Open|Klass AI",
       "type": "education-classroom",
-      "localPath": "vendor/OpenMAIC/",
+      "localPath": "okai/",
       "sourceRepo": "https://github.com/THU-MAIC/OpenMAIC.git",
-      "description": "Multi-agent interactive classroom platform. Transforms any topic or document into rich, interactive lessons with AI teachers and classmates. Built on Next.js/React/TypeScript with LangGraph orchestration. Supports slides, quizzes, simulations, whiteboard drawing, and voice explanations.",
+      "description": "Multi-agent interactive classroom platform. Transforms any topic or document into rich, interactive lessons with AI teachers and classmates. Built on Next.js/React/TypeScript with LangGraph orchestration. Full app with landing pages, classroom UI, PPTX export, and Boomer_Angs loading screen.",
       "assignedHawks": ["scripter", "designer", "sme-notebooklm"],
-      "skills": ["brainstorming", "subagent-driven-development"],
-      "status": "onboarding"
+      "skills": ["okai/skills/openmaic/SKILL.md", "brainstorming", "subagent-driven-development"],
+      "status": "active"
     },
     {
       "id": "locale",
