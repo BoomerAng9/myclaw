@@ -40,7 +40,21 @@
       "description": "Multi-agent interactive classroom platform. Transforms any topic or document into rich, interactive lessons with AI teachers and classmates. Built on Next.js/React/TypeScript with LangGraph orchestration. Full app with landing pages, classroom UI, PPTX export, and Boomer_Angs loading screen.",
       "assignedHawks": ["scripter", "designer", "sme-notebooklm"],
       "skills": ["okai/skills/openmaic/SKILL.md", "brainstorming", "subagent-driven-development"],
-      "status": "active"
+      "status": "active",
+      "whitelabel": {
+        "enabled": true,
+        "brandable": ["productName", "logo", "favicon", "primaryColor", "accentColor", "domain", "footerText", "loginProvider"],
+        "defaults": {
+          "productName": "Open|Klass AI",
+          "logoPath": "okai/public/okai-logos/okai-logo-primary.png",
+          "primaryColor": "#6C5CE7",
+          "accentColor": "#00CECE",
+          "domain": "klass.foai.cloud",
+          "footerText": "Powered by ACHIEVEMOR"
+        },
+        "tenantConfigPath": "okai/configs/tenant-overrides/",
+        "notes": "AIMS deploys whitelabeled instances via Make-It-Mine cloning. Each tenant gets their own config override file in tenantConfigPath. Chicken Hawk manages the clone/deploy cycle via Coolify."
+      }
     },
     {
       "id": "locale",
