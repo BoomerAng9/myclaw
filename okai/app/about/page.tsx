@@ -18,7 +18,7 @@ export default function AboutPage() {
         >
           <h1 className="text-4xl md:text-5xl font-extrabold mb-6">Built for <span className="text-violet-600 dark:text-violet-400">Peer-to-Peer</span> Learning</h1>
           <p className="text-lg text-slate-600 dark:text-slate-400">
-            Open Class AI is a revolutionary platform dedicated to knowledge sharing. We believe the fastest way to master a skill is by learning directly from someone who has already mastered it.
+            Open|Klass AI is a revolutionary platform dedicated to knowledge sharing. We believe the fastest way to master a skill is by learning directly from someone who has already mastered it.
           </p>
         </motion.div>
 
@@ -66,3 +66,4 @@ export default function AboutPage() {
     </div>
   );
 }
+

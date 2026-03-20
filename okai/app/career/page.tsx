@@ -21,7 +21,7 @@ export default function CareerPage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold mb-6">Career <span className="text-emerald-500">Connect</span></h1>
           <p className="text-lg text-slate-600 dark:text-slate-400">
-            Education is only the first step. Open Class AI connects you directly with companies that have pledged to accept and value our training certifications.
+            Education is only the first step. Open|Klass AI connects you directly with companies that have pledged to accept and value our training certifications.
           </p>
         </motion.div>
 
@@ -56,7 +56,7 @@ export default function CareerPage() {
           >
              {/* Using the primary logo (the face logo) here to distribute the 4 logos */}
             <div className="absolute inset-x-0 bottom-0 top-1/2 bg-emerald-100 dark:bg-emerald-900/20 blur-3xl opacity-50" />
-            <img src="/okai-logos/okai-logo-primary.png" alt="Open Class AI Connect" className="relative z-10 w-full h-full object-contain p-4 drop-shadow-2xl" />
+            <img src="/okai-logos/okai-logo-primary.png" alt="Open|Klass AI Connect" className="relative z-10 w-full h-full object-contain p-4 drop-shadow-2xl" />
           </motion.div>
         </div>
 
@@ -70,3 +70,4 @@ export default function CareerPage() {
     </div>
   );
 }
+

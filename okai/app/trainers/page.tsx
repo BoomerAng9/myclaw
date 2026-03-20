@@ -30,7 +30,7 @@ export default function TrainersPage() {
             className="order-2 md:order-1 relative flex justify-center"
           >
             {/* Using the full logo here */}
-            <img src="/okai-logos/okai-logo-full.png" alt="Open Class AI Logo Full" className="relative z-10 w-[80%] max-w-sm object-contain drop-shadow-lg" />
+            <img src="/okai-logos/okai-logo-full.png" alt="Open|Klass AI Logo Full" className="relative z-10 w-[80%] max-w-sm object-contain drop-shadow-lg" />
           </motion.div>
 
           <motion.div
@@ -60,3 +60,4 @@ export default function TrainersPage() {
     </div>
   );
 }
+

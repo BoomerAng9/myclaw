@@ -26,11 +26,11 @@ export default function LandingPage() {
           </div>
           
           <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight leading-loose lg:leading-tight">
-            Peer-to-Peer Learning with <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-cyan-500 drop-shadow-sm">Open Class AI</span>
+            Peer-to-Peer Learning with <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-cyan-500 drop-shadow-sm">Open|Klass AI</span>
           </h1>
           
           <p className="text-lg lg:text-xl text-slate-600 dark:text-slate-400 leading-relaxed font-light">
-            We offer accredited training courses, direct mentorship from industry leaders, and connect you with top companies ready to accept your Open Class AI certification.
+            We offer accredited training courses, direct mentorship from industry leaders, and connect you with top companies ready to accept your Open|Klass AI certification.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
@@ -63,8 +63,8 @@ export default function LandingPage() {
           {/* Main Hero Graphic / Concierge Logo */}
           <img 
             src="/okai-logos/okai-badge-formal.png" 
-            alt="Open Class AI Concierge Badge" 
-            className="w-[85%] relative z-10 drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+            alt="Open|Klass AI Concierge Badge" 
+            className="w-[120%] lg:w-[140%] max-w-none relative z-10 drop-shadow-2xl hover:scale-105 transition-transform duration-500 transform translate-x-4 lg:translate-x-8"
           />
         </motion.div>
       </main>

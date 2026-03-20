@@ -21,7 +21,7 @@ export default function AccreditedPage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold mb-6">Accredited <span className="text-cyan-500">Training Courses</span></h1>
           <p className="text-lg text-slate-600 dark:text-slate-400">
-            Open Class AI partners with industry giants like Mind Edge and EC Council to provide self-paced, fully certified courses recognized worldwide.
+            Open|Klass AI partners with industry giants like Mind Edge and EC Council to provide self-paced, fully certified courses recognized worldwide.
           </p>
         </motion.div>
 
@@ -64,3 +64,4 @@ export default function AccreditedPage() {
     </div>
   );
 }
+
