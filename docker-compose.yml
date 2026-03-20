@@ -24,3 +24,24 @@ services:
       - traefik.http.routers.myclawstudio.entrypoints=websecure
       - traefik.http.routers.myclawstudio.tls.certresolver=letsencrypt
       - traefik.http.services.myclawstudio.loadbalancer.server.port=3000
+
+  okai:
+    build:
+      context: ./okai
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file:
+      - ./okai/.env.local
+    ports:
+      - "3001:3000"
+    volumes:
+      - okai-data:/app/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.okai.rule=Host(`okai.foai.cloud`)
+      - traefik.http.routers.okai.entrypoints=websecure
+      - traefik.http.routers.okai.tls.certresolver=letsencrypt
+      - traefik.http.services.okai.loadbalancer.server.port=3000
+
+volumes:
+  okai-data:
