@@ -38,7 +38,7 @@ services:
       - okai-data:/app/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.okai.rule=Host(`klass.foai.cloud`)
+      - traefik.http.routers.okai.rule=Host(`ok.foai.cloud`)
       - traefik.http.routers.okai.entrypoints=websecure
       - traefik.http.routers.okai.tls.certresolver=letsencrypt
       - traefik.http.services.okai.loadbalancer.server.port=3000
@@ -78,6 +78,18 @@ services:
       - traefik.http.routers.partners.entrypoints=websecure
       - traefik.http.routers.partners.tls.certresolver=letsencrypt
       - traefik.http.services.partners.loadbalancer.server.port=80
+
+  foai:
+    image: nginx:alpine
+    restart: unless-stopped
+    volumes:
+      - ./foai/dist:/usr/share/nginx/html:ro
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.foai.rule=Host(`foai.cloud`, `www.foai.cloud`)
+      - traefik.http.routers.foai.entrypoints=websecure
+      - traefik.http.routers.foai.tls.certresolver=letsencrypt
+      - traefik.http.services.foai.loadbalancer.server.port=80
 
 volumes:
   okai-data:
