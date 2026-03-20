@@ -41,7 +41,7 @@
     .card-title { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
     .card-desc { font-size: 14px; color: #666; line-height: 1.55; }
     .card-action {
-      display: inline-flex; align-items: center; gap-6px;
+      display: inline-flex; align-items: center; gap: 6px;
       margin-top: 16px; font-size: 13px; font-weight: 600; color: #0066ff;
     }
 
@@ -59,7 +59,9 @@
 <body>
 
   <header>
-    <div class="logo">My<span>Claw</span></div>
+    <div class="logo">
+      <img src="../images/aims-logo-transparent.png" alt="AIMS" style="height: 28px; width: auto; display: block;" />
+    </div>
     <div class="header-right">
       <span class="user-email" id="userEmail">Loading...</span>
       <button class="btn-logout" onclick="logout()">Sign out</button>
@@ -102,29 +104,59 @@
     </div>
 
     <div class="card-grid">
-      <a class="card" href="https://openclaw-sop5.srv1492108.hstgr.cloud" target="_blank">
+      <a class="card" href="https://app.myclaw.foai.cloud" target="_blank">
         <div class="card-icon">💬</div>
         <div class="card-title">Open Chat</div>
         <div class="card-desc">Start a conversation with your private AI. Full access to your active models and agents.</div>
         <div class="card-action">Launch Chat →</div>
       </a>
-      <a class="card" href="https://openclaw-sop5.srv1492108.hstgr.cloud/agents" target="_blank">
+      <a class="card" href="https://app.myclaw.foai.cloud/agents" target="_blank">
         <div class="card-icon">🤖</div>
         <div class="card-title">Agents</div>
         <div class="card-desc">Configure and manage your autonomous AI agents. Set tasks, review outputs, adjust behavior.</div>
         <div class="card-action">Manage Agents →</div>
       </a>
-      <a class="card" href="https://openclaw-sop5.srv1492108.hstgr.cloud/models" target="_blank">
+      <a class="card" href="https://app.myclaw.foai.cloud/models" target="_blank">
         <div class="card-icon">⚡</div>
         <div class="card-title">Models</div>
         <div class="card-desc">Browse and switch between available AI models. Nemotron, LLaMA, Mistral and more.</div>
         <div class="card-action">View Models →</div>
       </a>
-      <a class="card" href="https://openclaw-sop5.srv1492108.hstgr.cloud/settings" target="_blank">
+      <a class="card" href="https://app.myclaw.foai.cloud/settings" target="_blank">
         <div class="card-icon">⚙️</div>
         <div class="card-title">Settings</div>
         <div class="card-desc">Configure your environment, API keys, memory, and privacy settings.</div>
         <div class="card-action">Open Settings →</div>
+      </a>
+      <a class="card" href="/luc-calculator.html" target="_blank">
+        <div class="card-icon">📊</div>
+        <div class="card-title">LUC Usage</div>
+        <div class="card-desc">View your Ledger Usage Calculator. Track token spend, swarm cycles, and quota across tiers.</div>
+        <div class="card-action">View Usage →</div>
+      </a>
+      <a class="card" href="#" onclick="alert('Paperform Hook ACTIVE. Point your Paperform Webhook to: https://myclaw.foai.cloud/v1/kyb-onboard'); return false;">
+        <div class="card-icon">🛡️</div>
+        <div class="card-title">KYB Onboarding</div>
+        <div class="card-desc">SME_Paperform_Ang is active. Register new Boomer_Angs directly via your Paperform webhook.</div>
+        <div class="card-action">View Webhook URL →</div>
+      </a>
+      <a class="card" href="https://studio.myclaw.foai.cloud" target="_blank">
+        <div class="card-icon">🎛️</div>
+        <div class="card-title">Mission Control</div>
+        <div class="card-desc">Live Eye-in-the-Sky view of all ACHEEVY operations and global state.</div>
+        <div class="card-action">Launch Mission Control →</div>
+      </a>
+      <a class="card" href="/partners/index.html" target="_blank">
+        <div class="card-icon">🤝</div>
+        <div class="card-title">Mind Edge Partners</div>
+        <div class="card-desc">Manage your relationship, integrations, and course metrics with Mind Edge.</div>
+        <div class="card-action">Open Partners Portal →</div>
+      </a>
+      <a class="card" href="/circuit-box.html" target="_blank">
+        <div class="card-icon">🔌</div>
+        <div class="card-title">Circuit Box (ACHEEVY)</div>
+        <div class="card-desc">Manage site capabilities, permissions, and knowledge for ACHEEVY.</div>
+        <div class="card-action">Open Circuit Box →</div>
       </a>
     </div>
   </div>

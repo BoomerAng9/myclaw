@@ -1,0 +1,220 @@
+.nodeContainer {
+  perspective: 1000px;
+  width: 200px;
+  height: 90px;
+  position: relative;
+  z-index: 10;
+}
+
+.nodeInner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.nodeContainer.selected .nodeInner {
+  transform: rotateY(180deg);
+  z-index: 20;
+}
+
+/* Front & Back Faces Base */
+.nodeFront, .nodeBack {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Handles only on front (or they stick out weirdly when flipped) */
+.handleTop { top: -4px !important; z-index: -1; }
+.handleBottom { bottom: -4px !important; z-index: -1; }
+.nodeContainer.selected .handleTop,
+.nodeContainer.selected .handleBottom { opacity: 0; pointer-events: none; }
+
+/* Front Specifics */
+.nodeFront::before, .nodeBack::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--rc);
+  opacity: 0.6;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.nodeContainer:hover .nodeFront,
+.nodeContainer:hover .nodeBack {
+  border-color: color-mix(in srgb, var(--rc) 30%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--rc) 12%, transparent), var(--shadow-card);
+}
+
+.nodeContainer.selected .nodeBack {
+  border-color: var(--rc) !important;
+  box-shadow: 0 0 14px color-mix(in srgb, var(--rc) 40%, transparent);
+}
+
+/* Status variants */
+.s_active { border-color: var(--border-success); }
+.s_active::before { opacity: 1; animation: pulse 1.5s ease-in-out infinite; }
+.s_failed { border-color: var(--border-danger); }
+.s_failed::before { background: var(--accent-red); opacity: 1; }
+.s_complete::before { background: var(--accent-green); opacity: 0.8; }
+.s_standby::before { opacity: 0.3; }
+
+/* Top bar (Front) */
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px 0;
+}
+
+.rank {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--rc);
+  background: color-mix(in srgb, var(--rc) 10%, transparent);
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.dot_active { background: var(--accent-green); box-shadow: 0 0 6px var(--accent-green); }
+.dot_complete { background: var(--accent-green); }
+.dot_failed { background: var(--accent-red); box-shadow: 0 0 6px var(--accent-red); }
+.dot_standby { background: var(--accent-amber); }
+.dot_idle { background: var(--text-muted); }
+
+/* Middle body (Front) */
+.mid {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px 6px;
+  flex: 1;
+}
+
+.icon {
+  font-size: 20px;
+  line-height: 1;
+  color: var(--rc);
+  flex-shrink: 0;
+}
+
+.info { flex: 1; min-width: 0; }
+
+.name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.task {
+  font-size: 10px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Stats row (Front) */
+.stats {
+  display: flex;
+  gap: 1px;
+  background: rgba(255,255,255,0.03);
+  border-top: 1px solid var(--border-subtle);
+  margin-top: auto;
+}
+
+.stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 4px;
+}
+
+.statVal {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.statLbl {
+  font-size: 8px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 1px;
+}
+
+/* Back Side Details */
+.nodeBack {
+  transform: rotateY(180deg);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.backContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.backIcon {
+  font-size: 16px;
+  color: var(--text-secondary);
+}
+
+.backContent h4 {
+  font-size: 12px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.backContent p {
+  font-size: 10px;
+  color: var(--text-primary);
+  line-height: 1.3;
+  margin: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.liveIndicator {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  font-family: 'JetBrains Mono', monospace;
+}

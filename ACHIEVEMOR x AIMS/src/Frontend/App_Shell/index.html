@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A.I.M.S — Autonomous Intelligence Management System</title>
+  <meta name="description" content="A.I.M.S is an API-first, vision-first action runtime. Govern, orchestrate, and review multi-agent AI execution at scale." />
+  <meta name="theme-color" content="#0d0f17" />
+  <link rel="stylesheet" href="../Styling/design-tokens.css" />
+  <link rel="stylesheet" href="shell.css" />
+  <link rel="stylesheet" href="../Pages/landing.css" />
+</head>
+<body>
+  <!-- ═══ Background Mesh ═══ -->
+  <div class="bg-mesh" aria-hidden="true">
+    <div class="mesh-orb mesh-orb--cyan"></div>
+    <div class="mesh-orb mesh-orb--violet"></div>
+    <div class="mesh-orb mesh-orb--amber"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <!-- ═══ Navigation ═══ -->
+  <nav class="nav glass" id="main-nav">
+    <div class="nav__inner">
+      <a href="#" class="nav__brand" id="nav-brand">
+        <span class="nav__logo-mark text-gradient">◆</span>
+        <span class="nav__wordmark">A.I.M.S</span>
+      </a>
+      <div class="nav__links" id="nav-links">
+        <a href="#features" class="nav__link">Features</a>
+        <a href="#agents" class="nav__link">Agents</a>
+        <a href="#runtime" class="nav__link">Runtime</a>
+        <a href="#pricing" class="nav__link">Pricing</a>
+      </div>
+      <div class="nav__actions">
+        <button class="btn btn-ghost" id="btn-login">Log In</button>
+        <button class="btn btn-primary" id="btn-launch">
+          Launch Console
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <button class="nav__hamburger" id="nav-hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══ Hero Section ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero__content">
+      <div class="hero__badge badge badge-cyan animate-fade-in-up">
+        <span class="badge__dot"></span>
+        Runtime v2026.3
+      </div>
+      <h1 class="hero__title animate-fade-in-up delay-1">
+        Your AI workforce,<br/>
+        <span class="text-gradient">governed & autonomous.</span>
+      </h1>
+      <p class="hero__subtitle animate-fade-in-up delay-2">
+        A.I.M.S is the API-first action runtime that turns human intent into 
+        reviewed, traceable, multi-agent execution. No guesswork. No slop.
+      </p>
+      <div class="hero__actions animate-fade-in-up delay-3">
+        <button class="btn btn-primary btn--lg" id="hero-cta">
+          Start Building
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="btn btn-secondary btn--lg" id="hero-docs">
+          Read the Docs
+        </button>
+      </div>
+      <div class="hero__stats animate-fade-in-up delay-4">
+        <div class="hero__stat">
+          <span class="hero__stat-value text-gradient-accent" id="stat-agents">24</span>
+          <span class="hero__stat-label">Swarm Agents</span>
+        </div>
+        <div class="hero__stat-divider"></div>
+        <div class="hero__stat">
+          <span class="hero__stat-value text-gradient-accent" id="stat-uptime">99.7%</span>
+          <span class="hero__stat-label">Uptime</span>
+        </div>
+        <div class="hero__stat-divider"></div>
+        <div class="hero__stat">
+          <span class="hero__stat-value text-gradient-accent" id="stat-latency">&lt;120ms</span>
+          <span class="hero__stat-label">Avg Latency</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero__visual animate-scale-in delay-3">
+      <div class="hero__terminal glass-heavy">
+        <div class="terminal__bar">
+          <span class="terminal__dot terminal__dot--red"></span>
+          <span class="terminal__dot terminal__dot--yellow"></span>
+          <span class="terminal__dot terminal__dot--green"></span>
+          <span class="terminal__title">aims-runtime</span>
+        </div>
+        <div class="terminal__body" id="terminal-output">
+          <div class="terminal__line"><span class="t-cyan">ACHEEVY</span> <span class="t-muted">→</span> Intent normalized <span class="t-emerald">✓</span></div>
+          <div class="terminal__line"><span class="t-violet">Picker_Ang</span> <span class="t-muted">→</span> Route: <span class="t-amber">CFO_Ang</span></div>
+          <div class="terminal__line"><span class="t-amber">CFO_Ang</span> <span class="t-muted">→</span> Quota gate: <span class="t-emerald">PASS</span></div>
+          <div class="terminal__line"><span class="t-cyan">BuildSmith</span> <span class="t-muted">→</span> Assembly in progress...</div>
+          <div class="terminal__line typing"><span class="t-emerald">Review_Hone</span> <span class="t-muted">→</span> Validating output<span class="cursor">█</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Features Grid ═══ -->
+  <section class="features" id="features">
+    <div class="section__header animate-fade-in-up">
+      <span class="badge badge-violet">Capabilities</span>
+      <h2 class="section__title">Built for <span class="text-gradient">serious operators.</span></h2>
+      <p class="section__desc">Not another chatbot wrapper. A.I.M.S is a governed runtime with review gates, quota enforcement, and traceable evidence at every step.</p>
+    </div>
+    <div class="features__grid">
+      <div class="feature-card glass interactive animate-fade-in-up delay-1" id="feat-orchestration">
+        <div class="feature-card__icon glow-cyan">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--aims-cyan)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4m0 14v4M4.22 4.22l2.83 2.83m9.9 9.9l2.83 2.83M1 12h4m14 0h4M4.22 19.78l2.83-2.83m9.9-9.9l2.83-2.83"/></svg>
+        </div>
+        <h3 class="feature-card__title">Multi-Agent Orchestration</h3>
+        <p class="feature-card__desc">ACHEEVY coordinates parallel Boomer_Ang execution. No single-threaded bottlenecks.</p>
+      </div>
+      <div class="feature-card glass interactive animate-fade-in-up delay-2" id="feat-routing">
+        <div class="feature-card__icon glow-violet">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--aims-violet)" stroke-width="2"><path d="M16 3h5v5M4 20L20.5 3.5M21 16v5h-5M15 15l5.5 5.5M4 4l5 5"/></svg>
+        </div>
+        <h3 class="feature-card__title">Capability-First Routing</h3>
+        <p class="feature-card__desc">Picker_Ang routes by capability class, not hard-coded vendors. Provider-agnostic by law.</p>
+      </div>
+      <div class="feature-card glass interactive animate-fade-in-up delay-3" id="feat-governance">
+        <div class="feature-card__icon glow-amber">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--aims-amber)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="feature-card__title">Governed Context (MIM)</h3>
+        <p class="feature-card__desc">Every action passes through MIM: revisions, approvals, memory, and distribution — never guesswork.</p>
+      </div>
+      <div class="feature-card glass interactive animate-fade-in-up delay-4" id="feat-quota">
+        <div class="feature-card__icon" style="box-shadow: var(--shadow-glow-cyan);">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--aims-emerald)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3 class="feature-card__title">LUC Quota Engine</h3>
+        <p class="feature-card__desc">Real-time ledger usage calculation with ByteRover discounts, soft-warn and hard-block gates.</p>
+      </div>
+      <div class="feature-card glass interactive animate-fade-in-up delay-5" id="feat-review">
+        <div class="feature-card__icon glow-cyan">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--aims-cyan)" stroke-width="2"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        </div>
+        <h3 class="feature-card__title">Review-Driven Output</h3>
+        <p class="feature-card__desc">Nothing ships without Review_Hone validation. Evidence-backed, gate-checked deliverables only.</p>
+      </div>
+      <div class="feature-card glass interactive animate-fade-in-up delay-6" id="feat-evidence">
+        <div class="feature-card__icon glow-violet">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--aims-violet)" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+        </div>
+        <h3 class="feature-card__title">Evidence Bundles</h3>
+        <p class="feature-card__desc">Every execution packaged with manifest, approval state, and retrieval path. Full traceability.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Runtime Pipeline ═══ -->
+  <section class="pipeline" id="runtime">
+    <div class="section__header animate-fade-in-up">
+      <span class="badge badge-emerald">Pipeline</span>
+      <h2 class="section__title">The <span class="text-gradient">mental loop.</span></h2>
+      <p class="section__desc">Every request follows the same governed path. No shortcuts.</p>
+    </div>
+    <div class="pipeline__track">
+      <div class="pipeline__step glass animate-fade-in-up delay-1" id="step-understand">
+        <div class="pipeline__number">01</div>
+        <h4>Understand</h4>
+        <p>Parse the real objective, not just the wording.</p>
+      </div>
+      <div class="pipeline__connector"></div>
+      <div class="pipeline__step glass animate-fade-in-up delay-2" id="step-normalize">
+        <div class="pipeline__number">02</div>
+        <h4>Normalize</h4>
+        <p>NTNTN frames intent into constraints, inputs, outputs, risks.</p>
+      </div>
+      <div class="pipeline__connector"></div>
+      <div class="pipeline__step glass animate-fade-in-up delay-3" id="step-govern">
+        <div class="pipeline__number">03</div>
+        <h4>Govern</h4>
+        <p>MIM builds the Context Pack. Policy is truth.</p>
+      </div>
+      <div class="pipeline__connector"></div>
+      <div class="pipeline__step glass animate-fade-in-up delay-4" id="step-route">
+        <div class="pipeline__number">04</div>
+        <h4>Route</h4>
+        <p>Picker_Ang matches capability classes to Boomer_Angs.</p>
+      </div>
+      <div class="pipeline__connector"></div>
+      <div class="pipeline__step glass animate-fade-in-up delay-5" id="step-execute">
+        <div class="pipeline__number">05</div>
+        <h4>Execute</h4>
+        <p>Boomer_Angs perform in parallel on governed context.</p>
+      </div>
+      <div class="pipeline__connector"></div>
+      <div class="pipeline__step glass animate-fade-in-up delay-6" id="step-review">
+        <div class="pipeline__number">06</div>
+        <h4>Review</h4>
+        <p>Review_Hone validates. Nothing leaves without proof.</p>
+      </div>
+      <div class="pipeline__connector"></div>
+      <div class="pipeline__step glass animate-fade-in-up delay-7" id="step-package">
+        <div class="pipeline__number">07</div>
+        <h4>Package</h4>
+        <p>BuildSmith assembles the evidence bundle and ships.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA Section ═══ -->
+  <section class="cta-section" id="cta">
+    <div class="cta-section__inner glass-heavy animate-scale-in">
+      <h2 class="cta-section__title">Ready to deploy your <span class="text-gradient">autonomous workforce?</span></h2>
+      <p class="cta-section__desc">Stop guessing. Start governing. Launch your swarm in under 5 minutes.</p>
+      <div class="cta-section__actions">
+        <button class="btn btn-primary btn--lg" id="cta-deploy">
+          Deploy Now
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="btn btn-secondary btn--lg" id="cta-demo">Book a Demo</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Footer ═══ -->
+  <footer class="footer" id="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="nav__logo-mark text-gradient">◆</span>
+        <span class="nav__wordmark">A.I.M.S</span>
+        <p class="footer__tagline">Autonomous Intelligence Management System</p>
+      </div>
+      <div class="footer__links">
+        <div class="footer__col">
+          <h5>Product</h5>
+          <a href="#">Features</a>
+          <a href="#">Pricing</a>
+          <a href="#">Documentation</a>
+          <a href="#">Changelog</a>
+        </div>
+        <div class="footer__col">
+          <h5>Runtime</h5>
+          <a href="#">ACHEEVY</a>
+          <a href="#">Boomer_Angs</a>
+          <a href="#">Picker_Ang</a>
+          <a href="#">MIM</a>
+        </div>
+        <div class="footer__col">
+          <h5>Company</h5>
+          <a href="#">About</a>
+          <a href="#">Blog</a>
+          <a href="#">Careers</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 ACHIEVEMOR. All rights reserved.</span>
+        <span class="footer__status"><span class="status-dot"></span> All Systems Operational</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="shell.js"></script>
+</body>
+</html>

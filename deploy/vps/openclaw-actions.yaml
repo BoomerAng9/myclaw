@@ -1,0 +1,88 @@
+openapi: 3.1.0
+info:
+  title: AIMS Internal Swarm API (ACHEEVY)
+  description: Internal operations executed by Boomer_Angs across the AIMS ecosystem (NotebookLM, Cinematic Rendering, KYB Registration).
+  version: 1.0.0
+servers:
+  - url: https://api.myclaw.foai.cloud/v1
+paths:
+  /notebooklm/generate:
+    post:
+      operationId: generateNotebookLMAudio
+      summary: Generates podcast-style audio briefings.
+      description: Use SME_NotebookLM_Ang to synthesize an audio podcast or briefing based on a topic and text content.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  description: "Topic for the audio briefing (e.g., 'Acuity Course Expansion Strategy')"
+                textContent:
+                  type: string
+                  description: "Source material to analyze"
+      responses:
+        '200':
+          description: Successful synthesis.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  audioUrl:
+                    type: string
+                  durationSec:
+                    type: number
+
+  /cinematic/generate:
+    post:
+      operationId: generateCinematicMedia
+      summary: Dispatches visual/video generation via AIMS.
+      description: Generate AI storyboards or full AI video renders using Gemini 3.1 Pro or Veo.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                outputType:
+                  type: string
+                  enum: [storyboard, thumbnail_grid, video_preview, full_render]
+      responses:
+        '200':
+          description: Media generation completed successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  storyboard:
+                    type: object
+                  outputs:
+                    type: array
+                    items:
+                      type: object
+
+  /acheevy/simulate:
+    post:
+      operationId: dispatchSwarmTask
+      summary: Dispatches a generic complex task through the AIMS pipeline.
+      description: Submits a prompt to ACHEEVY for DAG orchestration and review.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                intent:
+                  type: string
+      responses:
+        '200':
+          description: Pipeline dispatch status.

@@ -1,0 +1,38 @@
+{
+  "id": "researcher",
+  "name": "Research_Ang",
+  "role": "Research & Intelligence Specialist",
+  "description": "Narrow agent dedicated solely to gathering, summarizing, and structuring external information. Uses Brave Search API and web fetch. Does NOT write code or execute actions.",
+  "model": "gemini-3.1-pro",
+  "capabilities": ["web_search", "url_fetch", "summarization", "data_structuring"],
+  "constraints": {
+    "canExecuteCode": false,
+    "canWriteFiles": false,
+    "canAccessNetwork": true,
+    "canApprove": false,
+    "maxTokensPerTurn": 4096,
+    "requiresApproval": false
+  },
+  "tools": {
+    "braveSearch": {
+      "enabled": true,
+      "apiKeyEnv": "BRAVE_API_KEY"
+    },
+    "webFetch": {
+      "enabled": true,
+      "allowedDomains": ["*"],
+      "timeout": 15000
+    }
+  },
+  "triggers": {
+    "onEvent": ["research_request", "context_enrichment"],
+    "cronSchedule": null
+  },
+  "systemPrompt": "You are Research_Ang, the intelligence-gathering specialist inside A.I.M.S. Your ONLY job is to search the web, read URLs, and structure the information into clean, evidence-backed summaries. You NEVER write code. You NEVER approve anything. You return structured research packets with: source URL, key findings, confidence score, and relevance assessment.",
+  "outputFormat": {
+    "findings": [],
+    "sources": [],
+    "confidence": 0.0,
+    "relevance": ""
+  }
+}

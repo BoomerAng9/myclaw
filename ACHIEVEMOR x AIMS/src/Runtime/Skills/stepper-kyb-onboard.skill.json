@@ -1,0 +1,132 @@
+{
+  "skillId": "stepper-kyb-onboard-v1",
+  "skillName": "KYB Onboarding Automation",
+  "version": "1.0.0",
+  "owner": "SME_Stepper_Ang",
+  "description": "Stepper workflow skill for the gamified KYB (Know Your Boomer_Ang) onboarding pipeline. Catches Paperform submissions and fans out to HubSpot, Slack, and the A.I.M.S LUC governance endpoint.",
+  
+  "trigger": {
+    "type": "paperform_new_submission",
+    "formId": "{{PAPERFORM_KYB_FORM_ID}}",
+    "connectionMethod": "native_oauth"
+  },
+
+  "pipeline": [
+    {
+      "stepId": 1,
+      "name": "Receive Paperform Payload",
+      "type": "trigger",
+      "description": "Catches the raw guided-mode submission including all calculated outcomes.",
+      "outputs": ["submissionId", "ownerEmail", "boomerAngName", "primarySkill", "capabilities", "limitations", "privacy", "outcomeScore", "outcomeLabel", "submittedAt"]
+    },
+    {
+      "stepId": 2,
+      "name": "Fork: Risk-Based Routing",
+      "type": "conditional_branch",
+      "description": "Evaluate the Paperform outcomeScore to determine which parallel paths to execute.",
+      "conditions": [
+        {
+          "if": "outcomeScore <= 0.6",
+          "label": "Standard Path",
+          "goto": [3, 5]
+        },
+        {
+          "if": "outcomeScore > 0.6",
+          "label": "High-Risk Path",
+          "goto": [4, 5]
+        }
+      ]
+    },
+    {
+      "stepId": 3,
+      "name": "Component: HubSpot CRM Entry",
+      "type": "reusable_component",
+      "componentId": "hubspot-contact-create",
+      "description": "Standard-tier onboarding: push the new agent owner as a HubSpot contact with KYB metadata tags.",
+      "inputMapping": {
+        "email": "{{ownerEmail}}",
+        "firstname": "{{boomerAngName}}",
+        "kyb_tier": "Standard",
+        "kyb_score": "{{outcomeScore}}",
+        "source": "Paperform KYB Onboarding"
+      }
+    },
+    {
+      "stepId": 4,
+      "name": "Component: Slack Manual Review",
+      "type": "reusable_component",
+      "componentId": "slack-ops-notification",
+      "description": "High-risk tier: ping #ops-review channel with the submission for human review before CRM entry.",
+      "inputMapping": {
+        "channel": "#ops-review",
+        "message": "🚨 KYB High-Risk Onboarding: {{boomerAngName}} (Score: {{outcomeScore}}). Owner: {{ownerEmail}}. Review required before activation.",
+        "priority": "high"
+      }
+    },
+    {
+      "stepId": 5,
+      "name": "Component: A.I.M.S LUC Governance Webhook",
+      "type": "reusable_component",
+      "componentId": "aims-luc-kyb-webhook",
+      "description": "MANDATORY for ALL paths. Fires the full payload to the A.I.M.S backend for Flight Recorder logging and Anchor Chain preparation.",
+      "inputMapping": {
+        "url": "{{AIMS_API_BASE_URL}}/v1/kyb-onboard",
+        "method": "POST",
+        "headers": {
+          "Authorization": "Bearer {{INTERNAL_API_KEY}}",
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "submissionId": "{{submissionId}}",
+          "ownerEmail": "{{ownerEmail}}",
+          "boomerAngName": "{{boomerAngName}}",
+          "primarySkill": "{{primarySkill}}",
+          "capabilities": "{{capabilities}}",
+          "limitations": "{{limitations}}",
+          "privacy": "{{privacy}}",
+          "outcomeScore": "{{outcomeScore}}",
+          "outcomeLabel": "{{outcomeLabel}}",
+          "submittedAt": "{{submittedAt}}"
+        }
+      },
+      "outputCapture": ["serialId", "inputHash", "riskTier", "routingDecision"]
+    },
+    {
+      "stepId": 6,
+      "name": "Confirmation Email",
+      "type": "action",
+      "description": "Send a confirmation email to the owner with their new KYB serial ID.",
+      "provider": "resend",
+      "inputMapping": {
+        "to": "{{ownerEmail}}",
+        "subject": "Your Boomer_Ang has been registered — {{serialId}}",
+        "body": "Congratulations! Your agent '{{boomerAngName}}' has been assigned serial ID {{serialId}}. Risk classification: {{riskTier}}. You can view the Public Passport at: {{AIMS_APP_URL}}/kyb/charter/{{serialId}}"
+      }
+    }
+  ],
+
+  "components": {
+    "hubspot-contact-create": {
+      "description": "Reusable component: Creates or updates a HubSpot contact.",
+      "provider": "hubspot",
+      "action": "create_contact"
+    },
+    "slack-ops-notification": {
+      "description": "Reusable component: Posts a formatted message to a Slack channel.",
+      "provider": "slack",
+      "action": "post_message"
+    },
+    "aims-luc-kyb-webhook": {
+      "description": "Reusable component: HTTP POST to the A.I.M.S KYB governance endpoint.",
+      "provider": "http",
+      "action": "request"
+    }
+  },
+
+  "environmentVariables": [
+    "PAPERFORM_KYB_FORM_ID",
+    "AIMS_API_BASE_URL",
+    "INTERNAL_API_KEY",
+    "AIMS_APP_URL"
+  ]
+}

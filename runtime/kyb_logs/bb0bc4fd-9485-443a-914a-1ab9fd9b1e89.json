@@ -1,0 +1,33 @@
+{
+  "serialId": "bb0bc4fd-9485-443a-914a-1ab9fd9b1e89",
+  "timestamp": "2026-03-20T00:59:11.832Z",
+  "objective": "Normalized: Build a chat-first interface using real-time websockets",
+  "governancePack": {
+    "policiesChecked": [
+      "No hard-coded vendor choices",
+      "Require VL-JEPA semantic validation"
+    ],
+    "approved": true
+  },
+  "routing": {
+    "capability": "CodeGeneration_Type1",
+    "provider": "Provider-Agnostic"
+  },
+  "validation": {
+    "approved": true,
+    "hallucinationScore": 3.499105411410399
+  },
+  "evidence": [
+    {
+      "timestamp": "2026-03-20T00:59:11.302Z",
+      "event": "Execution Started",
+      "provider": "Provider-Agnostic",
+      "capability": "CodeGeneration_Type1"
+    },
+    {
+      "timestamp": "2026-03-20T00:59:11.303Z",
+      "event": "Execution Completed",
+      "draftLength": 147
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+vps sET UP
+
+
+
+# VPS2 Setup — From the Top
+
+## What We're Doing and Why
+
+You have **two Hostinger VPS machines**:
+
+| | VPS1 (Core Platform) | VPS2 (Sandbox & Plug Engine) |
+|---|---|---|
+| **Hostname** | srv1328075.hstgr.cloud | srv1318308.hstgr.cloud |
+| **IP** | 76.13.96.107 | 31.97.138.45 |
+| **OS** | Ubuntu 24.04 with n8n | Ubuntu 24.04 LTS (clean) |
+| **Plan** | KVM 2 | KVM 2 |
+| **Currently running** | 14 A.I.M.S. containers | Nothing |
+| **Will run** | Same 14 containers | OpenSandbox + Plug Engine |
+
+**VPS1** is your core platform — ACHEEVY, UEF Gateway, frontend, Redis, all 14 services from docker-compose.prod.yml.
+
+**VPS2** is clean. We're putting two things on it that are too resource-hungry and too dangerous to share VPS1:
+
+1. **OpenSandbox** — Where ACHEEVY's agents (Lil_Hawks, Chicken Hawk, NtNtN Engine) execute code in isolated sandboxes. Replaces GCP Cloud Run Jobs.
+2. **Plug Engine** — Where user-deployed Plug instances (the PaaS containers on port 51000+) actually run.
+
+---
+
+## The Problem We're Solving Right Now
+
+VPS1 needs to talk to VPS2 securely. We don't want OpenSandbox or the Plug Engine exposed to the public internet. So we need a **private encrypted tunnel** between the two servers using WireGuard.
+
+```
+VPS1 (76.13.96.107)                    VPS2 (31.97.138.45)
+┌──────────────────┐                   ┌──────────────────┐
+│  14 A.I.M.S.     │                   │  OpenSandbox     │
+│  containers      │                   │  Plug Engine     │
+│                  │                   │  Monitoring      │
+│  ACHEEVY needs   │   WireGuard      │                  │
+│  to reach ───────│───tunnel──────────│──▶ :4100         │
+│  sandbox         │   (encrypted)     │  (sandbox API)   │
+│                  │                   │                  │
+│  10.0.0.1        │◄─────────────────▶│  10.0.0.2        │
+└──────────────────┘                   └──────────────────┘
+    Public: 76.13.96.107                   Public: 31.97.138.45
+    Private: 10.0.0.1                      Private: 10.0.0.2
+```
+
+After WireGuard is set up, VPS1 can reach VPS2's services at `10.0.0.2:4100` (sandbox), `10.0.0.2:4200` (plug engine), etc. — through an encrypted tunnel that nobody else can see or access.
+
+---
+
+## The 5 Steps
+
+### Step 1: SSH into both servers
+
+You need two terminal windows. Kodee can't do this — WireGuard install commands are blocked on Hostinger's remote-command channel.
+
+**Terminal 1:**
+```bash
+ssh root@31.97.138.45
+```
+
+**Terminal 2:**
+```bash
+ssh root@76.13.96.107
+```
+
+---
+
+### Step 2: Install WireGuard on both
+
+**On VPS2 (31.97.138.45):**
+```bash
+apt-get update
+apt-get install -y wireguard wireguard-tools
+mkdir -p /etc/wireguard
+wg genkey | tee /etc/wireguard/privatekey | wg pubkey > /etc/wireguard/publickey
+chmod 600 /etc/wireguard/privatekey
+cat /etc/wireguard/publickey
+```
+
+**Copy the key it prints.** It looks something like:
+```
+aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789abc=
+```
+
+**On VPS1 (76.13.96.107):**
+```bash
+apt-get update
+apt-get install -y wireguard wireguard-tools
+mkdir -p /etc/wireguard
+wg genkey | tee /etc/wireguard/privatekey | wg pubkey > /etc/wireguard/publickey
+chmod 600 /etc/wireguard/privatekey
+cat /etc/wireguard/publickey
+```
+
+**Copy that key too.** Now you have two public keys.
+
+---
+
+### Step 3: Write the config files
+
+**On VPS1 (76.13.96.107)** — paste this, replacing `<VPS2_PUBLIC_KEY>` with the key from VPS2:
+
+```bash
+cat > /etc/wireguard/wg0.conf <<EOF
+[Interface]
+Address = 10.0.0.1/24
+PrivateKey = $(cat /etc/wireguard/privatekey)
+ListenPort = 51820
+
+[Peer]
+PublicKey = <VPS2_PUBLIC_KEY>
+Endpoint = 31.97.138.45:51820
+AllowedIPs = 10.0.0.2/32
+PersistentKeepalive = 25
+EOF
+chmod 600 /etc/wireguard/wg0.conf
+```
+
+**On VPS2 (31.97.138.45)** — paste this, replacing `<VPS1_PUBLIC_KEY>` with the key from VPS1:
+
+```bash
+cat > /etc/wireguard/wg0.conf <<EOF
+[Interface]
+Address = 10.0.0.2/24
+PrivateKey = $(cat /etc/wireguard/privatekey)
+ListenPort = 51820
+
+[Peer]
+PublicKey = <VPS1_PUBLIC_KEY>
+Endpoint = 76.13.96.107:51820
+AllowedIPs = 10.0.0.1/32
+PersistentKeepalive = 25
+EOF
+chmod 600 /etc/wireguard/wg0.conf
+```
+
+---
+
+### Step 4: Open the firewall and start the tunnel
+
+**On both servers** (run on each):
+```bash
+ufw allow 51820/udp
+systemctl enable wg-quick@wg0
+systemctl start wg-quick@wg0
+```
+
+---
+
+### Step 5: Test
+
+**From VPS1:**
+```bash
+ping -c 3 10.0.0.2
+```
+
+**From VPS2:**
+```bash
+ping -c 3 10.0.0.1
+```
+
+If both respond, the tunnel is live. You're done with networking.
+
+---
+
+## What Comes After the Tunnel
+
+Once the tunnel works, the next steps are:
+
+1. **Copy VPS2 service files** to `/opt/aims-vps2/` on 31.97.138.45
+2. **Run deploy.sh** on VPS2 to start OpenSandbox + Plug Engine
+3. **Add env vars to VPS1** so ACHEEVY knows where to find VPS2:
+   ```
+   OPENSANDBOX_URL=http://10.0.0.2:4100
+   VPS2_PLUG_ENGINE_URL=http://10.0.0.2:4200
+   ```
+4. **Restart ACHEEVY + UEF Gateway** on VPS1 to pick up the new endpoints
+
+But none of that matters until the WireGuard tunnel is working. **Step 1 is SSH into both servers.**
+
+Do you have SSH access to both VPS machines?

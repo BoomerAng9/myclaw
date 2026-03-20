@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Core Palette — Military/Mission Control feel */
+  --bg-primary: #06080d;
+  --bg-secondary: #0c1018;
+  --bg-tertiary: #131924;
+  --bg-card: #0f1520;
+  --bg-elevated: #161e2e;
+  --bg-surface: #0d1219;
+  
+  /* ACHIEVEMOR Brand Accents */
+  --accent-gold: #d4a030;
+  --accent-gold-dim: rgba(212, 160, 48, 0.15);
+  --accent-gold-bright: #f0c040;
+  --accent-green: #00d47e;
+  --accent-green-dim: rgba(0, 212, 126, 0.12);
+  --accent-red: #ff4057;
+  --accent-red-dim: rgba(255, 64, 87, 0.12);
+  --accent-amber: #ff9f1c;
+  --accent-cyan: #00b4d8;
+  --accent-cyan-dim: rgba(0, 180, 216, 0.12);
+  --accent-white: #e8edf5;
+  
+  /* Gradients */
+  --gradient-gold: linear-gradient(135deg, #d4a030, #f0c040);
+  --gradient-command: linear-gradient(135deg, #0c1018 0%, #131924 100%);
+  --gradient-glass: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  
+  /* Text */
+  --text-primary: #e8edf5;
+  --text-secondary: #7a8599;
+  --text-muted: #3d4a5c;
+  --text-gold: #d4a030;
+  
+  /* Borders */
+  --border-subtle: rgba(255,255,255,0.05);
+  --border-active: rgba(212, 160, 48, 0.3);
+  --border-danger: rgba(255, 64, 87, 0.3);
+  --border-success: rgba(0, 212, 126, 0.3);
+  
+  /* Shadows */
+  --shadow-card: 0 2px 12px rgba(0,0,0,0.5);
+  --shadow-elevated: 0 8px 32px rgba(0,0,0,0.7);
+  --shadow-glow-gold: 0 0 20px rgba(212, 160, 48, 0.15);
+  --shadow-glow-green: 0 0 20px rgba(0, 212, 126, 0.15);
+  --shadow-glow-red: 0 0 16px rgba(255, 64, 87, 0.2);
+  
+  /* Agent Role Colors */
+  --role-acheevy: #d4a030;
+  --role-ntntn: #00b4d8;
+  --role-mim: #8b5cf6;
+  --role-picker: #ff9f1c;
+  --role-boomer: #00d47e;
+  --role-review: #ff4057;
+  --role-buildsmith: #14b8a6;
+  --role-packaging: #a78bfa;
+  --role-betty-anne: #f472b6;
+  --role-scripter: #60a5fa;
+  --role-chicken-hawk: #fbbf24;
+  --role-avva-noon: #ef4444;
+  
+  /* Dimensions */
+  --header-height: 52px;
+  --sidebar-width: 260px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+::selection {
+  background: rgba(212, 160, 48, 0.3);
+  color: #fff;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); }
+
+/* React Flow Overrides */
+.react-flow__background { background: var(--bg-primary) !important; }
+.react-flow__edge-path { stroke: rgba(212, 160, 48, 0.15) !important; stroke-width: 1.5 !important; }
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 5 !important;
+  animation: dashdraw 0.5s linear infinite !important;
+}
+.react-flow__edge.selected .react-flow__edge-path { stroke: var(--accent-gold) !important; stroke-width: 2 !important; }
+.react-flow__handle {
+  width: 8px !important; height: 8px !important; border-radius: 50% !important;
+  background: var(--bg-tertiary) !important; border: 1.5px solid rgba(212,160,48,0.3) !important;
+  transition: all 0.2s ease !important;
+}
+.react-flow__handle:hover { background: var(--accent-gold) !important; border-color: var(--accent-gold) !important; }
+.react-flow__minimap { display: none !important; }
+.react-flow__controls { display: none !important; }
+
+@keyframes dashdraw { from { stroke-dashoffset: 10; } to { stroke-dashoffset: 0; } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+@keyframes scan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
