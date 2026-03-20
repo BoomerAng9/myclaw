@@ -117,11 +117,11 @@
     {
       "id": "chicken-hawk",
       "config": "agents/chicken-hawk.json",
-      "role": "procurement-governance",
-      "canDelegate": false,
+      "role": "master-ai-openclaw",
+      "canDelegate": true,
       "canExecute": true,
-      "priority": 2,
-      "description": "Rigid governance loop over active agent tooling. Procures external resources."
+      "priority": 0,
+      "description": "The Master AI. OpenClaw engine with dynamic MCP tooling, Voice-First/Vision-First loops, LUC metering, Make-It-Mine cloning, and Telegram remote control. Spawns all lil_hawks."
     },
     {
       "id": "avva-noon",
@@ -131,6 +131,15 @@
       "canExecute": true,
       "priority": 0,
       "description": "Agent Zero. Activated on critical failure for OODA loop auto-fix."
+    },
+    {
+      "id": "autoresearch",
+      "config": "vendor/autoresearch",
+      "role": "autonomous-research",
+      "canDelegate": false,
+      "canExecute": true,
+      "priority": 3,
+      "description": "Karpathy AutoResearch engine. Autonomous deep-dive research and training pipeline."
     }
   ],
   "executionRules": {
@@ -153,12 +162,25 @@
     "betty-anne → TEP performance gate (parallel oversight)",
     "sme-stepper → validate external architecture (if applicable)",
     "sme-notebooklm → audio intelligence generation (if applicable)",
-    "chicken-hawk → procurement governance check (if applicable)",
-    "coder | researcher | designer | scripter | sme-notebooklm → parallel execution",
+    "chicken-hawk → Master AI orchestration + LUC gate + MCP tooling",
+    "coder | researcher | designer | scripter | sme-notebooklm | autoresearch → parallel execution",
     "cinematic → Veo / Imagen 3 / Remotion rendering (if video output requested)",
     "validator → review gate",
     "avva-noon → escalation failover (on failure only)",
     "ops → deliver notifications",
     "acheevy → package evidence bundle"
-  ]
+  ],
+  "skillLibrary": {
+    "superpowers": "skills/using-superpowers/SKILL.md",
+    "systematicDebugging": "skills/systematic-debugging/SKILL.md",
+    "parallelAgents": "skills/dispatching-parallel-agents/SKILL.md",
+    "tdd": "skills/test-driven-development/SKILL.md",
+    "brainstorming": "skills/brainstorming/SKILL.md",
+    "codeReview": "skills/requesting-code-review/SKILL.md",
+    "writingPlans": "skills/writing-plans/SKILL.md",
+    "subagentDev": "skills/subagent-driven-development/SKILL.md",
+    "verification": "skills/verification-before-completion/SKILL.md",
+    "mcpTelegram": "ACHIEVEMOR x AIMS/src/Runtime/Skills/mcp-telegram-bridge.skill.json",
+    "mcpWeb3": "ACHIEVEMOR x AIMS/src/Runtime/Skills/mcp-web3-bridge.skill.json"
+  }
 }
