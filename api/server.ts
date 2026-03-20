@@ -377,6 +377,99 @@ app.post('/v1/acheevy/simulate', (req, res) => {
   setTimeout(advance, 1500); // initial start wait
 });
 
+// ═══════════════════════════════════════════════════════════════
+// LUC (Ledger Usage Calculator) Gate Endpoint
+// ═══════════════════════════════════════════════════════════════
+import { LucEngine } from './services/luc-engine';
+
+app.post('/v1/luc/gate', async (req, res) => {
+  const { tenantId, serviceKey, amount, actionId } = req.body;
+
+  if (!tenantId || !serviceKey || amount === undefined) {
+    return res.status(400).json({ error: 'Missing tenantId, serviceKey, or amount.' });
+  }
+
+  try {
+    const luc = new LucEngine(tenantId);
+
+    // In production, load from InsForge. For now, load defaults.
+    await luc.loadQuotas([
+      { key: 'tokens_in', used: 0, limit: 1_000_000, unit: 'tokens' },
+      { key: 'tokens_out', used: 0, limit: 500_000, unit: 'tokens' },
+      { key: 'voice_minutes', used: 0, limit: 120, unit: 'minutes' },
+      { key: 'container_hours', used: 0, limit: 50, unit: 'hours' },
+      { key: 'storage_gb', used: 0, limit: 10, unit: 'GB' },
+    ]);
+
+    // 1. Estimate
+    const estimate = luc.estimate(serviceKey, amount);
+
+    // 2. Gate
+    const gate = luc.canExecute(serviceKey, amount);
+
+    if (!gate.allowed) {
+      return res.status(403).json({ gate, estimate });
+    }
+
+    // 3. Record (only if allowed)
+    const record = luc.recordUsage(serviceKey, amount, actionId || 'unknown');
+
+    return res.json({ gate, estimate, record, snapshot: luc.getSnapshot() });
+  } catch (err: any) {
+    console.error('[LUC Gate] Error:', err.message);
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+// ═══════════════════════════════════════════════════════════════
+// Voice-First Full Loop Endpoint
+// ═══════════════════════════════════════════════════════════════
+import { VoiceVisionBridge } from './services/voice-vision-bridge';
+
+app.post('/v1/voice/loop', async (req, res) => {
+  const { audioBase64, provider } = req.body;
+
+  if (!audioBase64) {
+    return res.status(400).json({ error: 'Missing audioBase64 payload.' });
+  }
+
+  try {
+    const bridge = new VoiceVisionBridge({
+      provider: provider || 'elevenlabs',
+      apiKey: process.env.VOICE_API_KEY || '',
+    });
+
+    const audioBuffer = Buffer.from(audioBase64, 'base64');
+
+    const result = await bridge.fullLoop(audioBuffer, async (transcribedText: string) => {
+      // Forward the transcribed text to Gemini for reasoning
+      const geminiKey = process.env.GEMINI_API_KEY || '';
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key=${geminiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: transcribedText }] }],
+          }),
+        }
+      );
+      const data = await response.json() as any;
+      return data?.candidates?.[0]?.content?.parts?.[0]?.text || 'I could not process that.';
+    });
+
+    return res.json({
+      transcription: result.transcription.text,
+      response: result.response,
+      speechBase64: result.speech.audioBuffer.toString('base64'),
+      latencyMs: result.transcription.durationMs + result.speech.durationMs,
+    });
+  } catch (err: any) {
+    console.error('[Voice Loop] Error:', err.message);
+    return res.status(500).json({ error: err.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`🚀 MyClaw API Server running on port ${PORT}`);
 });
