@@ -6,3 +6,7 @@ build/
 *.log
 Master Key.txt
 *firebase-adminsdk*.json
+aims-tools/autoresearch/
+aims-tools/superpowers/
+okai/node_modules/
+okai/.next/
