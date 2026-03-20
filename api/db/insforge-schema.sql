@@ -48,7 +48,20 @@ ALTER TABLE public.acheevy_tasks ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.acheevy_pipeline_runs ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.acheevy_node_logs ENABLE ROW LEVEL SECURITY;
 
--- Temporarily allow all for API usage (Update policies when moving to strict production)
+-- 5. KYB (Know Your Boomer_Ang) Registration Ledger
+CREATE TABLE public.kyb_ledger (
+    serial_id TEXT PRIMARY KEY,
+    owner_email TEXT NOT NULL,
+    boomer_ang_name TEXT NOT NULL,
+    risk_tier TEXT NOT NULL,
+    routing_decision TEXT NOT NULL,
+    input_hash TEXT NOT NULL,
+    flight_recorder_entry JSONB NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Note: In production you MUST set strict RLS policies.
 CREATE POLICY "Allow Service Role API" ON public.acheevy_tasks FOR ALL USING (true);
 CREATE POLICY "Allow Service Role API" ON public.acheevy_pipeline_runs FOR ALL USING (true);
 CREATE POLICY "Allow Service Role API" ON public.acheevy_node_logs FOR ALL USING (true);
+CREATE POLICY "Allow Service Role API" ON public.kyb_ledger FOR ALL USING (true);

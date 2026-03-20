@@ -7,11 +7,13 @@ import {
   classifyRiskTier, 
   determineRoutingDecision 
 } from '../Validation/kyb-onboard.schema';
+import { insforge } from '../../../../../api/insforge';
 
 const KYB_PHASES = { REGISTRATION: 'REGISTRATION' } as const;
 
 /**
  * KYB (Know Your Boomer_Ang) Onboarding Webhook — V2
+
  * 
  * Pipeline: Paperform → Stepper → THIS ENDPOINT → LUC Flight Recorder
  * 
@@ -83,14 +85,26 @@ export async function POST(req: Request) {
       }
     };
 
-    // ── 6. Write to LUC ──────────────────────────────────────────
-    // TODO: Replace with actual database write
-    // await db.kybLedger.create({ data: flightRecorderEntry });
-    // await lucService.increment(LUC_SERVICE_KEYS.KYB_REGISTRATIONS, 1);
-    // await lucService.increment(LUC_SERVICE_KEYS.STEPPER_WEBHOOK_CALLS, 1);
-    // if (riskTier === 'HIGH') {
-    //   await lucService.increment(LUC_SERVICE_KEYS.KYB_REVIEW_ESCALATIONS, 1);
-    // }
+    // ── 6. Write to LUC / InsForge ───────────────────────────────
+    let dbStatus = 'skipped';
+    if (process.env.INSFORGE_URL) {
+      try {
+        const { error } = await insforge.from('kyb_ledger').insert({
+          serial_id: serialId,
+          owner_email: payload.ownerEmail,
+          boomer_ang_name: payload.boomerAngName,
+          risk_tier: riskTier,
+          routing_decision: routingDecision,
+          input_hash: inputHash,
+          flight_recorder_entry: flightRecorderEntry
+        });
+        if (error) throw error;
+        dbStatus = 'success';
+      } catch (e: any) {
+        console.error('[KYB Governance] Failed writing to InsForge:', e.message);
+        dbStatus = 'failed';
+      }
+    }
 
     console.log(`[KYB Governance] ✓ New Boomer_Ang Registered`);
     console.log(`  Serial: ${serialId}`);
@@ -98,6 +112,7 @@ export async function POST(req: Request) {
     console.log(`  Name: ${payload.boomerAngName}`);
     console.log(`  Risk: ${riskTier} → ${routingDecision}`);
     console.log(`  Hash: ${inputHash.substring(0, 16)}...`);
+    console.log(`  DB State: ${dbStatus}`);
 
     // ── 7. Construct the Public Passport (KYB Tier 1) ────────────
     const publicPassport = {
