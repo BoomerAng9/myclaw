@@ -1,0 +1,47 @@
+{
+  "id": "skill-mcp-blockwise-web3",
+  "name": "Web3 & Blockwise Context Initialization (SME_Ang)",
+  "version": "1.0.0",
+  "description": "Empowers OpenClaw/ChickenHawk to deploy the SME_Ang (Web3) minion to autonomously coordinate MCP wrappers for Blockchain RPC endpoints, execute smart contracts within the AIMS architecture, and manage failovers to Agent Zero (AVVA NOON).",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "target_chain": {
+        "type": "string",
+        "description": "The target blockchain (e.g., 'ethereum', 'solana', 'polygon')."
+      },
+      "mcp_rpc_port": {
+        "type": "integer",
+        "description": "The local port to bind the Web3 RPC interface MCP.",
+        "default": 8545
+      },
+      "cli_tools": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "List of CLIs available to interface the smart contract context (e.g., 'killercode', 'gemini', 'claude').",
+        "default": ["killercode", "claude", "gemini"]
+      }
+    },
+    "required": ["target_chain"]
+  },
+  "execution_context": {
+    "require_sandbox": true,
+    "require_network": true,
+    "require_system_access": true,
+    "permissions": ["file_system_read_write", "mcp_rpc_bind", "process_execution_cli", "avva_noon_escalation"]
+  },
+  "phases": [
+    {
+      "step": "Analyze AIMS & Blockwise Contract Context",
+      "action": "Locate logic in `BoomerAng9/AIMS.git`. Review exact ABIs and block scripts using locally provisioned CLIs (like Gemini or Claude) mapped to Chicken Hawk's overarching logic."
+    },
+    {
+      "step": "Provision Dynamic Smart Contract MCP",
+      "action": "Bind [target_chain] node/testnet wrappers locally via MCP on port [mcp_rpc_port], surfacing JSON-RPC native access back to Chicken Hawk."
+    },
+    {
+      "step": "Execute Pipeline & Monitor Errors",
+      "action": "Push the execution through the GRAMMAR architecture. If execution critically fails (e.g., contract revert, out of gas), instantly package logs and escalate to AVVA_NOON (Agent Zero) to run the OODA loop."
+    }
+  ]
+}
