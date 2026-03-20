@@ -1,19 +1,40 @@
 {
-  "swarmId": "aims-lil-hawks-v1",
-  "name": "A.I.M.S Lil Hawk Swarm",
+  "swarmId": "chicken-hawk-v1",
+  "name": "Chicken Hawk Agent Swarm",
   "version": "1.0.0",
-  "description": "Specialized narrow agent swarm following the 20-agent paradigm. Each agent has a single responsibility and cannot overlap with others.",
+  "description": "Chicken Hawk (OpenClaw / NemoClaw / MyClaw) is the single deployed AI runtime. It spawns lil_hawks — narrow sub-agents — for parallel task execution. This registry defines the lil_hawks that Chicken Hawk can dispatch.",
+  "master": {
+    "id": "chicken-hawk",
+    "aliases": ["openclaw", "nemoclaw", "myclaw"],
+    "runtime": "ghcr.io/nvidia/openshell/cluster:0.0.10",
+    "port": 8080,
+    "role": "The deployed AI runtime. Everything runs through this single instance.",
+    "capabilities": [
+      "dynamic_skilling_mcp",
+      "voice_first_vision_first_loop",
+      "stt_tts_processing",
+      "delta_screenshot_analysis",
+      "make_it_mine_cloning",
+      "coolify_auto_deploy",
+      "luc_metering_enforcement",
+      "kata_microvm_sandbox",
+      "telegram_command_routing",
+      "lil_hawks_spawning",
+      "grammar_runtime_enforcement"
+    ]
+  },
   "orchestrator": "acheevy",
   "routingPolicy": "capability-first",
   "providerAgnostic": true,
-  "agents": [
+  "lil_hawks": [
     {
       "id": "acheevy",
       "config": "../../../aims-tools/luc/agents/lil-hawk-acheevy.json",
       "role": "orchestrator",
       "canDelegate": true,
       "canExecute": false,
-      "priority": 0
+      "priority": 0,
+      "description": "Digital CEO. Interprets user intent, sequences work, packages evidence bundles."
     },
     {
       "id": "picker",
@@ -21,7 +42,8 @@
       "role": "router",
       "canDelegate": false,
       "canExecute": false,
-      "priority": 1
+      "priority": 1,
+      "description": "Routes tasks to the right lil_hawk by capability class, not vendor."
     },
     {
       "id": "cfo",
@@ -29,7 +51,8 @@
       "role": "finance-gate",
       "canDelegate": false,
       "canExecute": false,
-      "priority": 2
+      "priority": 2,
+      "description": "LUC quota gate. Blocks actions exceeding cost limits."
     },
     {
       "id": "coder",
@@ -45,7 +68,8 @@
       "role": "review-gate",
       "canDelegate": false,
       "canExecute": false,
-      "priority": 4
+      "priority": 4,
+      "description": "Security and quality review gate. Must pass before any delivery."
     },
     {
       "id": "researcher",
@@ -61,7 +85,8 @@
       "role": "notifications",
       "canDelegate": false,
       "canExecute": false,
-      "priority": 5
+      "priority": 5,
+      "description": "Bulk outbound notifications (Slack, Discord, Telegram formatting)."
     },
     {
       "id": "designer",
@@ -94,7 +119,7 @@
       "canDelegate": false,
       "canExecute": true,
       "priority": 3,
-      "description": "Generates podcasts, briefings, and FAQs from source material via Gemini+TTS or NotebookLM Enterprise API."
+      "description": "Generates podcasts, briefings, and FAQs via Gemini+TTS or NotebookLM."
     },
     {
       "id": "betty-anne",
@@ -103,7 +128,7 @@
       "canDelegate": false,
       "canExecute": false,
       "priority": 1,
-      "description": "PMO HR oversight. Grades Boomer_Ang performance against TEP objectives."
+      "description": "PMO HR oversight. Grades lil_hawk performance against TEP objectives."
     },
     {
       "id": "scripter",
@@ -115,22 +140,13 @@
       "description": "Drafts execution narratives and video pipeline scripts."
     },
     {
-      "id": "chicken-hawk",
-      "config": "agents/chicken-hawk.json",
-      "role": "master-ai-openclaw",
-      "canDelegate": true,
-      "canExecute": true,
-      "priority": 0,
-      "description": "The Master AI. OpenClaw engine with dynamic MCP tooling, Voice-First/Vision-First loops, LUC metering, Make-It-Mine cloning, and Telegram remote control. Spawns all lil_hawks."
-    },
-    {
       "id": "avva-noon",
       "config": "agents/avva-noon.json",
       "role": "escalation-failover",
       "canDelegate": true,
       "canExecute": true,
       "priority": 0,
-      "description": "Agent Zero. Activated on critical failure for OODA loop auto-fix."
+      "description": "Agent Zero. Last resort failover via OODA loop. Pages human on double failure."
     },
     {
       "id": "autoresearch",
@@ -139,7 +155,7 @@
       "canDelegate": false,
       "canExecute": true,
       "priority": 3,
-      "description": "Karpathy AutoResearch engine. Autonomous deep-dive research and training pipeline."
+      "description": "Karpathy AutoResearch engine. Background data crunching on free OpenRouter models."
     }
   ],
   "executionRules": {
@@ -158,13 +174,11 @@
   "pipelineOrder": [
     "acheevy → interpret intent",
     "picker → route to capability class",
-    "cfo → quota gate check",
-    "betty-anne → TEP performance gate (parallel oversight)",
+    "cfo → LUC quota gate check",
+    "betty-anne → TEP performance gate (parallel)",
     "sme-stepper → validate external architecture (if applicable)",
-    "sme-notebooklm → audio intelligence generation (if applicable)",
-    "chicken-hawk → Master AI orchestration + LUC gate + MCP tooling",
-    "coder | researcher | designer | scripter | sme-notebooklm | autoresearch → parallel execution",
-    "cinematic → Veo / Imagen 3 / Remotion rendering (if video output requested)",
+    "sme-notebooklm → audio intelligence (if applicable)",
+    "coder | researcher | designer | scripter | autoresearch → parallel execution",
     "validator → review gate",
     "avva-noon → escalation failover (on failure only)",
     "ops → deliver notifications",
@@ -181,6 +195,21 @@
     "subagentDev": "skills/subagent-driven-development/SKILL.md",
     "verification": "skills/verification-before-completion/SKILL.md",
     "mcpTelegram": "ACHIEVEMOR x AIMS/src/Runtime/Skills/mcp-telegram-bridge.skill.json",
-    "mcpWeb3": "ACHIEVEMOR x AIMS/src/Runtime/Skills/mcp-web3-bridge.skill.json"
+    "mcpWeb3": "ACHIEVEMOR x AIMS/src/Runtime/Skills/mcp-web3-bridge.skill.json",
+    "designTool": "skills/SME_DesignTool_Antigravity/SKILL.md",
+    "autoResearch": "skills/SME_AutoResearch/SKILL.md"
+  },
+  "infrastructure": {
+    "vps": {
+      "ssh": "myclaw-vps",
+      "ip": "31.97.133.29",
+      "containers": {
+        "nemoclaw": "openshell-cluster-nemoclaw",
+        "simstudio": "sim-studio-9fks-simstudio-1",
+        "openclaw": "openclaw-sop5-openclaw-1",
+        "myclaw": "myclaw-myclaw-1",
+        "traefik": "traefik-traefik-1"
+      }
+    }
   }
 }

@@ -1,57 +1,59 @@
 # AGENTS.md
-# Rules and instructions for managing the 'lil_hawks' minion agents serving within the Chicken Hawk infrastructure.
+# Chicken Hawk lil_hawks Management Rules
 
-## Chain of Command
+## Identity (Non-Negotiable)
+**Chicken Hawk = OpenClaw = NemoClaw = MyClaw.**
+One product. One VPS deployment. One runtime container (`openshell-cluster-nemoclaw`).
+These names are NOT separate systems. They all refer to the same deployed instance.
+
+## Architecture
 ```
-Chicken Hawk (OpenClaw Master AI)
-  ├── ACHEEVY 009 (Digital CEO / Frontend Orchestrator)
-  ├── AVVA NOON (Agent Zero — Escalation Failover)
-  └── lil_hawks (Narrow Execution Minions)
-       ├── Coder_Ang         — code-producer
-       ├── Validator_Ang     — review & security gate
-       ├── Researcher_Ang    — intelligence
-       ├── Designer_Ang      — visual-producer
-       ├── Scripter_Ang      — narrative-producer
-       ├── Ops_Ang           — bulk notifications
-       ├── SME_Stepper_Ang   — stepper skill manager
-       ├── SME_Paperform_Ang — form schema architect
-       ├── SME_NotebookLM    — audio intelligence
-       ├── Betty_Anne_Ang    — HR / TEP oversight
-       ├── CFO_Ang           — finance gate
-       ├── Picker_Ang        — capability router
-       ├── Cinematic_Ang     — video rendering
-       └── AutoResearch      — autonomous deep research (Karpathy)
+Chicken Hawk (The Single AI Runtime)
+  │
+  ├── VPS Container: openshell-cluster-nemoclaw (port 8080)
+  ├── UI Container:  openclaw-sop5-openclaw-1 (behind Traefik)
+  ├── Workflows:     sim-studio-9fks-simstudio-1 (port 32769)
+  │
+  └── lil_hawks (Sub-Agents spawned by Chicken Hawk)
+       ├── ACHEEVY          — orchestrator / digital CEO
+       ├── Picker_Ang       — capability router
+       ├── CFO_Ang          — LUC quota gate
+       ├── Coder_Ang        — code producer
+       ├── Validator_Ang    — review & security gate
+       ├── Researcher_Ang   — intelligence
+       ├── Designer_Ang     — visual producer
+       ├── Scripter_Ang     — narrative producer
+       ├── Ops_Ang          — bulk notifications
+       ├── SME_Stepper_Ang  — stepper skill manager
+       ├── SME_Paperform_Ang— form schema architect
+       ├── SME_NotebookLM   — audio intelligence
+       ├── Betty_Anne_Ang   — HR / TEP oversight
+       ├── AutoResearch     — Karpathy deep research
+       └── AVVA NOON        — Agent Zero failover (last resort)
 ```
 
-## Non-Negotiable Rules
-1. **Chicken Hawk is the Master AI.** It spawns, commands, and terminates all `lil_hawks`. No minion acts without Chicken Hawk's dispatched context.
-2. **lil_hawks are stateless and narrow.** Each minion handles exactly one capability class. They do not make routing decisions, approve work, or communicate with each other directly.
-3. **LUC gates are mandatory.** Before any `lil_hawk` executes a billable action, it must pass through the LUC `canExecute()` hard gate. No exceptions.
-4. **AVVA NOON is the last resort.** If a `lil_hawk` fails critically and `Validator_Ang` cannot resolve it, Chicken Hawk escalates to AVVA NOON (Agent Zero) which mounts its OODA loop. If Agent Zero fails twice, it pages the human operator.
-5. **Voice-First is default.** All user-facing interactions route through the Voice/Vision bridge (STT → LLM → TTS). Dashboard UIs are hidden from normal users.
-6. **Parallel execution cap: 6 agents.** The swarm registry enforces a maximum of 6 concurrent `lil_hawks` to prevent resource exhaustion.
-7. **Evidence is required.** Every completed task must produce a traceable evidence bundle before Chicken Hawk marks it as `delivered`.
+## Rules
+1. **Chicken Hawk is the runtime, not an agent.** It does not appear in the lil_hawks list.
+2. **lil_hawks are stateless and narrow.** One capability per hawk. No routing or approval decisions.
+3. **LUC gates are mandatory.** Every billable action passes `canExecute()` first.
+4. **AVVA NOON is last resort.** Double failure pages the human.
+5. **Voice-First is default.** Users talk, Chicken Hawk executes.
+6. **Max 6 parallel lil_hawks.** Swarm registry enforces this cap.
+7. **Evidence required.** Every task produces a traceable bundle before delivery.
 
-## Available Skill Libraries
-All agents have access to the merged skill pool:
-
-| Skill | Source | Purpose |
-|-------|--------|---------|
-| `systematic-debugging` | superpowers | Methodical root-cause analysis |
-| `dispatching-parallel-agents` | superpowers | Coordinating multi-agent workloads |
-| `test-driven-development` | superpowers | TDD workflows |
-| `brainstorming` | superpowers | Structured ideation |
-| `subagent-driven-development` | superpowers | Delegated implementation |
-| `verification-before-completion` | superpowers | Pre-ship validation |
-| `writing-plans` | superpowers | Structured plan documents |
-| `requesting-code-review` | superpowers | Formal review requests |
-| `mcp-telegram-bridge` | AIMS | Remote Telegram control + MCP |
-| `mcp-web3-bridge` | AIMS | Blockwise AI / Web3 execution |
-| `SME_OpenClaw_Skill_Development` | AIMS | Dynamic app skilling via MCP |
-
-## Adding New lil_hawks
-1. Create a JSON config in `ACHIEVEMOR x AIMS/src/Runtime/Orchestrator/agents/`.
-2. Register the agent in `swarm-registry.json` with `canDelegate: false`.
-3. Set `priority` (0 = top, 5 = low).
-4. Add the agent's capability to the `pipelineOrder` array.
-5. Chicken Hawk will automatically discover and spawn it.
+## Skills (Merged Pool)
+| Skill | Source |
+|-------|--------|
+| systematic-debugging | superpowers |
+| dispatching-parallel-agents | superpowers |
+| test-driven-development | superpowers |
+| brainstorming | superpowers |
+| subagent-driven-development | superpowers |
+| verification-before-completion | superpowers |
+| writing-plans | superpowers |
+| requesting-code-review | superpowers |
+| mcp-telegram-bridge | AIMS |
+| mcp-web3-bridge | AIMS |
+| SME_OpenClaw_Skill_Development | AIMS |
+| SME_DesignTool_Antigravity | AIMS |
+| SME_AutoResearch | AIMS |
