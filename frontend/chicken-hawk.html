@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chicken Hawk | Your AI. Your Rules.</title>
+    <meta name="description" content="Chicken Hawk — The Master AI Command Center. Voice-First, Vision-First autonomous intelligence. Think it. Prompt it. Let ACHEEVY manage it.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════════════════════
+           AETHER ONYX DESIGN SYSTEM — Chicken Hawk Edition
+           Generated via Google Stitch → Exported → Customized
+           ═══════════════════════════════════════════════════════════ */
+        :root {
+            --background: #0a0e17;
+            --surface: #0a0e17;
+            --surface-container: #151925;
+            --surface-container-low: #0f131d;
+            --surface-container-high: #1a1f2c;
+            --surface-container-highest: #202633;
+            --surface-bright: #262c3a;
+            --on-surface: #ebedfb;
+            --on-surface-variant: #a7abb7;
+            --primary: #ca98ff;
+            --primary-dim: #9c42f4;
+            --primary-container: #c185ff;
+            --secondary: #00fbfb;
+            --secondary-dim: #00ecec;
+            --secondary-container: #006a6a;
+            --tertiary: #ac89ff;
+            --tertiary-container: #7000ff;
+            --outline: #727581;
+            --outline-variant: #444852;
+            --error-dim: #d73357;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--on-surface);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Navigation ────────────────────────────────────────── */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 1.25rem 3rem;
+            background: rgba(10, 14, 23, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .nav-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem; font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a {
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.875rem; font-weight: 500;
+            color: var(--on-surface-variant);
+            text-decoration: none;
+            transition: color 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .nav-links a:hover { color: var(--secondary); }
+
+        .nav-cta {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem; font-weight: 600;
+            padding: 0.625rem 1.75rem;
+            border: none; border-radius: 100px; cursor: pointer;
+            background: linear-gradient(135deg, var(--primary-dim), var(--primary));
+            color: #fff;
+            box-shadow: 0 0 15px rgba(183, 114, 255, 0.3);
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .nav-cta:hover {
+            box-shadow: 0 0 30px rgba(183, 114, 255, 0.5);
+            transform: translateY(-1px);
+        }
+
+        /* ── Hero ──────────────────────────────────────────────── */
+        .hero {
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(112, 0, 255, 0.15), transparent 70%),
+                        radial-gradient(ellipse 60% 50% at 30% 60%, rgba(0, 251, 251, 0.05), transparent 60%);
+            animation: heroGlow 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroGlow {
+            0% { opacity: 0.6; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .hero-badge {
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--secondary);
+            padding: 0.5rem 1.25rem;
+            border: 1px solid rgba(0, 251, 251, 0.2);
+            border-radius: 100px;
+            margin-bottom: 2rem;
+            position: relative; z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
+            position: relative; z-index: 1;
+        }
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1.25rem; font-weight: 300;
+            color: var(--on-surface-variant);
+            max-width: 600px;
+            line-height: 1.7;
+            margin-bottom: 3rem;
+            position: relative; z-index: 1;
+        }
+
+        .hero-actions {
+            display: flex; gap: 1rem;
+            position: relative; z-index: 1;
+        }
+
+        .btn-primary {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem; font-weight: 600;
+            padding: 1rem 2.5rem;
+            border: none; border-radius: 100px; cursor: pointer;
+            background: linear-gradient(135deg, var(--primary-dim), var(--primary));
+            color: #fff;
+            box-shadow: 0 0 20px rgba(183, 114, 255, 0.3);
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .btn-primary:hover {
+            box-shadow: 0 0 40px rgba(183, 114, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem; font-weight: 500;
+            padding: 1rem 2.5rem;
+            border: 1px solid var(--outline-variant);
+            border-radius: 100px; cursor: pointer;
+            background: transparent; color: var(--on-surface);
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .btn-ghost:hover {
+            border-color: var(--primary);
+            background: rgba(202, 152, 255, 0.05);
+        }
+
+        /* ── Feature Cards ────────────────────────────────────── */
+        .features {
+            padding: 6rem 3rem;
+            display: flex; flex-direction: column;
+            align-items: center;
+        }
+
+        .features-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .features-header h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem; font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .features-header p {
+            font-size: 1.1rem; font-weight: 300;
+            color: var(--on-surface-variant);
+            max-width: 550px; margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1100px; width: 100%;
+        }
+
+        .feature-card {
+            background: rgba(38, 44, 58, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            border-top: 1px solid rgba(193, 133, 255, 0.2);
+            border-left: 1px solid rgba(193, 133, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(112, 0, 255, 0.15);
+        }
+
+        .feature-icon {
+            width: 56px; height: 56px;
+            border-radius: 1rem;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+        }
+        .feature-icon.voice {
+            background: linear-gradient(135deg, rgba(0, 251, 251, 0.15), rgba(0, 236, 236, 0.05));
+            color: var(--secondary);
+        }
+        .feature-icon.auto {
+            background: linear-gradient(135deg, rgba(156, 66, 244, 0.15), rgba(202, 152, 255, 0.05));
+            color: var(--primary);
+        }
+        .feature-icon.secure {
+            background: linear-gradient(135deg, rgba(172, 137, 255, 0.15), rgba(112, 0, 255, 0.05));
+            color: var(--tertiary);
+        }
+
+        .feature-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.35rem; font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        .feature-card p {
+            font-size: 0.95rem; font-weight: 300;
+            color: var(--on-surface-variant);
+            line-height: 1.7;
+        }
+
+        /* ── Backbone Section ─────────────────────────────────── */
+        .backbone {
+            padding: 6rem 3rem;
+            background: var(--surface-container-low);
+        }
+        .backbone-inner {
+            max-width: 900px; margin: 0 auto;
+            text-align: center;
+        }
+        .backbone h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem; font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        .backbone p {
+            font-size: 1.1rem; font-weight: 300;
+            color: var(--on-surface-variant);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .backbone-features {
+            display: flex; gap: 2rem;
+            justify-content: center; flex-wrap: wrap;
+        }
+        .backbone-chip {
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            background: var(--surface-container-high);
+            border-radius: 1rem;
+            font-size: 0.95rem; font-weight: 500;
+        }
+        .backbone-chip .material-icons-round {
+            color: var(--secondary); font-size: 1.25rem;
+        }
+
+        /* ── Footer ───────────────────────────────────────────── */
+        .footer {
+            padding: 4rem 3rem 2rem;
+            border-top: 1px solid rgba(68, 72, 82, 0.3);
+            text-align: center;
+        }
+        .footer-tagline {
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.85rem; font-weight: 500;
+            color: var(--on-surface-variant);
+            margin-bottom: 0.5rem;
+        }
+        .footer-copy {
+            font-size: 0.75rem;
+            color: var(--outline);
+        }
+
+        /* ── Responsive ───────────────────────────────────────── */
+        @media (max-width: 768px) {
+            .nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .hero { padding: 6rem 1.5rem 3rem; }
+            .hero-actions { flex-direction: column; width: 100%; }
+            .btn-primary, .btn-ghost { width: 100%; text-align: center; }
+            .features { padding: 4rem 1.5rem; }
+            .features-grid { grid-template-columns: 1fr; }
+            .backbone { padding: 4rem 1.5rem; }
+            .backbone-features { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav" id="main-nav">
+        <div class="nav-logo">🦅 Chicken Hawk</div>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#backbone">Architecture</a></li>
+            <li><a href="#security">Security</a></li>
+        </ul>
+        <button class="nav-cta" onclick="window.location.href='https://myclaw.foai.cloud'">Launch Command Center</button>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-badge">Voice-First · Vision-First · Autonomous</div>
+        <h1>Your AI.<br><span class="gradient-text">Your Rules.</span></h1>
+        <p class="hero-sub">
+            The Master AI Command Center. Speak or type, attach context, and get clear results.
+            No dashboards. No clutter. Just sovereign intelligence.
+        </p>
+        <div class="hero-actions">
+            <button class="btn-primary" onclick="window.location.href='https://myclaw.foai.cloud'">Get Started</button>
+            <button class="btn-ghost" onclick="window.location.href='#features'">Explore Features</button>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="features-header">
+            <h2>Engineered for Power</h2>
+            <p>Precision-tuned AI modules that adapt to your unique workflow, not the other way around.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon voice">
+                    <span class="material-icons-round">mic</span>
+                </div>
+                <h3>Voice-First Control</h3>
+                <p>Natural language processing that understands intent, tone, and context for zero-latency execution. STT → LLM → TTS in under 800ms.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon auto">
+                    <span class="material-icons-round">auto_awesome</span>
+                </div>
+                <h3>Smart Automation</h3>
+                <p>Autonomous agent workflows powered by lil_hawks — narrow minions that execute massive parallel workloads while you focus on strategy.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon secure">
+                    <span class="material-icons-round">shield</span>
+                </div>
+                <h3>Secure by Design</h3>
+                <p>End-to-end encryption with local-first processing. Kata MicroVMs, InsForge tenancy isolation, and LUC metering on every action.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Backbone -->
+    <section class="backbone" id="backbone">
+        <div class="backbone-inner">
+            <h2>The Neural Backbone of Your Digital Empire.</h2>
+            <p>
+                Chicken Hawk doesn't just respond to commands — it predicts needs. The GRAMMAR runtime engine
+                analyzes cross-platform behavior to surface the right tools before you even ask for them.
+            </p>
+            <div class="backbone-features">
+                <div class="backbone-chip">
+                    <span class="material-icons-round">check_circle</span>
+                    Zero-Config Setup
+                </div>
+                <div class="backbone-chip">
+                    <span class="material-icons-round">check_circle</span>
+                    Make It Mine Cloning
+                </div>
+                <div class="backbone-chip">
+                    <span class="material-icons-round">check_circle</span>
+                    LUC Cost Metering
+                </div>
+                <div class="backbone-chip">
+                    <span class="material-icons-round">check_circle</span>
+                    Agent Zero Failover
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-tagline">Think it. Prompt it. Let ACHEEVY Manage it.</p>
+        <p class="footer-copy">© 2026 Chicken Hawk — ACHIEVEMOR Edition. Precise. Powerful. Private.</p>
+    </footer>
+
+    <!-- Micro-animations via IntersectionObserver -->
+    <script>
+        document.querySelectorAll('.feature-card, .backbone-chip').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(24px)';
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.transition = 'all 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, i * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.feature-card, .backbone-chip').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
