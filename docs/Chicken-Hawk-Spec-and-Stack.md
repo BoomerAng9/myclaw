@@ -1,10 +1,10 @@
-SuperClaw Full Specification Document |03/20/[04:20]
-# SuperClaw Specification & Technology Stack
+Chicken Hawk Full Specification Document |03/20/[04:20]
+# Chicken Hawk Specification & Technology Stack
 ## ACHIEVEMOR Voice-First + Vision-First Autonomous AI Agent
 **Version:** 1.0  
 **Date:** March 20, 2026  
 **Owner:** ACHIEVEMOR  
-**Purpose:** This is the complete, copy-paste-ready blueprint for building SuperClaw — our Make It Mine customized version of the OpenClaw agent. It can be used as-is or adapted for any other application we clone and customize.
+**Purpose:** This is the complete, copy-paste-ready blueprint for building Chicken Hawk — our Make It Mine customized version of the OpenClaw agent. It can be used as-is or adapted for any other application we clone and customize.
 
 **What “Make It Mine” means**  
 Make It Mine is our standard process for taking any existing open-source or third-party application (or GitHub repo), cloning it, and then adding our own customizations — voice-first interaction, vision accessibility, Ledger Usage Calculator metering, security hardening, real-time automation, and deployment to a custom domain. You simply replace “[TARGET_APPLICATION]” with the name of the app you are cloning (example: “OpenClaw”).
@@ -18,7 +18,7 @@ Open the app → speak or type → attach context if needed → get a clear resu
 Dashboards and admin panels stay completely hidden from normal users.
 
 ================================================================================
-SUPERCLAW STACK ARCHITECTURE (ASCII DIAGRAM)
+CHICKEN HAWK STACK ARCHITECTURE (ASCII DIAGRAM)
 ================================================================================
 
                   +-------------------------------------+
@@ -148,5 +148,5 @@ GATES & EVIDENCE (MUST PASS BEFORE MOVING FORWARD)
 • Deploy Gate             → Live on custom domain with monitoring  
 • Final Launch Gate       → Full proof bundle (screenshots, tests, LUC logs, rollback plan)
 
-This document is the single source of truth for SuperClaw.  
+This document is the single source of truth for Chicken Hawk.  
 Think it. Prompt it. Let ACHEEVY Manage it.
