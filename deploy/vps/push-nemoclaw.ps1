@@ -1,5 +1,5 @@
 param (
-    [string]$TargetHost = "root@app.myclaw.foai.cloud",
+    [string]$TargetHost = "myclaw-vps",
     [string]$RemoteDir = "/opt/openclaw"
 )
 
