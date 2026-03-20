@@ -117,125 +117,9 @@ app.post('/v1/kyb-onboard', async (req, res) => {
 import { executeNotebookLM, NotebookLMRequest } from './notebooklm';
 import * as path from 'node:path';
 
-/**
- * Native Guide Chat (Cody-style)
- * This lives on the MYCLAW server.
- * Now routes NotebookLM requests through the real API integration.
- */
-app.post('/v1/chat/guide', async (req, res) => {
-  const { message } = req.body;
-  const msgLower = message.toLowerCase();
-  
-  // Guard logic (Proprietary Shield)
-  const prying = ['source code', 'architecture', 'internal'].some(k => msgLower.includes(k));
-  if (prying) {
-    return res.json({ reply: "I am the MyClaw guide. For technical architecture details, please refer to the secure A.I.M.S. documentation." });
-  }
-
-  // ─── SME_NotebookLM_Ang: Real API Integration ───
-  if (msgLower.includes('notebooklm') || msgLower.includes('podcast') || msgLower.includes('audio summary') || msgLower.includes('generate audio')) {
-    try {
-      // Extract content from the message (user may paste text directly or provide a URL)
-      const urlMatch = message.match(/(https?:\/\/[^\s]+)/);
-      const contentType = urlMatch 
-        ? (urlMatch[0].includes('youtube.com') || urlMatch[0].includes('youtu.be') ? 'youtube' : 'url')
-        : 'text';
-      const content = urlMatch ? urlMatch[0] : message;
-
-      const result = await executeNotebookLM({
-        content,
-        contentType: contentType as any,
-        outputType: 'conversational_audio',
-        focusPrompt: message.replace(urlMatch?.[0] || '', '').trim() || undefined,
-        length: msgLower.includes('brief') || msgLower.includes('short') ? 'short' : 'standard'
-      });
-
-      return res.json({
-        reply: `SME_NotebookLM_Ang has processed your request via **${result.executionPath}** (${result.meta.durationMs}ms). ${result.meta.tokensUsed ? `Tokens used: ${result.meta.tokensUsed}.` : ''}`,
-        attachment: result.attachment,
-        script: result.textContent?.substring(0, 500)
-      });
-    } catch (error: any) {
-      console.error('[Guide_Ang] NotebookLM error:', error.message);
-      return res.json({
-        reply: "SME_NotebookLM_Ang encountered an error while processing your request. Please check that GEMINI_API_KEY is configured.",
-      });
-    }
-  }
-  
-  if (msgLower.includes('briefing') || msgLower.includes('document summary')) {
-    try {
-      const urlMatch = message.match(/(https?:\/\/[^\s]+)/);
-      const content = urlMatch ? urlMatch[0] : message;
-
-      const result = await executeNotebookLM({
-        content,
-        contentType: urlMatch ? 'url' : 'text',
-        outputType: 'briefing_doc',
-        focusPrompt: message.replace(urlMatch?.[0] || '', '').trim() || undefined
-      });
-
-      return res.json({
-        reply: `SME_NotebookLM_Ang has compiled the intelligence briefing via **${result.executionPath}**.`,
-        attachment: result.attachment,
-        briefingPreview: result.textContent?.substring(0, 800)
-      });
-    } catch (error: any) {
-      return res.json({ reply: "Briefing generation failed. Check API configuration." });
-    }
-  }
-
-  if (msgLower.includes('faq') || msgLower.includes('questions')) {
-    try {
-      const result = await executeNotebookLM({
-        content: message,
-        contentType: 'text',
-        outputType: 'faq',
-        focusPrompt: message
-      });
-
-      return res.json({
-        reply: `SME_NotebookLM_Ang generated the FAQ via **${result.executionPath}**.`,
-        attachment: result.attachment
-      });
-    } catch {
-      return res.json({ reply: "FAQ generation failed." });
-    }
-  }
-
-  // ─── Cinematic Pipeline: Video & Visual Generation ───
-  if (msgLower.includes('video') || msgLower.includes('cinematic') || msgLower.includes('storyboard') || msgLower.includes('thumbnail') || msgLower.includes('render')) {
-    try {
-      const outputType = msgLower.includes('storyboard') ? 'storyboard'
-        : msgLower.includes('thumbnail') ? 'thumbnail_grid'
-        : msgLower.includes('render') ? 'full_render'
-        : 'video_preview';
-
-      const style = msgLower.includes('corporate') ? 'corporate'
-        : msgLower.includes('anime') ? 'anime'
-        : msgLower.includes('documentary') ? 'documentary'
-        : 'cinematic_dark';
-
-      const result = await executeCinematic({
-        prompt: message,
-        outputType: outputType as any,
-        style: style as any,
-        aspectRatio: msgLower.includes('vertical') || msgLower.includes('9:16') ? '9:16' : '16:9',
-        targetDurationSec: msgLower.includes('short') ? 30 : 60
-      });
-
-      return res.json({
-        reply: `Cinematic pipeline executed via **${result.backend}** (${result.meta.durationMs}ms). Generated ${result.outputs.length} outputs. Est. cost: ${result.meta.estimatedCost}`,
-        storyboard: result.storyboard,
-        outputs: result.outputs
-      });
-    } catch (error: any) {
-      return res.json({ reply: 'Cinematic pipeline error. Check API configuration.' });
-    }
-  }
-
-  res.json({ reply: `Welcome to MyClaw! I can help you navigate the ${req.hostname} services. What would you like to explore?` });
-});
+// The legacy /v1/chat/guide endpoint has been removed.
+// Frontend ACHEEVY orchestration is handled locally or via dedicated /v1/acheevy endpoints.
+// Media endpoints (NotebookLM, Cinematic) are now strictly internal OpenClaw plugins.
 
 /**
  * ═════════════════════════════════════════════════════════════════
@@ -413,7 +297,8 @@ app.get('/v1/acheevy/state', (req, res) => {
 });
 
 app.post('/v1/acheevy/simulate', (req, res) => {
-  const { task } = req.body;
+  const { task, intent } = req.body;
+  const targetTask = intent || task;
   if (acheevyState.activeNode !== 'idle' && acheevyState.activeNode !== 'packaging') {
     return res.status(400).json({ error: 'Pipeline already running.' });
   }
@@ -422,8 +307,8 @@ app.post('/v1/acheevy/simulate', (req, res) => {
   Object.keys(acheevyState.nodes).forEach(k => {
     (acheevyState.nodes as any)[k].status = 'standby';
   });
-  acheevyState.logs = [`[ACHEEVY] Intent received: ${task}`];
-  acheevyState.objective = task;
+  acheevyState.logs = [`[ACHEEVY] Intent received: ${targetTask}`];
+  acheevyState.objective = targetTask;
   acheevyState.activeNode = 'acheevy';
   (acheevyState.nodes as any)['acheevy'].status = 'active';
 
