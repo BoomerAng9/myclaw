@@ -211,5 +211,6 @@
         "traefik": "traefik-traefik-1"
       }
     }
-  }
+  },
+  "verticalsRegistry": "ACHIEVEMOR x AIMS/src/Runtime/Orchestrator/verticals-registry.json"
 }

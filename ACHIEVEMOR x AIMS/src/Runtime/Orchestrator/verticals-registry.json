@@ -1,0 +1,60 @@
+{
+  "description": "Verticals are products and platforms managed by Chicken Hawk at the periphery of the ecosystem. They are NOT core components — they are independent services that Chicken Hawk can spawn lil_hawks to operate, monitor, and extend. New verticals can be added at any time.",
+  "verticals": [
+    {
+      "id": "perform",
+      "name": "Per|form Platform",
+      "type": "sports-biometrics",
+      "localPath": "perform/",
+      "description": "Sports analytics, player stat tracking, biometric data aggregation, and predictive stat generation.",
+      "assignedHawks": ["autoresearch", "researcher"],
+      "status": "active"
+    },
+    {
+      "id": "blockwise",
+      "name": "Blockwise AI",
+      "type": "web3-custody",
+      "localPath": "blockwise/",
+      "sourceRepo": "https://github.com/BoomerAng9/AIMS.git",
+      "description": "Web3 smart contract deployment, RPC management, tokenization, and on-chain transaction execution.",
+      "assignedHawks": ["coder", "validator"],
+      "skills": ["mcp-web3-bridge"],
+      "status": "active"
+    },
+    {
+      "id": "partners",
+      "name": "Partners Portal",
+      "type": "partner-ecosystem",
+      "localPath": "partners/",
+      "domain": "partners.foai.cloud",
+      "description": "Partner onboarding, affiliate management, and ecosystem directory.",
+      "assignedHawks": ["ops", "designer"],
+      "status": "active"
+    },
+    {
+      "id": "openklass",
+      "name": "Open|Klass AI",
+      "type": "education-classroom",
+      "localPath": "vendor/OpenMAIC/",
+      "sourceRepo": "https://github.com/THU-MAIC/OpenMAIC.git",
+      "description": "Multi-agent interactive classroom platform. Transforms any topic or document into rich, interactive lessons with AI teachers and classmates. Built on Next.js/React/TypeScript with LangGraph orchestration. Supports slides, quizzes, simulations, whiteboard drawing, and voice explanations.",
+      "assignedHawks": ["scripter", "designer", "sme-notebooklm"],
+      "skills": ["brainstorming", "subagent-driven-development"],
+      "status": "onboarding"
+    },
+    {
+      "id": "locale",
+      "name": "Locale by ACHIEVEMOR",
+      "type": "localization",
+      "sourceRepo": "https://github.com/BoomerAng9/Locale-by-achievemor.git",
+      "description": "Localization and internationalization platform for ACHIEVEMOR products.",
+      "assignedHawks": ["researcher", "coder"],
+      "status": "planned"
+    }
+  ],
+  "rules": {
+    "addingVerticals": "Any new vertical can be added at any time by appending to this registry. Chicken Hawk will auto-discover and assign lil_hawks based on the 'type' field.",
+    "isolation": "Each vertical operates in its own tenant space. LUC metering tracks usage per-vertical.",
+    "governance": "ACHEEVY routes user intents to the appropriate vertical. Picker_Ang selects the right lil_hawks for the job."
+  }
+}
