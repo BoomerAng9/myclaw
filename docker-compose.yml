@@ -9,4 +9,18 @@ services:
       - traefik.http.routers.myclaw.rule=Host(`myclaw.foai.cloud`)
       - traefik.http.routers.myclaw.entrypoints=websecure
       - traefik.http.routers.myclaw.tls.certresolver=letsencrypt
-      - traefik.http.services.myclaw.loadbalancer.server.url=http://127.0.0.1:8090
+      - traefik.http.services.myclaw.loadbalancer.server.port=80
+
+  studio:
+    build:
+      context: ./acheevy-studio
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.myclawstudio.rule=Host(`studio.myclaw.foai.cloud`)
+      - traefik.http.routers.myclawstudio.entrypoints=websecure
+      - traefik.http.routers.myclawstudio.tls.certresolver=letsencrypt
+      - traefik.http.services.myclawstudio.loadbalancer.server.port=3000

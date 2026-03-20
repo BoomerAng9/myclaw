@@ -1,0 +1,33 @@
+{
+  "serialId": "5cd892e4-3c44-4f58-a2dc-3dcf8187928b",
+  "timestamp": "2026-03-20T01:02:18.780Z",
+  "objective": "Normalized: Write a unit test for the main function",
+  "governancePack": {
+    "policiesChecked": [
+      "No hard-coded vendor choices",
+      "Require VL-JEPA semantic validation"
+    ],
+    "approved": true
+  },
+  "routing": {
+    "capability": "CodeGeneration_Type1",
+    "provider": "Provider-Agnostic"
+  },
+  "validation": {
+    "approved": true,
+    "hallucinationScore": 2.634879764732989
+  },
+  "evidence": [
+    {
+      "timestamp": "2026-03-20T01:02:18.209Z",
+      "event": "Execution Started",
+      "provider": "Provider-Agnostic",
+      "capability": "CodeGeneration_Type1"
+    },
+    {
+      "timestamp": "2026-03-20T01:02:18.209Z",
+      "event": "Execution Completed",
+      "draftLength": 131
+    }
+  ]
+}

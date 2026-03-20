@@ -1,0 +1,205 @@
+{
+  "skillId": "paperform-kyb-guided-v1",
+  "skillName": "KYB Guided Onboarding Form",
+  "version": "1.0.0",
+  "owner": "SME_Paperform_Ang",
+  "description": "Paperform Guided Mode form definition for gamified KYB (Know Your Boomer_Ang) onboarding. Collects agent identity, capabilities, limitations, and privacy preferences. Calculates an outcome score using Paperform's built-in Calculations.",
+
+  "formSettings": {
+    "mode": "guided",
+    "theme": "dark",
+    "brandColor": "#7c5cfc",
+    "accentColor": "#00e5a0",
+    "fontFamily": "Inter",
+    "progressBar": true,
+    "showQuestionNumbers": false
+  },
+
+  "pages": [
+    {
+      "pageId": 1,
+      "title": "Welcome to A.I.M.S",
+      "subtitle": "Let's register your autonomous agent. This takes about 2 minutes.",
+      "fields": [
+        {
+          "fieldId": "owner_email",
+          "type": "email",
+          "label": "Your Email",
+          "placeholder": "operator@company.com",
+          "required": true,
+          "validation": "email"
+        }
+      ]
+    },
+    {
+      "pageId": 2,
+      "title": "Agent Identity",
+      "subtitle": "Tell us about the Boomer_Ang you're deploying.",
+      "fields": [
+        {
+          "fieldId": "boomer_ang_name",
+          "type": "short_text",
+          "label": "Agent Name",
+          "placeholder": "e.g., CodeAng, ResearchBot, DesignPilot",
+          "required": true,
+          "maxLength": 64
+        },
+        {
+          "fieldId": "primary_skill",
+          "type": "dropdown",
+          "label": "Primary Skill Category",
+          "required": true,
+          "options": [
+            "Code Generation",
+            "Code Refactoring", 
+            "Research & Analysis",
+            "UI/UX Design",
+            "Data Processing",
+            "Customer Support",
+            "Content Writing",
+            "DevOps & Infrastructure",
+            "Security Auditing",
+            "Financial Analysis",
+            "Other"
+          ]
+        }
+      ]
+    },
+    {
+      "pageId": 3,
+      "title": "Capabilities & Limitations",
+      "subtitle": "What can this agent do — and what should it NOT do?",
+      "fields": [
+        {
+          "fieldId": "capabilities",
+          "type": "multi_select",
+          "label": "Select all capabilities this agent is authorized for",
+          "required": true,
+          "options": [
+            "Read files",
+            "Write files",
+            "Execute code (sandboxed)",
+            "Execute code (unrestricted)",
+            "Access external APIs",
+            "Access production databases",
+            "Send notifications",
+            "Process payments",
+            "Handle PII data",
+            "Make autonomous decisions"
+          ]
+        },
+        {
+          "fieldId": "limitations",
+          "type": "multi_select",
+          "label": "Select hard limitations for this agent",
+          "required": true,
+          "options": [
+            "Cannot access production databases",
+            "Cannot access the internet",
+            "Cannot send emails directly",
+            "Cannot process financial transactions",
+            "Cannot handle personal health data",
+            "Cannot make autonomous deployments",
+            "Cannot modify security rules",
+            "Cannot access other agents' data"
+          ]
+        }
+      ]
+    },
+    {
+      "pageId": 4,
+      "title": "Privacy & Governance",
+      "subtitle": "How should A.I.M.S handle this agent's data?",
+      "fields": [
+        {
+          "fieldId": "data_retention",
+          "type": "radio",
+          "label": "Data Retention Policy",
+          "required": true,
+          "options": [
+            { "label": "7 days (minimal retention)", "value": "7d" },
+            { "label": "30 days (standard)", "value": "30d" },
+            { "label": "90 days (extended audit)", "value": "90d" },
+            { "label": "Indefinite (full history)", "value": "indefinite" }
+          ]
+        },
+        {
+          "fieldId": "human_review_policy",
+          "type": "radio",
+          "label": "When should a human review this agent's output?",
+          "required": true,
+          "options": [
+            { "label": "Always — every output reviewed", "value": "always" },
+            { "label": "Only on errors or anomalies", "value": "on_error" },
+            { "label": "Never — fully autonomous", "value": "never" }
+          ]
+        },
+        {
+          "fieldId": "model_training_opt_out",
+          "type": "yes_no",
+          "label": "Opt out of using this agent's data for model training?",
+          "required": true,
+          "default": true
+        }
+      ]
+    },
+    {
+      "pageId": 5,
+      "title": "Review & Submit",
+      "subtitle": "Almost there! Confirm your agent's registration.",
+      "fields": [
+        {
+          "fieldId": "confirmation",
+          "type": "checkbox",
+          "label": "I confirm this agent will operate under the KYB General Standard v1.0 and the A.I.M.S governance framework.",
+          "required": true
+        }
+      ]
+    }
+  ],
+
+  "calculations": {
+    "description": "Paperform's internal Calculator computes the outcome score based on the risk profile of the agent being registered.",
+    "formula": {
+      "riskScore": {
+        "description": "Weighted risk score from 0.0 (lowest risk) to 1.0 (highest risk)",
+        "logic": [
+          { "if": "capabilities CONTAINS 'Execute code (unrestricted)'", "add": 0.25 },
+          { "if": "capabilities CONTAINS 'Access production databases'", "add": 0.20 },
+          { "if": "capabilities CONTAINS 'Process payments'", "add": 0.15 },
+          { "if": "capabilities CONTAINS 'Handle PII data'", "add": 0.15 },
+          { "if": "capabilities CONTAINS 'Make autonomous decisions'", "add": 0.10 },
+          { "if": "human_review_policy == 'never'", "add": 0.10 },
+          { "if": "data_retention == '7d'", "subtract": 0.05 },
+          { "if": "model_training_opt_out == false", "add": 0.05 }
+        ],
+        "clamp": [0.0, 1.0]
+      },
+      "outcomeLabel": {
+        "if_riskScore_lte_0.3": "Low Risk — Standard",
+        "if_riskScore_lte_0.6": "Medium Risk — Flagged",
+        "if_riskScore_gt_0.6": "High Risk — Requires Manual Review"
+      }
+    }
+  },
+
+  "webhookOutput": {
+    "description": "The exact payload Paperform sends on submission. This is what Stepper catches.",
+    "fields": {
+      "submissionId": "{{paperform.submission_id}}",
+      "ownerEmail": "{{owner_email}}",
+      "boomerAngName": "{{boomer_ang_name}}",
+      "primarySkill": "{{primary_skill}}",
+      "capabilities": "{{capabilities}}",
+      "limitations": "{{limitations}}",
+      "privacy": {
+        "dataRetention": "{{data_retention}}",
+        "humanReviewPolicy": "{{human_review_policy}}",
+        "modelTrainingOptOut": "{{model_training_opt_out}}"
+      },
+      "outcomeScore": "{{calculations.riskScore}}",
+      "outcomeLabel": "{{calculations.outcomeLabel}}",
+      "submittedAt": "{{paperform.submitted_at}}"
+    }
+  }
+}

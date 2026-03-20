@@ -1,0 +1,80 @@
+{
+  "title": "ACHEEVY Cinematic Preview",
+  "scenes": [
+    {
+      "sceneId": "scene_01",
+      "description": "Wide establishing shot revealing the environment. Context: create a cinematic storyboard about a futuristic space station",
+      "voiceover": "Welcome to create a cinematic storyboard about a futuristic s...",
+      "durationSec": 8,
+      "style": "cinematic_dark",
+      "camera": "slow aerial establishing shot",
+      "musicMood": "ambient"
+    },
+    {
+      "sceneId": "scene_02",
+      "description": "Key subject introduction with dramatic lighting. Context: create a cinematic storyboard about a futuristic space station",
+      "voiceover": "",
+      "durationSec": 8,
+      "style": "cinematic_dark",
+      "camera": "medium dolly forward",
+      "musicMood": "dramatic"
+    },
+    {
+      "sceneId": "scene_03",
+      "description": "Detail shot of the core concept. Context: create a cinematic storyboard about a futuristic space station",
+      "voiceover": "",
+      "durationSec": 8,
+      "style": "cinematic_dark",
+      "camera": "close-up with rack focus",
+      "musicMood": "ambient"
+    },
+    {
+      "sceneId": "scene_04",
+      "description": "Dynamic motion revealing context. Context: create a cinematic storyboard about a futuristic space station",
+      "voiceover": "",
+      "durationSec": 8,
+      "style": "cinematic_dark",
+      "camera": "tracking shot left to right",
+      "musicMood": "upbeat"
+    },
+    {
+      "sceneId": "scene_05",
+      "description": "Overhead view of the working system. Context: create a cinematic storyboard about a futuristic space station",
+      "voiceover": "",
+      "durationSec": 8,
+      "style": "cinematic_dark",
+      "camera": "bird's eye rotating",
+      "musicMood": "dramatic"
+    },
+    {
+      "sceneId": "scene_06",
+      "description": "Intimate focus on the key outcome. Context: create a cinematic storyboard about a futuristic space station",
+      "voiceover": "",
+      "durationSec": 8,
+      "style": "cinematic_dark",
+      "camera": "slow zoom in",
+      "musicMood": "ambient"
+    },
+    {
+      "sceneId": "scene_07",
+      "description": "Final summary composition. Context: create a cinematic storyboard about a futuristic space station",
+      "voiceover": "",
+      "durationSec": 8,
+      "style": "cinematic_dark",
+      "camera": "static wide with depth of field",
+      "musicMood": "dramatic"
+    },
+    {
+      "sceneId": "scene_08",
+      "description": "Closing shot pulling away to reveal the full picture. Context: create a cinematic storyboard about a futuristic space station",
+      "voiceover": "",
+      "durationSec": 8,
+      "style": "cinematic_dark",
+      "camera": "slow pull back to wide",
+      "musicMood": "ambient"
+    }
+  ],
+  "totalDurationSec": 64,
+  "style": "cinematic_dark",
+  "aspectRatio": "16:9"
+}

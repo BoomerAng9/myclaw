@@ -1,0 +1,204 @@
+/* ═══════════════════════════════════════════════════════════
+   A.I.M.S App Shell — Navigation, Layout, Background
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Background Mesh ── */
+.bg-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.mesh-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.35;
+  animation: float 12s var(--ease-in-out) infinite;
+}
+
+.mesh-orb--cyan {
+  width: 600px;
+  height: 600px;
+  background: var(--aims-cyan);
+  top: -15%;
+  right: -10%;
+  opacity: 0.15;
+  animation-delay: 0s;
+}
+
+.mesh-orb--violet {
+  width: 500px;
+  height: 500px;
+  background: var(--aims-violet);
+  bottom: 10%;
+  left: -8%;
+  opacity: 0.12;
+  animation-delay: -4s;
+}
+
+.mesh-orb--amber {
+  width: 350px;
+  height: 350px;
+  background: var(--aims-amber);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.08;
+  animation-delay: -8s;
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 60% 50% at 50% 30%, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 30%, black 20%, transparent 70%);
+}
+
+/* ── Navigation ── */
+.nav {
+  position: fixed;
+  top: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92%, 1200px);
+  z-index: var(--z-sticky);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-xl);
+  animation: fade-in 0.4s var(--ease-out) both;
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+.nav__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
+}
+
+.nav__logo-mark {
+  font-size: var(--text-xl);
+  line-height: 1;
+}
+
+.nav__wordmark {
+  font-size: var(--text-lg);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--aims-text-bright);
+}
+
+.nav__links {
+  display: flex;
+  gap: var(--space-6);
+}
+
+.nav__link {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--aims-subtle);
+  transition: color var(--duration-fast) var(--ease-out);
+  position: relative;
+}
+
+.nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--grad-accent);
+  border-radius: var(--radius-full);
+  transition: width var(--duration-base) var(--ease-out);
+}
+
+.nav__link:hover { color: var(--aims-text-bright); }
+.nav__link:hover::after { width: 100%; }
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-2);
+}
+
+.nav__hamburger span {
+  width: 22px;
+  height: 2px;
+  background: var(--aims-text);
+  border-radius: var(--radius-full);
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+/* ── Mobile Nav ── */
+@media (max-width: 768px) {
+  .nav__links, .nav__actions .btn-ghost { display: none; }
+  .nav__hamburger { display: flex; }
+  
+  .nav.nav--open .nav__links {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--aims-surface);
+    backdrop-filter: blur(var(--glass-blur-heavy));
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    margin-top: var(--space-3);
+    gap: var(--space-4);
+    animation: scale-in 0.3s var(--ease-spring) both;
+  }
+}
+
+/* ── Sections ── */
+section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-24) var(--space-6);
+}
+
+.section__header {
+  text-align: center;
+  margin-bottom: var(--space-16);
+}
+
+.section__title {
+  font-size: var(--text-3xl);
+  font-weight: 800;
+  color: var(--aims-text-bright);
+  margin-top: var(--space-4);
+  line-height: 1.2;
+}
+
+.section__desc {
+  font-size: var(--text-lg);
+  color: var(--aims-subtle);
+  max-width: 560px;
+  margin: var(--space-4) auto 0;
+  line-height: 1.7;
+}

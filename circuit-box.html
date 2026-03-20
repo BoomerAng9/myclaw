@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACHEEVY Circuit Box</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #f8f9fa; color: #0a0a0a; -webkit-font-smoothing: antialiased; }
+    header { background: #fff; border-bottom: 1px solid #f0f0f0; padding: 0 40px; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
+    .logo { font-size: 16px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+    .nav-links { display: flex; gap: 20px; }
+    .nav-links a { font-size: 14px; font-weight: 600; color: #666; text-decoration: none; }
+    .nav-links a:hover { color: #0066ff; }
+    
+    .container { max-width: 900px; margin: 40px auto; padding: 0 40px; }
+    h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+    p.sub { font-size: 15px; color: #666; margin-bottom: 40px; }
+
+    .section { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 32px; margin-bottom: 24px; }
+    .section-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    
+    .toggle-row { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid #f5f5f5; }
+    .toggle-row:last-child { border-bottom: none; }
+    .toggle-info h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+    .toggle-info p { font-size: 13px; color: #888; }
+    
+    .switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 24px; }
+    .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+    input:checked + .slider { background-color: #0066ff; }
+    input:checked + .slider:before { transform: translateX(20px); }
+
+    .knowledge-item { display: flex; justify-content: space-between; background: #fafafa; padding: 12px 16px; border-radius: 8px; border: 1px solid #eee; margin-bottom: 12px; }
+    .knowledge-name { font-size: 14px; font-weight: 600; }
+    .knowledge-source { font-size: 12px; color: #888; }
+    .btn-remove { background: none; border: none; color: #ef4444; font-size: 13px; font-weight: 600; cursor: pointer; }
+    
+    .add-knowledge { margin-top: 20px; display: flex; gap: 10px; }
+    .add-knowledge input { flex: 1; padding: 10px 14px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; font-size: 14px; }
+    .add-knowledge button { padding: 10px 20px; background: #0a0a0a; color: #fff; border: none; border-radius: 6px; font-weight: 600; font-family: inherit; cursor: pointer; }
+    .add-knowledge button:hover { background: #333; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="images/acheevy-helmet-gold.png" alt="ACHEEVY" style="height: 28px; width: auto; display: block;" />
+      ACHEEVY Circuit Box
+    </div>
+    <div class="nav-links">
+      <a href="/dashboard/index.html">← Back to Dashboard</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Site Chatbot Management</h1>
+    <p class="sub">Configure ACHEEVY's capabilities, permissions, and knowledge for the frontend site.</p>
+
+    <!-- Permissions -->
+    <div class="section">
+      <div class="section-title">⚡ Core Capabilities</div>
+      
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <h3>OpenClaw Navigation</h3>
+          <p>Allow the chatbot to guide users to the private LLM environment.</p>
+        </div>
+        <label class="switch"><input type="checkbox" checked onchange="notifyUpdate()"><span class="slider"></span></label>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <h3>Mind Edge Gateway</h3>
+          <p>Allow the chatbot to handle queries about Course / Partner management.</p>
+        </div>
+        <label class="switch"><input type="checkbox" checked onchange="notifyUpdate()"><span class="slider"></span></label>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <h3>Backend Code Execution</h3>
+          <p>Authorize the site chatbot to run Python/Node scripts via the Sandbox. (High Risk)</p>
+        </div>
+        <label class="switch"><input type="checkbox" onchange="notifyUpdate()"><span class="slider"></span></label>
+      </div>
+      
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <h3>LUC Quota Visibility</h3>
+          <p>Allow the chatbot to fetch and report real-time token spend from Stripe.</p>
+        </div>
+        <label class="switch"><input type="checkbox" checked onchange="notifyUpdate()"><span class="slider"></span></label>
+      </div>
+    </div>
+
+    <!-- Knowledge Base -->
+    <div class="section">
+      <div class="section-title">📚 External Knowledge Connectors</div>
+      <p style="font-size:14px; color:#666; margin-bottom:16px;">Feed ACHEEVY documentation, site maps, or brand guidelines.</p>
+      
+      <div id="knowledgeList">
+        <div class="knowledge-item">
+          <div>
+            <div class="knowledge-name">MyClaw Platform Sitemap</div>
+            <div class="knowledge-source">Static Index (Internal)</div>
+          </div>
+          <button class="btn-remove" onclick="this.parentElement.remove()">Remove</button>
+        </div>
+        <div class="knowledge-item">
+          <div>
+            <div class="knowledge-name">NemoClaw Inference Docs</div>
+            <div class="knowledge-source">https://nemoclaw.docs/</div>
+          </div>
+          <button class="btn-remove" onclick="this.parentElement.remove()">Remove</button>
+        </div>
+      </div>
+
+      <div class="add-knowledge">
+        <input type="text" id="newKb" placeholder="Enter URL or file path..." />
+        <button onclick="addKnowledge()">Add Data</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function notifyUpdate() {
+      // In production, syncs with backend/circuit-box state
+      console.log('Synchronizing ACHEEVY permissions...');
+    }
+    
+    function addKnowledge() {
+      const input = document.getElementById('newKb');
+      if (!input.value.trim()) return;
+      
+      const div = document.createElement('div');
+      div.className = 'knowledge-item';
+      div.innerHTML = `
+        <div>
+          <div class="knowledge-name">Imported Source</div>
+          <div class="knowledge-source">${input.value}</div>
+        </div>
+        <button class="btn-remove" onclick="this.parentElement.remove()">Remove</button>
+      `;
+      document.getElementById('knowledgeList').appendChild(div);
+      input.value = '';
+    }
+  </script>
+</body>
+</html>

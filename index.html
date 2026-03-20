@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="acheevy-chat.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -132,7 +133,9 @@
 <body>
 
   <nav>
-    <div class="logo">My<span>Claw</span></div>
+    <div class="logo">
+      <img src="images/aims-logo-transparent.png" alt="AIMS" style="height: 32px; width: auto; display: block;" />
+    </div>
     <div class="nav-links">
       <a href="#features">Features</a>
       <a href="#signin" class="btn-signin">Sign in</a>
@@ -211,6 +214,48 @@
     </nav>
   </footer>
 
+  <!-- GuideChat Native Interface -->
+  <div id="guide-root">
+    <div class="guide-bubble" id="guideBubble" onclick="toggleGuide()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        <path d="M8 9h8" />
+        <path d="M8 13h5" />
+      </svg>
+    </div>
+
+    <div class="guide-panel" id="guidePanel">
+      <div class="guide-header">
+        <div class="guide-header-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2c-4.97 0-9 4.03-9 9v2h18v-2c0-4.97-4.03-9-9-9z"/>
+            <path d="M3 13v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6"/>
+            <path d="M12 21v-4"/>
+            <path d="M8 10h8"/>
+          </svg>
+        </div>
+        <div class="guide-header-status">
+          <span class="guide-header-title">ACHEEVY</span>
+          <span class="guide-header-tagline">MyClaw Site Guide & Digital CEO</span>
+        </div>
+      </div>
+      <div class="guide-messages" id="guideMessages">
+        <div class="guide-message bot">Welcome to MyClaw. I am ACHEEVY. How can I assist your mission today?</div>
+      </div>
+      <div class="guide-input-container">
+        <div class="guide-input-wrapper">
+          <input type="text" class="guide-input" id="guideInput" placeholder="Ask ACHEEVY..." onkeydown="handleGuideInput(event)" />
+          <button class="guide-send-btn" onclick="sendGuideMessage()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="acheevy-chat.js"></script>
   <script>
     // Credentials stored as SHA-256 hashes — never plaintext in source
     const VALID_EMAIL = 'asg@achievemor.io';

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L.U.C. - Ledger Usage Calculator</title>
+  <style>
+    :root {
+      --bg: #09090b;
+      --card-bg: rgba(24, 24, 27, 0.65);
+      --border: rgba(255, 255, 255, 0.1);
+      --text: #fafafa;
+      --text-muted: #a1a1aa;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --glow: rgba(59, 130, 246, 0.25);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: -20%; left: -10%;
+      width: 50%; height: 50%;
+      background: var(--glow);
+      filter: blur(150px);
+      z-index: 0;
+      border-radius: 50%;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1100px;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2.5rem;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(to right, #60a5fa, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p.subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    select, input[type="number"] {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 1rem;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    select:focus, input[type="number"]:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px var(--glow);
+    }
+
+    .checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      color: var(--text-muted);
+    }
+
+    input[type="checkbox"] {
+      width: 1.25rem;
+      height: 1.25rem;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .btn {
+      width: 100%;
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 1.2rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 1.5rem;
+      box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Results Dashboard */
+    .dashboard {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .metric-card {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+
+    .metric-title {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-value {
+      font-size: 2.2rem;
+      font-weight: 800;
+      word-break: break-all;
+    }
+
+    .value-success { color: var(--success); }
+    .value-warning { color: var(--warning); }
+    .value-danger { color: var(--danger); }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .progress-bar-bg {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      height: 12px;
+      width: 100%;
+      margin-top: 1rem;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--success);
+      width: 0%;
+      transition: width 0.5s ease, background 0.3s ease;
+    }
+
+    .insight-list {
+      list-style-type: none;
+      margin-top: 1rem;
+    }
+
+    .insight-list li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .insight-list li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .status-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 12px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .status-indicator {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      margin-right: 8px;
+      box-shadow: 0 0 10px var(--success);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Input Section -->
+    <div class="card">
+      <h1>Ledger Usage Calculator</h1>
+      <p class="subtitle">A.I.M.S. Standalone Tool (LUC v2.0)</p>
+
+      <div class="form-group">
+        <label>Service Capability</label>
+        <select id="service-key">
+          <option value="llm_tokens_in">LLM Tokens (Inbound)</option>
+          <option value="llm_tokens_out">LLM Tokens (Outbound)</option>
+          <option value="brave_queries">Brave Search Queries</option>
+          <option value="n8n_executions">n8n Workflow Executions</option>
+          <option value="swarm_cycles">Swarm Agent Cycles</option>
+          <option value="container_hours">Container Hours</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Estimated Units Transacted</label>
+        <input type="number" id="units" value="15000" min="1">
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="pattern-match" checked>
+        <label for="pattern-match" style="margin: 0; text-transform: none; letter-spacing: normal;">Enable ByteRover Reusability Discount Pattern</label>
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="live-mode">
+        <label for="live-mode" style="margin: 0; text-transform: none; letter-spacing: normal;">Execute (Live Mode - Requires CFO_Ang Approval)</label>
+      </div>
+
+      <button class="btn" onclick="simulateGating()">Calculate Ledger Impact</button>
+    </div>
+
+    <!-- Output Dashboard -->
+    <div class="dashboard">
+      <div class="card" style="flex: 1;">
+        <div class="status-strip" style="margin-bottom: 2rem;">
+          <div><span class="status-indicator"></span> CFO_Ang Status: Active</div>
+          <div id="quota-banner">Thresholds Monitoring</div>
+        </div>
+
+        <div class="metric-card" style="margin-bottom: 1.5rem;">
+          <div class="metric-title">Unit Cost Estimate (Adjusted)</div>
+          <div class="metric-value" id="cost-val">0</div>
+          <div style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;" id="discount-val">No discount applied</div>
+        </div>
+
+        <div class="grid-2" style="margin-bottom: 1.5rem;">
+          <div class="metric-card">
+            <div class="metric-title">Projected Usage</div>
+            <div class="metric-value" id="used-val" style="font-size: 1.8rem;">0 / ∞</div>
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="progress-bar"></div>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-title">LUC Clearance Gate</div>
+            <div class="metric-value" id="score-val" style="font-size: 1.6rem; padding-top: 0.5rem;">Pending</div>
+          </div>
+        </div>
+
+        <div>
+          <h3 style="font-size: 0.85rem; color: #fff; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Orchestrator Insights</h3>
+          <ul class="insight-list" id="insights">
+            <li>Awaiting pre-flight simulation parameters...</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Hardcoded plan ceilings for UI simulation demonstration purposes
+    const MOCK_ACTIVE_QUOTAS = {
+      llm_tokens_in: { limit: 200000, used: 165000 },
+      llm_tokens_out: { limit: 50000, used: 12000 },
+      brave_queries: { limit: 100, used: 45 },
+      n8n_executions: { limit: 5000, used: 2500 },
+      swarm_cycles: { limit: 500, used: 480 },
+      container_hours: { limit: 730, used: 300 }
+    };
+
+    function simulateGating() {
+      const serviceKey = document.getElementById('service-key').value;
+      const unitsEstimate = parseInt(document.getElementById('units').value, 10) || 0;
+      const hasPatternMatch = document.getElementById('pattern-match').checked;
+      const isLive = document.getElementById('live-mode').checked;
+
+      // 1. Math computation matching aims-tools/luc/luc.engine.ts
+      const discountMultiplier = hasPatternMatch ? (Math.random() * (0.85 - 0.60) + 0.60) : 1.0;
+      const finalEstimate = Math.round(unitsEstimate * discountMultiplier);
+      const discountPercentage = hasPatternMatch ? Math.round((1 - discountMultiplier) * 100) : 0;
+
+      // 2. Fetch Quota logic matching aims-tools/luc/luc.storage.ts defaults
+      const quota = MOCK_ACTIVE_QUOTAS[serviceKey];
+      const projectedUsed = quota.used + finalEstimate;
+      const usagePct = projectedUsed / quota.limit;
+
+      // 3. UI logic
+      document.getElementById('cost-val').innerText = finalEstimate.toLocaleString();
+      document.getElementById('discount-val').innerText = hasPatternMatch 
+        ? `${discountPercentage}% reuse ByteRover footprint applied.`
+        : 'Standard rate (No reusable pattern footprint).';
+
+      document.getElementById('used-val').innerText = `${projectedUsed.toLocaleString()} / ${quota.limit.toLocaleString()}`;
+      
+      const progressBar = document.getElementById('progress-bar');
+      const barWidth = Math.min(100, usagePct * 100);
+      progressBar.style.width = barWidth + '%';
+
+      let gateStatus = '✅ OK';
+      let gateColor = '#10b981';
+      let barColor = '#10b981';
+      
+      if (usagePct >= 1.10) {
+        gateStatus = '⛔ HARD_BLOCK';
+        gateColor = '#ef4444';
+        barColor = '#ef4444';
+      } else if (usagePct >= 0.80) {
+        gateStatus = '⚠️ SOFT_WARN';
+        gateColor = '#f59e0b';
+        barColor = '#f59e0b';
+      }
+
+      progressBar.style.background = barColor;
+      const scoreElem = document.getElementById('score-val');
+      scoreElem.innerText = gateStatus;
+      scoreElem.style.color = gateColor;
+
+      document.getElementById('quota-banner').innerText = isLive ? 'Runtime Mode (Ledger appending active)' : 'Telemetry (Simulation Mode)';
+      document.getElementById('quota-banner').style.color = isLive ? '#ef4444' : '#a1a1aa';
+
+      const insightsList = document.getElementById('insights');
+      insightsList.innerHTML = `
+        <li><strong>Service Route:</strong> Execution for \`${serviceKey}\` verified.</li>
+        <li><strong>Overage Impact:</strong> ${usagePct > 1.0 ? `Projected overage of ${(projectedUsed - quota.limit).toLocaleString()} units detected.` : `Execution securely within quota boundaries.`}</li>
+        <li><strong>CFO_Ang Checkpoint:</strong> ${gateStatus.includes('HARD_BLOCK') ? 'Task blocked by orchestrator. Escalate capabilities or reset limits.' : 'Clearance granted for routing phase to Picker_Ang.'}</li>
+      `;
+    }
+  </script>
+</body>
+</html>

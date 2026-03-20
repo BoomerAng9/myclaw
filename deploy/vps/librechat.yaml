@@ -1,0 +1,42 @@
+version: 1.0.5
+
+cache: true
+
+endpoints:
+  custom:
+    - name: "Gemini / Vertex AI (Google)"
+      apiKey: "${GEMINI_API_KEY}"
+      baseURL: "https://generativelanguage.googleapis.com/v1beta"
+      models:
+        default: ["gemini-3.1-pro", "gemini-1.5-pro", "gemini-1.5-flash"]
+        fetch: true
+      titleConvo: true
+      titleModel: "gemini-1.5-flash"
+      summarize: true
+      modelDisplayLabel: "Vertex AI"
+
+    - name: "AIMS Native Swarm (Internal)"
+      apiKey: "${ACHEEVY_INTERNAL_KEY}"
+      baseURL: "https://api.myclaw.foai.cloud/v1/acheevy"
+      models:
+        default: ["ACHEEVY-Orchestrator", "SME_NotebookLM_Ang", "SME_Paperform_Ang", "Guide_Ang"]
+        fetch: false
+      titleConvo: true
+      titleModel: "ACHEEVY-Orchestrator"
+      modelDisplayLabel: "Boomer_Ang Swarm"
+
+registration:
+  socialLogins: ["google", "github"]
+  # Strict policy: Only allowed users can enter OpenClaw
+  allowEmails: ["asg@achievemor.io"]
+
+rateLimits:
+  fileUploads:
+    ipMax: 100
+    ipWindowInMinutes: 60
+    userMax: 1000
+    userWindowInMinutes: 60
+
+# Plugins and Tools integration (Exposing MyClaw Internal APIs to OpenClaw Agents)
+plugins:
+  creds: true

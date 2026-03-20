@@ -1,0 +1,164 @@
+{
+  "swarmId": "aims-lil-hawks-v1",
+  "name": "A.I.M.S Lil Hawk Swarm",
+  "version": "1.0.0",
+  "description": "Specialized narrow agent swarm following the 20-agent paradigm. Each agent has a single responsibility and cannot overlap with others.",
+  "orchestrator": "acheevy",
+  "routingPolicy": "capability-first",
+  "providerAgnostic": true,
+  "agents": [
+    {
+      "id": "acheevy",
+      "config": "../../../aims-tools/luc/agents/lil-hawk-acheevy.json",
+      "role": "orchestrator",
+      "canDelegate": true,
+      "canExecute": false,
+      "priority": 0
+    },
+    {
+      "id": "picker",
+      "config": "../../../aims-tools/luc/agents/lil-hawk-picker.json",
+      "role": "router",
+      "canDelegate": false,
+      "canExecute": false,
+      "priority": 1
+    },
+    {
+      "id": "cfo",
+      "config": "../../../aims-tools/luc/agents/lil-hawk-cfo.json",
+      "role": "finance-gate",
+      "canDelegate": false,
+      "canExecute": false,
+      "priority": 2
+    },
+    {
+      "id": "coder",
+      "config": "agents/coder-ang.json",
+      "role": "code-producer",
+      "canDelegate": false,
+      "canExecute": true,
+      "priority": 3
+    },
+    {
+      "id": "validator",
+      "config": "agents/validator-ang.json",
+      "role": "review-gate",
+      "canDelegate": false,
+      "canExecute": false,
+      "priority": 4
+    },
+    {
+      "id": "researcher",
+      "config": "agents/research-ang.json",
+      "role": "intelligence",
+      "canDelegate": false,
+      "canExecute": false,
+      "priority": 3
+    },
+    {
+      "id": "ops",
+      "config": "agents/ops-ang.json",
+      "role": "notifications",
+      "canDelegate": false,
+      "canExecute": false,
+      "priority": 5
+    },
+    {
+      "id": "designer",
+      "config": "agents/designer-ang.json",
+      "role": "visual-producer",
+      "canDelegate": false,
+      "canExecute": false,
+      "priority": 3
+    },
+    {
+      "id": "sme-stepper",
+      "config": "agents/sme-stepper-ang.json",
+      "role": "stepper-skill-manager",
+      "canDelegate": false,
+      "canExecute": false,
+      "priority": 3
+    },
+    {
+      "id": "sme-paperform",
+      "config": "agents/sme-paperform-ang.json",
+      "role": "paperform-skill-manager",
+      "canDelegate": false,
+      "canExecute": false,
+      "priority": 3
+    },
+    {
+      "id": "sme-notebooklm",
+      "config": "agents/sme-notebooklm-ang.json",
+      "role": "audio-intelligence-specialist",
+      "canDelegate": false,
+      "canExecute": true,
+      "priority": 3,
+      "description": "Generates podcasts, briefings, and FAQs from source material via Gemini+TTS or NotebookLM Enterprise API."
+    },
+    {
+      "id": "betty-anne",
+      "config": "agents/betty-anne-ang.json",
+      "role": "hr-oversight",
+      "canDelegate": false,
+      "canExecute": false,
+      "priority": 1,
+      "description": "PMO HR oversight. Grades Boomer_Ang performance against TEP objectives."
+    },
+    {
+      "id": "scripter",
+      "config": "agents/scripter-ang.json",
+      "role": "narrative-producer",
+      "canDelegate": false,
+      "canExecute": true,
+      "priority": 3,
+      "description": "Drafts execution narratives and video pipeline scripts."
+    },
+    {
+      "id": "chicken-hawk",
+      "config": "agents/chicken-hawk.json",
+      "role": "procurement-governance",
+      "canDelegate": false,
+      "canExecute": true,
+      "priority": 2,
+      "description": "Rigid governance loop over active agent tooling. Procures external resources."
+    },
+    {
+      "id": "avva-noon",
+      "config": "agents/avva-noon.json",
+      "role": "escalation-failover",
+      "canDelegate": true,
+      "canExecute": true,
+      "priority": 0,
+      "description": "Agent Zero. Activated on critical failure for OODA loop auto-fix."
+    }
+  ],
+  "executionRules": {
+    "maxParallelAgents": 6,
+    "timeoutMs": 120000,
+    "retryPolicy": {
+      "maxRetries": 2,
+      "backoffMs": 3000
+    },
+    "approvalRequired": ["coder", "designer", "scripter"],
+    "alwaysReview": true,
+    "evidenceRequired": true,
+    "escalationAgent": "avva-noon",
+    "hrOversightAgent": "betty-anne"
+  },
+  "pipelineOrder": [
+    "acheevy → interpret intent",
+    "picker → route to capability class",
+    "cfo → quota gate check",
+    "betty-anne → TEP performance gate (parallel oversight)",
+    "sme-stepper → validate external architecture (if applicable)",
+    "sme-notebooklm → audio intelligence generation (if applicable)",
+    "chicken-hawk → procurement governance check (if applicable)",
+    "coder | researcher | designer | scripter | sme-notebooklm → parallel execution",
+    "cinematic → Veo / Imagen 3 / Remotion rendering (if video output requested)",
+    "validator → review gate",
+    "avva-noon → escalation failover (on failure only)",
+    "ops → deliver notifications",
+    "acheevy → package evidence bundle"
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "$id": "https://mindedge.com/schemas/skills/notebooklm-integration.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NotebookLM API SME Integration — Live Implementation",
+  "description": "Full API-backed integration for SME_NotebookLM_Ang. Routes between Gemini+TTS (primary) and NotebookLM Enterprise Podcast API (premium) based on environment configuration.",
+  "version": "2.0.0",
+  "implementation": "api/notebooklm.ts",
+  "type": "object",
+  "properties": {
+    "request": {
+      "type": "object",
+      "description": "The input payload for the NotebookLM generation API.",
+      "properties": {
+        "content": { "type": "string", "description": "Raw text, URL, or file path to process." },
+        "contentType": { "type": "string", "enum": ["text", "url", "pdf", "youtube"] },
+        "outputType": { "type": "string", "enum": ["conversational_audio", "briefing_doc", "faq"] },
+        "focusPrompt": { "type": "string", "description": "Optional focus directive to guide generation." },
+        "length": { "type": "string", "enum": ["short", "standard"], "default": "standard" }
+      },
+      "required": ["content", "outputType"]
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "success": { "type": "boolean" },
+        "textContent": { "type": "string", "description": "Generated script, briefing, or FAQ text." },
+        "audioUrl": { "type": "string", "description": "URL to the generated MP3 or text file." },
+        "attachment": {
+          "type": "object",
+          "description": "Payload for embedding in Guide_Ang chat.",
+          "properties": {
+            "type": { "type": "string", "enum": ["audio", "document"] },
+            "url": { "type": "string" },
+            "label": { "type": "string" }
+          }
+        },
+        "executionPath": { "type": "string", "enum": ["gemini_tts", "notebooklm_enterprise", "fallback"] },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "tokensUsed": { "type": "integer" },
+            "durationMs": { "type": "integer" },
+            "model": { "type": "string" }
+          }
+        }
+      }
+    },
+    "endpoints": {
+      "type": "object",
+      "description": "Available REST endpoints.",
+      "properties": {
+        "generate": {
+          "method": "POST",
+          "path": "/v1/notebooklm/generate",
+          "description": "Standalone API-first endpoint. Any Boomer_Ang can call this directly.",
+          "contentType": "application/json"
+        },
+        "guide_chat": {
+          "method": "POST",
+          "path": "/v1/chat/guide",
+          "description": "Guide_Ang chat endpoint. Detects NotebookLM keywords and routes automatically."
+        }
+      }
+    },
+    "executionPaths": {
+      "type": "object",
+      "properties": {
+        "pathA": {
+          "name": "Gemini + Google Cloud TTS",
+          "description": "Primary path. Uses Gemini 3.1 Pro to generate podcast scripts, then Google Cloud TTS to synthesize audio. Available with GEMINI_API_KEY and GCP_ACCESS_TOKEN.",
+          "requiredEnv": ["GEMINI_API_KEY", "GCP_ACCESS_TOKEN"],
+          "fallback": "Template-based script generation (no API keys needed)"
+        },
+        "pathB": {
+          "name": "NotebookLM Enterprise Podcast API",
+          "description": "Premium path. Direct call to Discovery Engine Podcast API. Requires allowlisted GCP project.",
+          "requiredEnv": ["GCP_ACCESS_TOKEN", "GCP_PROJECT_ID", "NOTEBOOKLM_ENTERPRISE_ENABLED=true"],
+          "endpoint": "https://discoveryengine.googleapis.com/v1alpha/projects/{PROJECT_ID}/locations/{LOCATION}:generatePodcast"
+        }
+      }
+    },
+    "environmentVariables": {
+      "GEMINI_API_KEY": "Google AI Studio / Gemini API key for script generation",
+      "GCP_ACCESS_TOKEN": "OAuth2 access token for Google Cloud APIs (TTS, Discovery Engine)",
+      "GCP_PROJECT_ID": "Google Cloud project ID",
+      "GCP_PROJECT_NUMBER": "Google Cloud project number (for long-form TTS)",
+      "GCP_LOCATION": "Google Cloud location (default: global)",
+      "NOTEBOOKLM_ENTERPRISE_ENABLED": "Set to 'true' to use Enterprise Podcast API",
+      "GCS_AUDIO_BUCKET": "Optional GCS bucket for long-form audio output",
+      "AUDIO_OUTPUT_DIR": "Local directory for generated audio files"
+    }
+  },
+  "required": ["request"]
+}
