@@ -40,3 +40,32 @@ rateLimits:
 # Plugins and Tools integration (Exposing MyClaw Internal APIs to OpenClaw Agents)
 plugins:
   creds: true
+
+# ════════════════════════════════════════════════════════════════
+# VOICE-FIRST: STT + TTS Configuration (Chicken Hawk Audio Layer)
+# ════════════════════════════════════════════════════════════════
+speech:
+  tts:
+    # OpenAI-compatible TTS (works with any OpenAI-compatible endpoint)
+    openai:
+      apiKey: "${OPENAI_API_KEY}"
+      model: "tts-1"
+      voices: ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]
+    # ElevenLabs TTS (premium voice quality)
+    elevenlabs:
+      apiKey: "${ELEVENLABS_API_KEY}"
+      model: "eleven_multilingual_v2"
+      voices: ["rachel", "drew", "clyde", "paul", "domi", "dave"]
+  stt:
+    openai:
+      apiKey: "${OPENAI_API_KEY}"
+      model: "whisper-1"
+
+# Interface: Expose the microphone + speaker UI controls
+interface:
+  endpointsMenu: true
+  speechTab: true
+  # Allow all endpoints to use speech
+  parameters:
+    speechToText: true
+    textToSpeech: true
