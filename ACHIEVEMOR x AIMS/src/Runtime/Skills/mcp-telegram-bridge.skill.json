@@ -1,0 +1,50 @@
+{
+  "id": "skill-mcp-telegram-bridge",
+  "name": "MCP Wrapper & Telegram Remote Control",
+  "version": "1.0.0",
+  "description": "Empowers OpenClaw agents to autonomously download, configure, and wrap MCP (Model Context Protocol) servers for complex applications (e.g., Blender) and manage them remotely via a visual Telegram bot loop.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "target_application": {
+        "type": "string",
+        "description": "The name of the application to control (e.g., 'Blender', 'Photoshop')."
+      },
+      "mcp_port": {
+        "type": "integer",
+        "description": "The local port to bind the application's MCP server.",
+        "default": 9876
+      },
+      "enable_telegram_loop": {
+        "type": "boolean",
+        "description": "Whether to initialize a Telegram bot hook to send screenshots and receive remote commands.",
+        "default": true
+      },
+      "telegram_chat_id": {
+        "type": "string",
+        "description": "The Chat ID to send periodic status updates and screenshots to."
+      }
+    },
+    "required": ["target_application"]
+  },
+  "execution_context": {
+    "require_sandbox": false,
+    "require_network": true,
+    "require_system_access": true,
+    "permissions": ["file_system_write", "network_bind", "process_execution"]
+  },
+  "phases": [
+    {
+      "step": "Install & Configure MCP",
+      "action": "Search internet for '[target_application] MCP', download the add-on, script the application's preferences to enable it, and connect it to locahost port [mcp_port]."
+    },
+    {
+      "step": "Initialize Remote Control Loop",
+      "action": "If requested, spin up a background thread that polls the application state (e.g., taking screenshots) and pushes HTTP POST requests to the Telegram Bot API (`sendPhoto`)."
+    },
+    {
+      "step": "Listen for Interrupts",
+      "action": "Expose a webhook or long-poll mechanism to receive Telegram messages, passing user feedback (e.g., 'change the color', 'stop') directly back into the OpenClaw prompt queue."
+    }
+  ]
+}
