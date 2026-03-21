@@ -27,6 +27,7 @@ export function useAuth() {
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [guest, setGuest] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -50,21 +51,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = async () => {
     await signOut(auth);
+    setGuest(false);
   };
 
   return (
     <AuthContext.Provider value={{ user, loading, signInWithGoogle, logout }}>
       {children}
       <AnimatePresence>
-        {!loading && !user && (
-          <AuthOverlay signInWithGoogle={signInWithGoogle} />
+        {!loading && !user && !guest && (
+          <AuthOverlay signInWithGoogle={signInWithGoogle} onGuest={() => setGuest(true)} />
         )}
       </AnimatePresence>
     </AuthContext.Provider>
   );
 }
 
-function AuthOverlay({ signInWithGoogle }: { signInWithGoogle: () => void }) {
+function AuthOverlay({ signInWithGoogle, onGuest }: { signInWithGoogle: () => void, onGuest: () => void }) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -84,13 +86,22 @@ function AuthOverlay({ signInWithGoogle }: { signInWithGoogle: () => void }) {
         <p className="text-slate-400 text-center text-sm mb-8">
           OPEN|KLASS AI requires verified clearance. Please authenticate to enter the interactive knowledge environment.
         </p>
-        <button
-          onClick={signInWithGoogle}
-          className="flex items-center justify-center gap-3 w-full py-4 bg-white hover:bg-slate-200 text-black font-semibold rounded-xl transition-all"
-        >
-          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
-          Authenticate with Google
-        </button>
+        <div className="w-full space-y-3">
+          <button
+            onClick={signInWithGoogle}
+            className="flex items-center justify-center gap-3 w-full py-4 bg-white hover:bg-slate-200 text-black font-semibold rounded-xl transition-all"
+          >
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
+            Authenticate with Google
+          </button>
+          
+          <button
+            onClick={onGuest}
+            className="w-full py-4 bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium rounded-xl transition-all border border-slate-700"
+          >
+            Continue as Guest
+          </button>
+        </div>
       </motion.div>
     </motion.div>
   );
