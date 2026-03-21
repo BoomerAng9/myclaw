@@ -46,6 +46,8 @@ services:
   perform:
     image: nginx:alpine
     restart: unless-stopped
+    ports:
+      - "8091:80"
     volumes:
       - ./perform:/usr/share/nginx/html:ro
     labels:
@@ -58,6 +60,8 @@ services:
   blockwise:
     image: nginx:alpine
     restart: unless-stopped
+    ports:
+      - "8092:80"
     volumes:
       - ./blockwise:/usr/share/nginx/html:ro
     labels:
@@ -70,6 +74,8 @@ services:
   partners:
     image: nginx:alpine
     restart: unless-stopped
+    ports:
+      - "8093:80"
     volumes:
       - ./partners:/usr/share/nginx/html:ro
     labels:
@@ -82,6 +88,8 @@ services:
   foai:
     image: nginx:alpine
     restart: unless-stopped
+    ports:
+      - "8094:80"
     volumes:
       - ./foai/dist:/usr/share/nginx/html:ro
     labels:
