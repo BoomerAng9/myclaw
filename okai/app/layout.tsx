@@ -18,9 +18,9 @@ const inter = localFont({
 });
 
 export const metadata: Metadata = {
-  title: 'OPEN|KLASS AI \u2014 by ACHIEVEMOR',
+  title: 'OPEN|KLASS AI',
   description:
-    'OPEN|KLASS AI \u2014 The open-source AI interactive classroom by ACHIEVEMOR. Upload a PDF to instantly generate an immersive, multi-agent learning experience.',
+    'OPEN|KLASS AI \u2014 The open-source AI interactive classroom. Upload a PDF to instantly generate an immersive, multi-agent learning experience.',
 };
 
 export default function RootLayout({
