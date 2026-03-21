@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "motion/react";
 import Link from "next/link";
 import { Navbar } from "@/components/marketing/Navbar";
 import { useRef } from "react";
