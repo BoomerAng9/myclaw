@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero"
+    },
+    "mindedge-catalog": {
+      "type": "mindedge-courses"
+    }
+  },
+  "order": [
+    "hero",
+    "mindedge-catalog"
+  ]
+}

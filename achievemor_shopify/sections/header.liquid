@@ -1,0 +1,110 @@
+<header class="achievemor-header glass-panel">
+  <div class="header-inner page-width">
+    <!-- Brand -->
+    <a href="/" class="header-brand">
+      <span class="brand-text">ACHIEVEMOR</span>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="header-nav" role="navigation">
+      <ul class="nav-list">
+        <li><a href="/collections/all" class="nav-link">Store</a></li>
+        <li><a href="#mindedge-catalog" class="nav-link">E-Learning</a></li>
+        <li><a href="https://myclaw.foai.cloud" class="nav-link">MyClaw AI</a></li>
+      </ul>
+    </nav>
+
+    <!-- Icons / Actions -->
+    <div class="header-actions">
+      <a href="/search" class="icon-btn" aria-label="Search">🔍</a>
+      <a href="/cart" class="icon-btn" aria-label="Cart">
+        🛒 <span class="cart-count">{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+.achievemor-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  background: rgba(5, 5, 10, 0.85);
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px;
+}
+
+.header-brand {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.nav-list {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--accent);
+}
+
+.header-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.icon-btn {
+  color: var(--text-primary);
+  text-decoration: none;
+  position: relative;
+  font-size: 1.25rem;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: var(--primary);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .nav-list { display: none; }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": []
+}
+{% endschema %}

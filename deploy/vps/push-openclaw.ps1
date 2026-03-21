@@ -1,6 +1,6 @@
 param (
-    [string]$TargetHost = "myclaw-vps",
-    [string]$RemoteDir = "/opt/openclaw"
+    [string]$TargetHost = "aims-vps",
+    [string]$RemoteDir = "/opt/myclaw"
 )
 
 Write-Host "🚀 Initializing OpenClaw Sync from MyClaw Workspace..." -ForegroundColor Cyan

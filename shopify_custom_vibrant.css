@@ -1,0 +1,103 @@
+/* ========================================================
+   ACHIEVEMOR Premium Theme Overrides (Brand Wireframe)
+   Paste this in: Theme Settings -> Custom CSS
+   ======================================================== */
+
+:root {
+  /* Brand Wireframe Colors extracted from PPTX */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F7F9FA;
+  --text-primary: #1A1D1E;
+  --text-secondary: #565B5F;
+  --brand-teal: #206E8C;
+  --brand-cyan: #03A6A6;
+  --brand-blue: #2B76F0;
+  --border-struct: #C1C4C7;
+  --accent-orange: #FFB64E;
+
+  --color-base-background-1: var(--bg-primary);
+  --color-base-background-2: var(--bg-secondary);
+  --color-base-text: var(--text-primary);
+  --color-button: var(--brand-teal);
+  --color-button-text: #FFFFFF;
+}
+
+/* Global Background */
+body, .gradient, .page-width {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Text & Headings */
+h1, h2, h3, h4, h5, .h1, .h2, .h3, .header__heading-link {
+  color: var(--text-primary) !important;
+  letter-spacing: -0.5px !important;
+}
+
+/* Header */
+.header-wrapper, .header, sticky-header {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border-bottom: 1px solid var(--border-struct) !important;
+}
+
+/* Primary Buttons */
+.button, .btn, form button, .shopify-payment-button__button, .cart__checkout-button {
+  background: var(--brand-teal) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  border-radius: 4px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+
+.button:hover, .btn:hover, .shopify-payment-button__button:hover {
+  background: var(--brand-cyan) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 10px rgba(3, 166, 166, 0.2) !important;
+}
+.button::after, .btn::after {
+  box-shadow: none !important;
+}
+
+/* Product & Collection Cards (Wireframe) */
+.card-wrapper, .card, .product-card, .collection-card, .grid__item {
+  background: var(--bg-primary) !important;
+  border: 1px solid var(--border-struct) !important;
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
+  overflow: hidden !important;
+}
+
+.card-wrapper:hover, .card:hover {
+  transform: translateY(-4px) !important;
+  border-color: var(--brand-cyan) !important;
+  box-shadow: 0 10px 20px rgba(3, 166, 166, 0.1) !important;
+}
+
+/* Inputs & Forms */
+.field__input, .select__select, .customer .field input {
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-struct) !important;
+  border-radius: 4px !important;
+}
+
+.field__input:focus {
+  border-color: var(--brand-teal) !important;
+  box-shadow: 0 0 0 1px var(--brand-teal) !important;
+}
+
+/* Cart Drawer / Modals */
+.drawer__inner, .modal__inner {
+  background-color: var(--bg-primary) !important;
+  border-left: 1px solid var(--border-struct) !important;
+}
+
+/* Footer */
+.footer {
+  background-color: var(--bg-secondary) !important;
+  border-top: 1px solid var(--border-struct) !important;
+}

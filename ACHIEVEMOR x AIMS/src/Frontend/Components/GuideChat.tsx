@@ -27,7 +27,7 @@ const GuideChat: React.FC = () => {
     {
       id: 'welcome-msg',
       type: 'bot',
-      content: 'Welcome to ACHIEVEMOR. I am Guide_Ang, your platform navigator. How can I assist your mission today?',
+      content: 'Welcome to ACHIEVEMOR. I am your platform navigator. How can I assist your mission today?',
       timestamp: new Date().toISOString()
     }
   ]);
@@ -60,8 +60,8 @@ const GuideChat: React.FC = () => {
     setIsTyping(true);
 
     try {
-      // API call to the backend chat guide endpoint
-      const response = await fetch('/v1/chat/guide', {
+      // API call to the backend AIMS acheevy endpoint
+      const response = await fetch('/api/chat/acheevy', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -70,7 +70,7 @@ const GuideChat: React.FC = () => {
         })
       });
 
-      if (!response.ok) throw new Error('Failed to reach Guide_Ang');
+      if (!response.ok) throw new Error('Failed to reach ACHIEVEMOR');
 
       const data = await response.json();
       
@@ -84,7 +84,7 @@ const GuideChat: React.FC = () => {
 
       setMessages(prev => [...prev, botMsg]);
     } catch (error) {
-      console.error('[Guide_Ang Error]', error);
+      console.error('[ACHIEVEMOR Error]', error);
       setMessages(prev => [...prev, {
         id: `err-${Date.now()}`,
         type: 'bot',
@@ -123,7 +123,7 @@ const GuideChat: React.FC = () => {
             </svg>
           </div>
           <div className="guide-header-status">
-            <span className="guide-header-title">Guide_Ang</span>
+            <span className="guide-header-title">chat W/ ACHIEVEMOR</span>
             <span className="guide-header-tagline">Adaptive Platform Intelligence</span>
           </div>
           <button className="guide-close-btn" onClick={handleToggle} title="Close guide">
@@ -174,7 +174,7 @@ const GuideChat: React.FC = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              aria-label="Ask Guide_Ang"
+              aria-label="chat W/ ACHIEVEMOR"
             />
             <button className="guide-send-btn" onClick={handleSend} disabled={!input.trim() || isTyping}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">

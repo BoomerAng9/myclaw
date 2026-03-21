@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "mindedge-catalog": {
+      "type": "mindedge-courses",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "mindedge-catalog"
+  ]
+}
