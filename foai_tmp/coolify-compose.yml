@@ -1,0 +1,13 @@
+services:
+  coolify:
+    image: ghcr.io/coollabsio/coolify:latest
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ./.env:/app/.env
+      - coolify-db:/app/database
+      - coolify-ssh:/app/ssh
+volumes:
+  coolify-db:
+  coolify-ssh:
