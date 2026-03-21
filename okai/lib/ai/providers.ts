@@ -843,7 +843,7 @@ export const PROVIDERS: Record<ProviderId, ProviderConfig> = {
     type: 'openai',
     defaultBaseUrl: 'https://openrouter.ai/api/v1',
     requiresApiKey: true,
-    icon: '/logos/openrouter.svg',
+    icon: '/logos/openai.svg',
     models: [
       {
         id: 'deepseek/deepseek-r1',
