@@ -57,11 +57,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   return (
     <AuthContext.Provider value={{ user, loading, signInWithGoogle, logout }}>
       {children}
-      <AnimatePresence>
-        {!loading && !user && !guest && (
-          <AuthOverlay signInWithGoogle={signInWithGoogle} onGuest={() => setGuest(true)} />
-        )}
-      </AnimatePresence>
     </AuthContext.Provider>
   );
 }
