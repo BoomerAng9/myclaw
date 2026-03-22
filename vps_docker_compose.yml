@@ -1,0 +1,30 @@
+services:
+  openclaw:
+    image: ghcr.io/hostinger/hvps-openclaw:latest
+    init: true
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.chickenhawk-ui.rule=Host(`chicken-hawk.myclaw.foai.cloud`)"
+      - "traefik.http.routers.chickenhawk-ui.entrypoints=websecure"
+      - "traefik.http.routers.chickenhawk-ui.tls.certresolver=letsencrypt"
+      - "traefik.http.services.chickenhawk-ui.loadbalancer.server.port=${PORT}"
+      - "traefik.http.middlewares.chickenhawk-auth.basicauth.users=admin:$$apr1$$/fW9C3EU$$ydB0rwpLepFo1v79yeYkQ1"
+      - "traefik.http.routers.chickenhawk-ui.middlewares=chickenhawk-auth"
+    env_file:
+      - .env
+    restart: unless-stopped
+    ports:
+      - "18789:18789"
+    volumes:
+      - ./data:/data
+      - ./data/linuxbrew:/home/linuxbrew
+
+  voice-layer:
+    image: alpine:latest
+    command: tail -f /dev/null
+    restart: unless-stopped
+    environment:
+      - TTS_PROVIDER=elevenlabs
+      - STT_PROVIDER=personaplex
+    ports:
+      - "50051:50051"
