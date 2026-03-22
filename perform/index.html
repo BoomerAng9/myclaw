@@ -3,92 +3,274 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Per|form Platform | Automated Pipeline Execution</title>
-  <meta name="description" content="Scalable workflow orchestrations for enterprise needs and continuous data aggregation." />
+  <title>Per|Form | A.I.M.S. Sports Intelligence Platform</title>
+  <meta name="description" content="AI-powered college football scouting. PAI grades, NFL Draft intel, NIL tracking, Transfer Portal &amp; Big Board — all on the A.I.M.S. engine." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/style.css" />
 </head>
 
 <body>
-  <div class="glow-pipeline"></div>
-  <div class="glow-2"></div>
 
-  <nav>
-    <a href="https://foai.cloud" class="nav-logo">
-      <span class="icon">⚙️</span> Per<span>|</span>form
+  <!-- ── NAV ─────────────────────────────────────────────── -->
+  <nav class="pf-nav">
+    <a href="https://foai.cloud" class="pf-nav__logo">
+      <span class="pf-nav__gear">⚙</span> Per<span class="pf-nav__pipe">|</span>Form
     </a>
-    <div class="nav-links">
-      <a href="#orchestration">Orchestration</a>
-      <a href="#research">Data Pipelines</a>
+    <div class="pf-nav__links">
+      <a href="#platform">Platform</a>
+      <a href="#grades">P.A.I. Grades</a>
+      <a href="#analysts">Analysts</a>
       <a href="https://foai.cloud">FOAI Cloud</a>
     </div>
-    <a href="https://foai.cloud/#ecosystem" class="btn-primary">Back to Ecosystem</a>
+    <a href="#platform" class="pf-btn pf-btn--primary">Enter Platform</a>
   </nav>
 
-  <section class="hero">
-    <div class="hero-badge">Workflow Automation</div>
-    <h1>
-      Automated Pipeline<br />
-      <span class="gradient">Execution.</span>
+  <!-- ── HERO ─────────────────────────────────────────────── -->
+  <section class="pf-hero">
+    <div class="pf-hero__badge">A.I.M.S. Sports Intelligence</div>
+    <h1 class="pf-hero__h1">
+      College Football<br />
+      <span class="pf-hero__accent">Intelligence. Reimagined.</span>
     </h1>
-    <p>
-      Per|form scales enterprise orchestration natively. Powered by the AutoResearch and Researcher agents, we execute deep data aggregation, sports biometrics tracking, and complex task pipelines securely on the server side.
+    <p class="pf-hero__sub">
+      Per|Form is the scouting and analytics engine for the modern football organization.
+      PAI-graded prospects, real-time NIL valuations, NFL Draft simulators,
+      and Transfer Portal flow — all powered by the A.I.M.S. multi-agent system.
     </p>
-    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
-      <a href="#orchestration" class="btn-primary">View Capabilities</a>
+    <div class="pf-hero__ctas">
+      <a href="#platform" class="pf-btn pf-btn--primary pf-btn--lg">View Platform</a>
+      <a href="#grades" class="pf-btn pf-btn--outline pf-btn--lg">How PAI Works</a>
     </div>
-  </section>
-
-  <section id="orchestration">
-    <div class="section-label">Enterprise Execution</div>
-    <h2 class="section-title">Scalable Workflows</h2>
-    <p class="section-subtitle">
-      Automate the ingestion, reasoning, and routing of dense data. Per|form translates unstructured inputs into verifiable outputs via structured AI agents.
-    </p>
-    
-    <div class="bento-grid">
-      <div class="bento-card span-8">
-        <div class="card-icon">🧠</div>
-        <h3 class="card-title">AutoResearch Engine</h3>
-        <p class="card-desc">Deploy continuous intelligence gathering. The AutoResearch agent autonomously trawls, verifies, and compiles deep structural knowledge without human intervention. Ideal for biometrics, market trends, and technical specifications.</p>
+    <!-- stat bar -->
+    <div class="pf-stat-bar">
+      <div class="pf-stat">
+        <span class="pf-stat__num">P.A.I.</span>
+        <span class="pf-stat__label">Grading Engine</span>
       </div>
-
-      <div class="bento-card span-4">
-        <div class="card-icon">⚡</div>
-        <h3 class="card-title">Real-Time Aggregation</h3>
-        <p class="card-desc">Process high-velocity data feeds natively. Convert raw unstructured signals into structured JSON/SQL formats instantly.</p>
+      <div class="pf-stat-div"></div>
+      <div class="pf-stat">
+        <span class="pf-stat__num">700+</span>
+        <span class="pf-stat__label">CFB Programs</span>
       </div>
-
-      <div class="bento-card span-4">
-        <div class="card-icon">🧬</div>
-        <h3 class="card-title">Sports Biometrics</h3>
-        <p class="card-desc">Track and predict player performance through aggregate statistical modeling and spatial tracking datasets.</p>
+      <div class="pf-stat-div"></div>
+      <div class="pf-stat">
+        <span class="pf-stat__num">4</span>
+        <span class="pf-stat__label">A.I. Analysts</span>
       </div>
-
-      <div class="bento-card span-8">
-        <div class="card-icon">🛡️</div>
-        <h3 class="card-title">Server-Side Security</h3>
-        <p class="card-desc">Every pipeline is executed securely within Kata MicroVM sandboxes. Your API keys, proprietary data logic, and workflow steps never leak to the client.</p>
-      </div>
-
-      <div class="bento-card span-12 mock-pipeline" id="research">
-        <div class="pipe-node" data-label="Ingest">📡</div>
-        <div class="pipe-line"><div class="pipe-flow"></div></div>
-        <div class="pipe-node" data-label="Researcher_Ang">🤖</div>
-        <div class="pipe-line"><div class="pipe-flow"></div></div>
-        <div class="pipe-node" data-label="Analyze">🔬</div>
-        <div class="pipe-line"><div class="pipe-flow"></div></div>
-        <div class="pipe-node" data-label="Deliver">📦</div>
+      <div class="pf-stat-div"></div>
+      <div class="pf-stat">
+        <span class="pf-stat__num">Live</span>
+        <span class="pf-stat__label">NIL + Portal Data</span>
       </div>
     </div>
   </section>
 
-  <footer>
-    <div class="footer-grid">
+  <!-- ── PLATFORM TILES ───────────────────────────────────── -->
+  <section class="pf-section" id="platform">
+    <div class="pf-section__label">Platform Modules</div>
+    <h2 class="pf-section__title">Everything the War Room Needs</h2>
+    <p class="pf-section__sub">
+      From depth-index scouting to draft-day simulation, Per|Form puts every
+      intelligence layer in one governed platform.
+    </p>
+
+    <div class="pf-tiles">
+
+      <a href="/perform/ncaa-database" class="pf-tile pf-tile--emerald">
+        <div class="pf-tile__icon">🗄</div>
+        <div class="pf-tile__body">
+          <h3>NCAA Database</h3>
+          <p>Depth Indexes · AGI Grades</p>
+        </div>
+      </a>
+
+      <a href="/perform/big-board" class="pf-tile pf-tile--slate">
+        <div class="pf-tile__icon">📋</div>
+        <div class="pf-tile__body">
+          <h3>Big Board</h3>
+          <p>Complete 2026 Rankings</p>
+        </div>
+      </a>
+
+      <a href="/perform/draft" class="pf-tile pf-tile--dark">
+        <div class="pf-tile__icon">🏆</div>
+        <div class="pf-tile__body">
+          <h3>NFL Draft Center</h3>
+          <p>Mock Cycles · Simulators</p>
+        </div>
+      </a>
+
+      <a href="/perform/war-room" class="pf-tile pf-tile--red">
+        <div class="pf-tile__icon">⚔</div>
+        <div class="pf-tile__body">
+          <h3>War Room</h3>
+          <p>Bull vs Bear Verdicts</p>
+        </div>
+      </a>
+
+      <a href="/perform/transfer-portal" class="pf-tile pf-tile--blue">
+        <div class="pf-tile__icon">⇄</div>
+        <div class="pf-tile__body">
+          <h3>Transfer Portal</h3>
+          <p>Portal Flow · NIL Value</p>
+        </div>
+      </a>
+
+      <a href="/perform/nil-tracker" class="pf-tile pf-tile--amber">
+        <div class="pf-tile__icon">💰</div>
+        <div class="pf-tile__body">
+          <h3>NIL Tracker</h3>
+          <p>Market Values · Deals</p>
+        </div>
+      </a>
+
+      <a href="/perform/state-boards" class="pf-tile pf-tile--amber">
+        <div class="pf-tile__icon">📍</div>
+        <div class="pf-tile__body">
+          <h3>State Boards</h3>
+          <p>Local Scouting Reports</p>
+        </div>
+      </a>
+
+      <a href="/perform/coaching-carousel" class="pf-tile pf-tile--slate">
+        <div class="pf-tile__icon">🔄</div>
+        <div class="pf-tile__body">
+          <h3>Coaching Carousel</h3>
+          <p>Staff Moves · Openings</p>
+        </div>
+      </a>
+
+      <a href="/perform/redraft" class="pf-tile pf-tile--amber">
+        <div class="pf-tile__icon">↺</div>
+        <div class="pf-tile__body">
+          <h3>Redraft Logic</h3>
+          <p>Accountability Audit</p>
+        </div>
+      </a>
+
+      <a href="/perform/revenue-budget" class="pf-tile pf-tile--emerald">
+        <div class="pf-tile__icon">📊</div>
+        <div class="pf-tile__body">
+          <h3>Revenue &amp; Budget</h3>
+          <p>Program Financial Models</p>
+        </div>
+      </a>
+
+      <a href="/perform/analysts" class="pf-tile pf-tile--slate">
+        <div class="pf-tile__icon">👥</div>
+        <div class="pf-tile__body">
+          <h3>Analyst Roster</h3>
+          <p>Meet the Boomer_Angs</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── P.A.I. GRADES ────────────────────────────────────── -->
+  <section class="pf-section pf-section--tinted" id="grades">
+    <div class="pf-section__label">Grading System</div>
+    <h2 class="pf-section__title">The P.A.I. Score</h2>
+    <p class="pf-section__sub">
+      Performance · Athleticism · Intangibles — three pillars computed in real time
+      by the A.I.M.S. grading engine. Grade values are public; formula weights are proprietary.
+    </p>
+
+    <div class="pf-grades">
+      <div class="pf-grade pf-grade--prime">
+        <span class="pf-grade__pill">PRIME</span>
+        <p>Generational talent — franchise-defining prospect</p>
+      </div>
+      <div class="pf-grade pf-grade--aplus">
+        <span class="pf-grade__pill">A+</span>
+        <p>Elite — first-round projection with multiple starting attributes</p>
+      </div>
+      <div class="pf-grade pf-grade--a">
+        <span class="pf-grade__pill">A</span>
+        <p>Blue Chip — high floor, projected starter within two years</p>
+      </div>
+      <div class="pf-grade pf-grade--bplus">
+        <span class="pf-grade__pill">B+</span>
+        <p>Prospect — developmental ceiling with measurable upside</p>
+      </div>
+      <div class="pf-grade pf-grade--b">
+        <span class="pf-grade__pill">B</span>
+        <p>Sleeper — raw tools, late-round value or UDFA target</p>
+      </div>
+    </div>
+
+    <div class="pf-pai-pillars">
+      <div class="pf-pillar">
+        <div class="pf-pillar__icon">📈</div>
+        <h4>Performance</h4>
+        <p>On-field production across verified game film and statistical outputs</p>
+      </div>
+      <div class="pf-pillar">
+        <div class="pf-pillar__icon">⚡</div>
+        <h4>Athleticism</h4>
+        <p>Combine data, measurables, and movement efficiency indices</p>
+      </div>
+      <div class="pf-pillar">
+        <div class="pf-pillar__icon">🎯</div>
+        <h4>Intangibles</h4>
+        <p>Leadership, coachability, and off-field character signals</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ANALYST ROSTER ───────────────────────────────────── -->
+  <section class="pf-section" id="analysts">
+    <div class="pf-section__label">Intelligence Team</div>
+    <h2 class="pf-section__title">Meet the Analysts</h2>
+    <p class="pf-section__sub">Four A.I. analysts. One platform. Zero bias.</p>
+
+    <div class="pf-analysts">
+
+      <div class="pf-analyst pf-analyst--emerald">
+        <div class="pf-analyst__dot pf-analyst__dot--emerald"></div>
+        <h3>ACHEEVY</h3>
+        <span class="pf-analyst__role">Lead Intelligence Orchestrator</span>
+        <p>The central brain of the A.I.M.S. platform. Orchestrates depth indexes, grading logic, and platform deployment.</p>
+        <blockquote>"Calculated. Orchestrated. Delivered."</blockquote>
+      </div>
+
+      <div class="pf-analyst pf-analyst--amber">
+        <div class="pf-analyst__dot pf-analyst__dot--amber"></div>
+        <h3>PrimeTime Jr.</h3>
+        <span class="pf-analyst__role">Personnel &amp; Entertainment</span>
+        <p>Specialist in player intangibles and market value. If it moves the needle, PrimeTime is on the transcript.</p>
+        <blockquote>"The AGI doesn't lie, but the tape tells the story."</blockquote>
+      </div>
+
+      <div class="pf-analyst pf-analyst--slate">
+        <div class="pf-analyst__dot pf-analyst__dot--slate"></div>
+        <h3>The Professor</h3>
+        <span class="pf-analyst__role">Senior Film &amp; Mechanics</span>
+        <p>A Film_First_Ang dedicated to mechanical efficiency. Every touchdown is a sequence of perfect variables.</p>
+        <blockquote>"Data is the film, film is the data."</blockquote>
+      </div>
+
+      <div class="pf-analyst pf-analyst--red">
+        <div class="pf-analyst__dot pf-analyst__dot--red"></div>
+        <h3>Uncle Blaze</h3>
+        <span class="pf-analyst__role">Heat &amp; Velocity Analyst</span>
+        <p>Monitoring the pulse of the sport. High-velocity takes backed by real-time AGI grade shifts.</p>
+        <blockquote>"I predicted the shift before the index moved."</blockquote>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── FOOTER ────────────────────────────────────────────── -->
+  <footer class="pf-footer">
+    <div class="pf-footer__grid">
       <div>
-        <h4>Per|form</h4>
+        <h4>Per|Form</h4>
         <ul>
-          <li><a href="#orchestration">Orchestration</a></li>
-          <li><a href="#research">Data Pipelines</a></li>
+          <li><a href="#platform">Platform</a></li>
+          <li><a href="#grades">P.A.I. Grades</a></li>
+          <li><a href="#analysts">Analysts</a></li>
         </ul>
       </div>
       <div>
@@ -100,23 +282,24 @@
         </ul>
       </div>
       <div>
-        <h4>Platforms</h4>
+        <h4>More Platforms</h4>
         <ul>
-          <li><a href="https://block.foai.cloud">Blockwise</a></li>
-          <li><a href="https://dia.foai.cloud">Destinations AI</a></li>
-          <li><a href="https://partners.foai.cloud">Partners</a></li>
+          <li><a href="https://blockwise.foai.cloud">Blockwise AI</a></li>
+          <li><a href="https://dai.foai.cloud">Destinations AI</a></li>
+          <li><a href="https://partners.foai.cloud">Partner Portal</a></li>
         </ul>
       </div>
       <div>
-        <h4>Per|form Platform</h4>
-        <p style="color: var(--on-surface-muted); font-size: 0.85rem; line-height: 1.5;">
-          Automated pipeline execution by ACHIEVEMOR LLC. Scaling intelligence through governed automation.
+        <h4>Per|Form Platform</h4>
+        <p class="pf-footer__copy">
+          AI-powered sports intelligence by ACHIEVEMOR LLC. Built on the A.I.M.S. engine.
         </p>
+        <a href="https://foai.cloud" class="pf-footer__link">foai.cloud</a>
       </div>
     </div>
-    <div class="footer-bottom">
+    <div class="pf-footer__bottom">
       <span>&copy; 2026 ACHIEVEMOR LLC. All rights reserved.</span>
-      <a href="https://foai.cloud" style="color: var(--primary); text-decoration: none; font-size: 0.85rem;">foai.cloud</a>
+      <span>Per|Form · A.I.M.S. Sports Intelligence</span>
     </div>
   </footer>
 
