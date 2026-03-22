@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.bento-card, .hero').forEach(el => {
+  document.querySelectorAll('.pf-tile, .pf-analyst, .pf-pillar, .pf-grade, .pf-stat-bar').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1)';
