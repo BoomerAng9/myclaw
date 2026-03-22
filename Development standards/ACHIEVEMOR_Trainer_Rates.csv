@@ -1,0 +1,6 @@
+Experience_Level,Hourly_Rate,Day_Rate,Prep_Time_Multiplier
+Junior Trainer (1-3 years),75,600,2.0
+Mid-Level Trainer (3-7 years),125,1000,1.5
+Senior Trainer (7+ years),175,1400,1.2
+Subject Matter Expert,250,2000,1.0
+Industry Thought Leader,400,3200,0.8

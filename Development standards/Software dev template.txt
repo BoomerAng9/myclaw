@@ -1,0 +1,626 @@
+# Universal Build Tracking Template |03/16/[10:18 AM]
+
+This template is built around the lifecycle developers are usually expected to follow: define requirements, design the system, implement, verify, secure, deploy, and maintain. I grounded it in NIST’s SSDF for secure development, OWASP ASVS for web app verification, the OpenAPI Specification for HTTP APIs, the MCP spec’s host-client-server model and version negotiation, Chrome Extension Manifest V3 requirements, and Core Web Vitals for web performance. ([NIST Computer Security Resource Center][1])
+
+Use this as the master tracker for any product build: SaaS, MCP, API, AI app, internal tool, Chrome extension, or mixed platform.
+
+```md
+# PROJECT BUILD TRACKER
+
+## 0. Project Identity
+Project Name:
+Project Type:
+- [ ] Web App
+- [ ] SaaS
+- [ ] API
+- [ ] MCP Host
+- [ ] MCP Client
+- [ ] MCP Server
+- [ ] Chrome Extension
+- [ ] AI / ML Product
+- [ ] Internal Tool
+- [ ] Mobile / Desktop
+Owner:
+Tech Lead:
+Product Lead:
+Design Lead:
+Security Lead:
+QA Lead:
+Created Date:
+Target Launch Date:
+Current Phase:
+Overall Status:
+- [ ] Not Started
+- [ ] Planning
+- [ ] In Build
+- [ ] QA
+- [ ] Launch Ready
+- [ ] Live
+- [ ] Maintenance
+- [ ] Blocked
+
+---
+
+## 1. Problem, Outcome, and Scope
+Problem Statement:
+Primary User:
+Core User Pain:
+Business Goal:
+User Goal:
+Primary Outcome:
+Non-Goals:
+Success Metrics:
+Launch Scope:
+Future Scope:
+Dependencies:
+Known Risks:
+Assumptions:
+
+Status:
+Owner:
+Notes:
+
+---
+
+## 2. Requirements Intake
+### Functional Requirements
+- [ ] Core user flow defined
+- [ ] Inputs defined
+- [ ] Outputs defined
+- [ ] Error cases defined
+- [ ] User roles defined
+- [ ] Permissions defined
+- [ ] Integrations defined
+- [ ] Notifications defined
+- [ ] Billing / subscription requirements defined
+- [ ] Analytics requirements defined
+
+### Non-Functional Requirements
+- [ ] Performance targets defined
+- [ ] Security requirements defined
+- [ ] Reliability targets defined
+- [ ] Accessibility requirements defined
+- [ ] Browser/device support defined
+- [ ] Logging/monitoring requirements defined
+- [ ] Backup/recovery requirements defined
+- [ ] Scalability expectations defined
+
+Status:
+Owner:
+Notes:
+
+---
+
+## 3. User Experience and GUI
+### UX
+- [ ] Primary user journeys mapped
+- [ ] Entry points defined
+- [ ] Navigation model defined
+- [ ] Empty states defined
+- [ ] Loading states defined
+- [ ] Error states defined
+- [ ] Success states defined
+- [ ] Onboarding flow defined
+- [ ] Account/auth flow defined
+- [ ] Upgrade/paywall flow defined if needed
+
+### GUI
+- [ ] Page inventory created
+- [ ] Wireframes created
+- [ ] Layout system defined
+- [ ] Visual hierarchy clear
+- [ ] Responsive behavior defined
+- [ ] Accessibility basics included
+- [ ] Copy reviewed for accuracy
+- [ ] Brand naming correct throughout
+
+Pages / Screens:
+- Landing:
+- Dashboard:
+- Settings:
+- Chat / Main Work Surface:
+- Pricing:
+- Auth:
+- Onboarding:
+- Error Pages:
+- Admin:
+- Extension Popup / Options / Onboarding:
+- MCP Management UI:
+- Other:
+
+Status:
+Owner:
+Notes:
+
+---
+
+## 4. Architecture and System Design
+### High-Level Design
+- [ ] System purpose documented
+- [ ] Architecture diagram created
+- [ ] Data flow diagram created
+- [ ] Component boundaries defined
+- [ ] Service boundaries defined
+- [ ] Internal vs external systems defined
+- [ ] Build vs buy decisions documented
+- [ ] Hosting/deployment target selected
+
+### App Layers
+- [ ] Frontend architecture defined
+- [ ] Backend architecture defined
+- [ ] Database/storage architecture defined
+- [ ] Queue/job architecture defined if needed
+- [ ] Auth architecture defined
+- [ ] File/object storage strategy defined
+- [ ] Search/indexing strategy defined if needed
+- [ ] Real-time/event strategy defined if needed
+
+Status:
+Owner:
+Notes:
+
+---
+
+## 5. Data, State, and Storage
+- [ ] Domain entities identified
+- [ ] Database schema drafted
+- [ ] State model defined
+- [ ] Caching strategy defined
+- [ ] Session model defined
+- [ ] Data retention rules defined
+- [ ] Backup plan defined
+- [ ] Migration strategy defined
+- [ ] Seed/test data plan defined
+
+Data Stores:
+- Primary DB:
+- Cache:
+- Vector DB / Embeddings:
+- File Storage:
+- Analytics Store:
+- Logs:
+
+Status:
+Owner:
+Notes:
+
+---
+
+## 6. Frontend Build Checklist
+- [ ] App shell created
+- [ ] Routes created
+- [ ] Shared components created
+- [ ] Forms validated
+- [ ] Navigation works
+- [ ] Mobile responsiveness checked
+- [ ] Accessibility checked
+- [ ] SEO metadata set where applicable
+- [ ] Error boundaries added
+- [ ] Loading UI added
+- [ ] Analytics hooks added
+- [ ] Performance baseline measured
+
+Key Screens Complete:
+- [ ] Landing
+- [ ] Main work surface
+- [ ] Auth
+- [ ] Onboarding
+- [ ] Billing
+- [ ] Settings
+- [ ] Admin
+
+Status:
+Owner:
+Notes:
+
+---
+
+## 7. Backend and API Checklist
+- [ ] API surface defined
+- [ ] Endpoint inventory created
+- [ ] Request/response contracts defined
+- [ ] Input validation added
+- [ ] Auth/authz enforced
+- [ ] Rate limiting added
+- [ ] Error handling standardized
+- [ ] Logging added
+- [ ] Health checks added
+- [ ] Background jobs defined
+- [ ] Webhooks verified if used
+- [ ] Idempotency handled where needed
+
+### API Documentation
+- [ ] OpenAPI spec created or updated
+- [ ] Example requests/responses included
+- [ ] Error codes documented
+- [ ] Versioning strategy defined
+- [ ] Deprecation policy defined
+
+Status:
+Owner:
+Notes:
+
+---
+
+## 8. AI / ML / Prompting Layer
+Use this section for AI features, prompt systems, retrieval, agent flows, evaluators, or model routing.
+
+- [ ] AI use case clearly defined
+- [ ] Prompt strategy documented
+- [ ] Input/output schema defined
+- [ ] Model/provider selection documented
+- [ ] Guardrails defined
+- [ ] Prompt templates created
+- [ ] Fallback behavior defined
+- [ ] Human review rules defined if needed
+- [ ] Hallucination/error handling plan defined
+- [ ] Cost/token controls defined
+- [ ] Evaluation criteria defined
+- [ ] Test prompts/examples collected
+- [ ] Safety/privacy rules defined
+
+Prompt / Agent Assets:
+- System Prompt:
+- Prompt Templates:
+- Output Formats:
+- Evaluation Set:
+- Failure Modes:
+- Model Routing Logic:
+
+Status:
+Owner:
+Notes:
+
+---
+
+## 9. MCP-Specific Checklist
+Use only if MCP is part of the product.
+
+- [ ] MCP role defined
+  - [ ] Host
+  - [ ] Client
+  - [ ] Server
+- [ ] Transport selected
+  - [ ] STDIO
+  - [ ] Streamable HTTP
+  - [ ] Custom Transport
+- [ ] Version negotiation handled
+- [ ] Capability exchange documented
+- [ ] Tool/resource model documented
+- [ ] Consent/security boundaries defined
+- [ ] Session lifecycle defined
+- [ ] Auth model defined
+- [ ] Error handling defined
+- [ ] Interoperability test plan defined
+
+MCP Components:
+- Host:
+- Client:
+- Server:
+- Tools:
+- Resources:
+- Prompts:
+- Auth:
+- Transport:
+
+Status:
+Owner:
+Notes:
+
+---
+
+## 10. Chrome Extension Checklist
+Use only if a browser extension is shipping.
+
+- [ ] Manifest V3 used
+- [ ] Background service worker implemented
+- [ ] No remotely hosted code
+- [ ] Permissions minimized
+- [ ] Content scripts reviewed
+- [ ] Storage strategy defined
+- [ ] Popup UI complete
+- [ ] Options page complete if needed
+- [ ] Messaging flow tested
+- [ ] Update lifecycle understood
+- [ ] Privacy disclosures prepared
+- [ ] Chrome Web Store assets prepared
+- [ ] Review policy compliance checked
+
+Extension Surfaces:
+- Popup:
+- Options:
+- Background Worker:
+- Content Scripts:
+- Native Messaging:
+- Permissions:
+
+Status:
+Owner:
+Notes:
+
+---
+
+## 11. SaaS and Business Logic
+- [ ] Tenant model defined
+- [ ] Org/user model defined
+- [ ] Subscription tiers defined
+- [ ] Trial logic defined
+- [ ] Paywall behavior defined
+- [ ] Billing provider integrated
+- [ ] Usage metering defined
+- [ ] Entitlements/feature gates defined
+- [ ] Admin controls defined
+- [ ] Support/escalation path defined
+
+Status:
+Owner:
+Notes:
+
+---
+
+## 12. Security, Privacy, and Compliance
+NIST recommends integrating secure software practices into each SDLC implementation, and OWASP ASVS is meant to be used as a verification yardstick for web applications. :contentReference[oaicite:1]{index=1}
+
+- [ ] Secrets are not in source control
+- [ ] Environment variables managed securely
+- [ ] Least-privilege access applied
+- [ ] Authentication secure
+- [ ] Authorization enforced
+- [ ] Input validation added
+- [ ] Output encoding handled
+- [ ] CSRF/XSS/SSRFi/SQLi checks done
+- [ ] Security headers configured
+- [ ] Webhook signature verification added
+- [ ] Audit logging added where needed
+- [ ] Data retention/privacy rules documented
+- [ ] Incident response path documented
+- [ ] Dependency review completed
+- [ ] SBOM/scans completed if required
+
+Status:
+Owner:
+Notes:
+
+---
+
+## 13. Testing and QA
+- [ ] Acceptance criteria written
+- [ ] Unit tests added
+- [ ] Integration tests added
+- [ ] End-to-end tests added
+- [ ] Manual QA checklist completed
+- [ ] Regression test list created
+- [ ] Accessibility checks run
+- [ ] Performance tests run
+- [ ] Security tests run
+- [ ] Error scenarios tested
+- [ ] Cross-browser/device tests run
+- [ ] UAT completed
+
+Test Coverage Notes:
+Known Defects:
+Blocked Tests:
+
+Status:
+Owner:
+Notes:
+
+---
+
+## 14. Performance and Reliability
+Core Web Vitals targets commonly used for web UX are LCP <= 2.5s, INP <= 200ms, and CLS <= 0.1. :contentReference[oaicite:2]{index=2}
+
+- [ ] Page load measured
+- [ ] Interactivity measured
+- [ ] Layout stability measured
+- [ ] Bundle size reviewed
+- [ ] Caching reviewed
+- [ ] Slow queries identified
+- [ ] Retry/timeouts set
+- [ ] Error budget or SLA defined
+- [ ] Monitoring and alerts configured
+- [ ] Backup/restore tested
+- [ ] Rollback plan prepared
+
+Metrics:
+- LCP:
+- INP:
+- CLS:
+- API latency:
+- Error rate:
+- Uptime target:
+
+Status:
+Owner:
+Notes:
+
+---
+
+## 15. DevOps and Environments
+- [ ] Local dev setup documented
+- [ ] Staging environment available
+- [ ] Production environment available
+- [ ] CI pipeline configured
+- [ ] CD pipeline configured
+- [ ] Build artifacts versioned
+- [ ] Release notes process defined
+- [ ] Infrastructure as code used if needed
+- [ ] Observability stack configured
+- [ ] Domain/DNS/SSL configured
+- [ ] Secrets management process defined
+
+Environments:
+- Local:
+- Dev:
+- Staging:
+- Production:
+
+Status:
+Owner:
+Notes:
+
+---
+
+## 16. Documentation
+- [ ] README updated
+- [ ] Setup instructions updated
+- [ ] Architecture docs updated
+- [ ] API docs updated
+- [ ] Prompt/AI docs updated
+- [ ] Admin runbook created
+- [ ] Support runbook created
+- [ ] Onboarding docs created
+- [ ] Change log started
+- [ ] Launch notes prepared
+
+Status:
+Owner:
+Notes:
+
+---
+
+## 17. Launch Readiness Gate
+Mark each as Pass / Fail / Blocked.
+
+### Product
+- [ ] Core user journey works end to end
+- [ ] Scope matches launch promise
+- [ ] Major defects resolved
+- [ ] Required pages exist
+- [ ] Copy and branding approved
+
+### Engineering
+- [ ] Production build passes
+- [ ] Required tests pass
+- [ ] Monitoring is live
+- [ ] Rollback plan exists
+- [ ] Backups are in place
+
+### Security
+- [ ] No exposed secrets
+- [ ] Security review completed
+- [ ] High-risk findings resolved
+
+### Business
+- [ ] Billing flow works
+- [ ] Support path ready
+- [ ] Legal/privacy terms ready if needed
+
+Launch Decision:
+- [ ] Go
+- [ ] No-Go
+- [ ] Go with Exceptions
+
+Approver:
+Date:
+Notes:
+
+---
+
+## 18. Post-Launch Operations
+- [ ] Error monitoring reviewed daily
+- [ ] Usage analytics reviewed
+- [ ] User feedback intake active
+- [ ] Bug triage cadence defined
+- [ ] Patch/release cadence defined
+- [ ] Cost monitoring active
+- [ ] Security review cadence defined
+- [ ] Performance review cadence defined
+- [ ] Documentation updated after release
+- [ ] Technical knowledge index updated from learnings
+
+Status:
+Owner:
+Notes:
+
+---
+
+## 19. Weekly Progress Tracker
+Week Of:
+Phase:
+Team:
+Current Goal:
+Top 3 Priorities:
+1.
+2.
+3.
+
+Completed This Week:
+-
+-
+-
+
+In Progress:
+-
+-
+-
+
+Blocked:
+-
+-
+-
+
+Risks:
+-
+-
+-
+
+Decisions Made:
+-
+-
+-
+
+Next Actions:
+-
+-
+-
+
+Overall Build Status:
+- [ ] Green
+- [ ] Yellow
+- [ ] Red
+
+---
+
+## 20. Final Delivery Record
+Release Version:
+Release Date:
+Shipped By:
+Deployment Target:
+Customer/Internal:
+Artifacts Delivered:
+- [ ] App
+- [ ] API
+- [ ] MCP Server
+- [ ] Chrome Extension
+- [ ] Admin Docs
+- [ ] Runbook
+- [ ] Test Evidence
+- [ ] Release Notes
+
+Final Notes:
+Lessons Learned:
+Follow-Up Work:
+```
+
+## How to use it
+
+Start every build by filling sections 0 through 4 before coding. During implementation, update sections 5 through 16 weekly. Do not mark section 17 as pass until the core user journey, security checks, and deployment checks are actually complete. That follows the same logic used by NIST SSDF and OWASP ASVS: security and verification are not separate afterthoughts. ([NIST Computer Security Resource Center][1])
+
+## Criteria that make this template fit your stack
+
+It covers:
+
+* general software development lifecycle
+* web app and GUI work
+* SaaS billing and tenant logic
+* API design and documentation through OpenAPI
+* MCP products through host/client/server, transport, and version handling
+* Chrome extensions through Manifest V3, service workers, permissions, and store prep
+* AI/prompt systems through templates, evaluations, fallback rules, and safety
+* post-launch maintenance and knowledge-index updates ([OpenAPI Initiative Publications][2])
+
+I can turn this into a polished DOCX or a spreadsheet tracker next.
+
+[1]: https://csrc.nist.gov/News/2025/draft-ssdf-version-1-2?utm_source=chatgpt.com "Draft SSDF 1.2 Available for Comment | CSRC"
+[2]: https://spec.openapis.org/oas/v3.2.0.html?utm_source=chatgpt.com "OpenAPI Specification v3.2.0"

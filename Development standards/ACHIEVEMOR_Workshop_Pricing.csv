@@ -1,0 +1,6 @@
+Delivery_Method,Industry_Low,Industry_Average,Industry_High,Recommended_ACHIEVEMOR,Duration_Hours,Max_Participants
+Local Workshop,1200,2500,5000,2200,6,24
+Online Workshop,800,1500,3000,1400,4,50
+Hybrid Workshop,1000,2000,4000,1800,5,30
+Multi-Day Local,2500,4500,8000,4200,12,18
+Enterprise Training,5000,8500,15000,7500,16,36
