@@ -1,165 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FOAI Cloud | The Foundation of Artificial Intelligence</title>
-    <meta name="description" content="Governance, Orchestration, and Specialized Execution. The premium multi-agent AI runtime by ACHIEVEMOR." />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/style.css" />
-  </head>
-  <body>
-    <!-- Ambient Background -->
-    <div class="ambient-glow glow-primary"></div>
-    <div class="ambient-glow glow-secondary"></div>
-    <div class="ambient-glow glow-tertiary"></div>
 
-    <!-- Navigation -->
-    <nav>
-      <div class="logo">FOAI <span>Cloud</span></div>
-      <div class="nav-links">
-        <a href="#ecosystem">Ecosystem</a>
-        <a href="#orchestration">Orchestration</a>
-        <a href="#about">Foundation</a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FOAI Cloud | The Future of AI</title>
+  <meta name="description"
+    content="Governance, Orchestration, and Specialized Execution. The premium multi-agent AI runtime by ACHIEVEMOR." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+  <!-- Ambient Background -->
+  <div class="ambient-glow glow-primary"></div>
+  <div class="ambient-glow glow-secondary"></div>
+  <div class="ambient-glow glow-tertiary"></div>
+
+  <!-- Navigation -->
+  <nav style="position: relative;">
+    <div class="logo">FOAI <span>Cloud</span></div>
+    
+    <!-- Hamburger/Accordion Menu implementation -->
+    <div class="hamburger" onclick="document.getElementById('accordion-menu').classList.toggle('open')" style="cursor: pointer; display: flex; flex-direction: column; gap: 4px; padding: 10px;">
+      <div style="width: 25px; height: 3px; background-color: var(--on-surface);"></div>
+      <div style="width: 25px; height: 3px; background-color: var(--on-surface);"></div>
+      <div style="width: 25px; height: 3px; background-color: var(--on-surface);"></div>
+    </div>
+    
+    <div id="accordion-menu" class="accordion-menu" style="display: none; position: absolute; top: 100%; right: 0; background: var(--surface-container); border: 1px solid var(--outline-variant); border-radius: 8px; flex-direction: column; width: 220px; padding: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5); z-index: 1000; text-align: left;">
+      <a href="/" style="padding: 0.5rem 0; color: var(--on-surface); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: bold;">Home</a>
+      <a href="javascript:history.back()" style="padding: 0.5rem 0; color: var(--on-surface); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);">Back</a>
+      <a href="https://myclaw.foai.cloud" style="padding: 0.5rem 0; color: var(--on-surface); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);">MyClaw AI</a>
+      <a href="https://ok.foai.cloud" style="padding: 0.5rem 0; color: var(--on-surface); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);">Open|Klass AI</a>
+      <a href="https://perform.foai.cloud" style="padding: 0.5rem 0; color: var(--on-surface); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);">Per|form Platform</a>
+      <a href="https://dia.foai.cloud" style="padding: 0.5rem 0; color: var(--on-surface); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);">Destinations AI</a>
+      <a href="https://block.foai.cloud" style="padding: 0.5rem 0; color: var(--on-surface); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);">Blockwise</a>
+      <a href="https://partners.foai.cloud" style="padding: 0.5rem 0; color: var(--on-surface); text-decoration: none;">Partners & Training</a>
+    </div>
+    <script>
+      document.head.insertAdjacentHTML("beforeend", `<style>
+        .accordion-menu.open { display: flex !important; }
+        .accordion-menu a:hover { color: var(--primary) !important; }
+      </style>`);
+    </script>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" style="position: relative; padding-top: 6rem;">
+    <div class="hero-badge" style="margin-bottom: 1.5rem;">Welcome to the epicenter</div>
+    <div class="hero-logo" style="font-size: clamp(4rem, 10vw, 8rem); font-weight: 800; letter-spacing: -0.05em; line-height: 1; margin-bottom: 2rem;">
+       <span style="color: #fff;">FOAI</span><span style="color: var(--primary); opacity: 0.8;">.</span>
+    </div>
+    
+    <p style="max-width: 800px; margin: 0 auto 3rem auto; font-size: 1.15rem; line-height: 1.6; color: var(--on-surface-variant); text-align: center;">
+      <strong style="color: #fff;">Welcome to the Future of AI.</strong> An innovative platform engineered for intelligence at scale. We are transforming logic into autonomous action—powering enterprise workflows natively, transitioning to Web3, and advancing capabilities of everyday people. Built Agent to Agent and Voice-first. Our goal is to perfect practical adoption.<br><br>
+      <span style="color: var(--primary); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;">You Are Here <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: text-bottom; margin-left: 2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></span>
+    </p>
+
+    <div class="hero-buttons">
+      <a href="#ecosystem" class="btn-primary" style="padding: 0.75rem 2rem; font-size: 1rem;">Explore Ecosystem</a>
+    </div>
+  </section>
+
+  <!-- Ecosystem Bento Grid -->
+  <section class="bento-section" id="ecosystem">
+    <div class="section-label">Infrastructure</div>
+    <h2 class="section-title">The <span style="color: var(--accent-1);">Ecosystem</span></h2>
+    <p class="section-subtitle">Every platform, every vertical, governed by a single orchestration layer.</p>
+    <div class="bento-grid">
+
+      <!-- Large Card: MyClaw -->
+      <a href="https://myclaw.foai.cloud" class="bento-card large accent-purple">
+        <div class="card-icon" style="color: var(--accent-1);">⚡</div>
+        <div class="card-tag" style="color: var(--accent-1);">Command Center</div>
+        <h3 class="card-title">MyClaw AI</h3>
+        <p class="card-desc">Your private, encrypted workspace powered by the NemoClaw runtime. Orchestrate workflows
+          with the Boomer_Angs swarm seamlessly.</p>
+        <div class="card-link" style="color: var(--accent-1);">Access Portal <svg width="16" height="16"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg></div>
+      </a>
+
+      <!-- Medium Card: Open|Klass -->
+      <a href="https://ok.foai.cloud" class="bento-card medium accent-gold">
+        <div class="card-icon" style="color: var(--accent-4);">🎓</div>
+        <div class="card-tag" style="color: var(--accent-4);">Education</div>
+        <h3 class="card-title">Open|Klass AI</h3>
+        <p class="card-desc">Agentic learning that ingests dense materials and delivers dynamic Socratic dialogue
+          guidance.</p>
+        <div class="card-link" style="color: var(--accent-4);">Enter Classroom <svg width="16" height="16"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg></div>
+      </a>
+
+      <!-- Medium Card: Perform -->
+      <a href="https://perform.foai.cloud" class="bento-card medium accent-pink">
+        <div class="card-icon" style="color: var(--accent-3);">⚙️</div>
+        <div class="card-tag" style="color: var(--accent-3);">Automation</div>
+        <h3 class="card-title">Per|form Platform</h3>
+        <p class="card-desc">Automated pipeline execution and scalable workflow orchestrations for enterprise needs.</p>
+        <div class="card-link" style="color: var(--accent-3);">Access Portal <svg width="16" height="16"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg></div>
+      </a>
+
+      <!-- Large Card: Destinations AI -->
+      <a href="https://dia.foai.cloud" class="bento-card large accent-cyan">
+        <div class="card-icon" style="color: var(--accent-2);">🏢</div>
+        <div class="card-tag" style="color: var(--accent-2);">Real Estate Intelligence</div>
+        <h3 class="card-title">Destinations AI</h3>
+        <p class="card-desc">The premier real estate intelligence engine. Property analysis, tenant profiling, automated
+          tours, and spatial reasoning powered by Google Maps.</p>
+        <div class="card-link" style="color: var(--accent-2);">Access Portal <svg width="16" height="16"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg></div>
+      </a>
+
+      <!-- Full Width: Blockwise -->
+      <a href="https://block.foai.cloud" class="bento-card medium accent-green">
+        <div class="card-icon" style="color: var(--accent-5);">🧱</div>
+        <div class="card-tag" style="color: var(--accent-5);">Web3</div>
+        <h3 class="card-title">Blockwise</h3>
+        <p class="card-desc">Decentralized intelligence and tokenized governance for the next generation of digital
+          trust.</p>
+        <div class="card-link" style="color: var(--accent-5);">Access Portal <svg width="16" height="16"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg></div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Orchestration Section -->
+  <section class="bento-section" id="orchestration" style="padding-top: 2rem;">
+    <div class="section-label">Runtime</div>
+    <h2 class="section-title">Governed by <span style="color: #fff;">ACHEEVY</span></h2>
+    <p class="section-subtitle">The digital CEO. API-first, vision-first, provider-agnostic orchestration.</p>
+    <div class="orchestration-card">
+      <div style="flex: 1;">
+        <h3 class="card-title" style="font-size: 1.8rem; margin-bottom: 1rem;">The Orchestrator</h3>
+        <p class="card-desc" style="max-width: 520px; margin-bottom: 0;">
+          ACHEEVY coordinates the entire runtime. From routing capability requests via <strong
+            style="color: var(--accent-1);">Picker_Ang</strong> to securing outputs with <strong
+            style="color: var(--accent-3);">Review_Hone</strong>.
+          The ecosystem is built API-first, vision-first, and deeply governed. Every task produces a traceable evidence
+          bundle.
+        </p>
       </div>
-      <a href="https://myclaw.foai.cloud" class="btn-primary">NemoClaw Login</a>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero-badge">Welcome to the epicenter</div>
-      <h1>
-        The Foundation of<br />
-        <span class="gradient-text">Artificial Intelligence.</span>
-      </h1>
-      <p>
-        Governance, Orchestration, and Specialized Execution. Unified under 
-        <strong style="color: #fff;">ACHIEVEMOR's</strong> premium multi-agent runtime.
-      </p>
-      <div class="hero-buttons">
-        <a href="#ecosystem" class="btn-primary" style="padding: 0.75rem 2rem; font-size: 1rem;">Explore Ecosystem</a>
-        <a href="https://ok.foai.cloud" class="btn-outline">Open|Klass AI</a>
+      <div class="terminal-box">
+        <br /><br />
+        <div class="terminal-line"><span class="prompt">▸</span> <span class="label">status:</span> <span
+            class="value">ONLINE</span></div>
+        <div class="terminal-line"><span class="prompt">▸</span> <span class="label">swarm:</span> <span
+            class="value">Active (6/6 hawks)</span></div>
+        <div class="terminal-line"><span class="prompt">▸</span> <span class="label">mode:</span> <span
+            class="value">Ethereal Obsidian</span></div>
+        <div class="terminal-line"><span class="prompt">▸</span> <span class="label">identity:</span> <span
+            class="value">jarrett.risher</span></div>
+        <div class="terminal-line"><span class="prompt">▸</span> <span class="label">project:</span> <span
+            class="value">ai-managed-services</span></div>
+        <div class="terminal-line"><span class="prompt">▸</span> <span class="label">systems:</span> <span class="value"
+            style="color: var(--accent-5);">ALL GO ✓</span></div>
       </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <div class="stat-number" style="color: var(--accent-1);">6</div>
-          <div class="stat-label">Active Platforms</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number" style="color: var(--accent-2);">24/7</div>
-          <div class="stat-label">Autonomous Ops</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number" style="color: var(--accent-5);">∞</div>
-          <div class="stat-label">Scalable Agents</div>
-        </div>
+    </div>
+  </section>
+
+  <!-- The Mission section has been moved to the hero above -->
+
+  <!-- Footer & Sitemap -->
+  <footer style="display: block; padding-top: 4rem; text-align: left; background: var(--surface-container-low); border-top: 1px solid var(--outline-variant); width: 100%; margin: 4rem 0 0 0; padding-bottom: 4rem;">
+    <div class="sitemap" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; padding: 0 2rem;">
+      <div>
+        <h4 style="color: var(--primary); margin-bottom: 1rem;">FOAI Cloud</h4>
+        <ul style="list-style: none; padding: 0; line-height: 2;">
+          <li><a href="/" style="color: var(--on-surface-variant); text-decoration: none;">Home</a></li>
+          <li><a href="#ecosystem" style="color: var(--on-surface-variant); text-decoration: none;">Ecosystem</a></li>
+          <li><a href="#about" style="color: var(--on-surface-variant); text-decoration: none;">Mission</a></li>
+        </ul>
       </div>
-    </section>
-
-    <!-- Ecosystem Bento Grid -->
-    <section class="bento-section" id="ecosystem">
-      <div class="section-label">Infrastructure</div>
-      <h2 class="section-title">The <span style="color: var(--accent-1);">Ecosystem</span></h2>
-      <p class="section-subtitle">Every platform, every vertical, governed by a single orchestration layer.</p>
-      <div class="bento-grid">
-        
-        <!-- Large Card: MyClaw -->
-        <a href="https://myclaw.foai.cloud" class="bento-card large accent-purple">
-          <div class="card-icon" style="color: var(--accent-1);">⚡</div>
-          <div class="card-tag" style="color: var(--accent-1);">Command Center</div>
-          <h3 class="card-title">MyClaw AI</h3>
-          <p class="card-desc">Your private, encrypted workspace powered by the NemoClaw runtime. Orchestrate workflows with the Boomer_Angs swarm seamlessly.</p>
-          <div class="card-link" style="color: var(--accent-1);">Access Portal <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-        </a>
-
-        <!-- Medium Card: Open|Klass -->
-        <a href="https://ok.foai.cloud" class="bento-card medium accent-gold">
-          <div class="card-icon" style="color: var(--accent-4);">🎓</div>
-          <div class="card-tag" style="color: var(--accent-4);">Education</div>
-          <h3 class="card-title">Open|Klass AI</h3>
-          <p class="card-desc">Agentic learning that ingests dense materials and delivers dynamic Socratic dialogue guidance.</p>
-          <div class="card-link" style="color: var(--accent-4);">Enter Classroom <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-        </a>
-
-        <!-- Medium Card: Perform -->
-        <a href="https://perform.foai.cloud" class="bento-card medium accent-pink">
-          <div class="card-icon" style="color: var(--accent-3);">⚙️</div>
-          <div class="card-tag" style="color: var(--accent-3);">Automation</div>
-          <h3 class="card-title">Per|form Platform</h3>
-          <p class="card-desc">Automated pipeline execution and scalable workflow orchestrations for enterprise needs.</p>
-          <div class="card-link" style="color: var(--accent-3);">Access Portal <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-        </a>
-
-        <!-- Large Card: Destinations AI -->
-        <a href="https://destinations.foai.cloud" class="bento-card large accent-cyan">
-          <div class="card-icon" style="color: var(--accent-2);">🏢</div>
-          <div class="card-tag" style="color: var(--accent-2);">Real Estate Intelligence</div>
-          <h3 class="card-title">Destinations AI</h3>
-          <p class="card-desc">The premier real estate intelligence engine. Property analysis, tenant profiling, automated tours, and spatial reasoning powered by Google Maps.</p>
-          <div class="card-link" style="color: var(--accent-2);">Access Portal <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-        </a>
-
-        <!-- Full Width: Blockwise -->
-        <a href="https://blockwise.foai.cloud" class="bento-card medium accent-green">
-          <div class="card-icon" style="color: var(--accent-5);">🧱</div>
-          <div class="card-tag" style="color: var(--accent-5);">Web3</div>
-          <h3 class="card-title">Blockwise</h3>
-          <p class="card-desc">Decentralized intelligence and tokenized governance for the next generation of digital trust.</p>
-          <div class="card-link" style="color: var(--accent-5);">Access Portal <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-        </a>
-
+      <div>
+        <h4 style="color: var(--primary); margin-bottom: 1rem;">Platforms</h4>
+        <ul style="list-style: none; padding: 0; line-height: 2;">
+          <li><a href="https://myclaw.foai.cloud" style="color: var(--on-surface-variant); text-decoration: none;">MyClaw AI</a></li>
+          <li><a href="https://ok.foai.cloud" style="color: var(--on-surface-variant); text-decoration: none;">Open|Klass AI</a></li>
+          <li><a href="https://perform.foai.cloud" style="color: var(--on-surface-variant); text-decoration: none;">Per|form</a></li>
+        </ul>
       </div>
-    </section>
-
-    <!-- Orchestration Section -->
-    <section class="bento-section" id="orchestration" style="padding-top: 2rem;">
-      <div class="section-label">Runtime</div>
-      <h2 class="section-title">Governed by <span style="color: #fff;">ACHEEVY</span></h2>
-      <p class="section-subtitle">The digital CEO. API-first, vision-first, provider-agnostic orchestration.</p>
-      <div class="orchestration-card">
-        <div style="flex: 1;">
-          <h3 class="card-title" style="font-size: 1.8rem; margin-bottom: 1rem;">The Orchestrator</h3>
-          <p class="card-desc" style="max-width: 520px; margin-bottom: 0;">
-            ACHEEVY coordinates the entire runtime. From routing capability requests via <strong style="color: var(--accent-1);">Picker_Ang</strong> to securing outputs with <strong style="color: var(--accent-3);">Review_Hone</strong>. 
-            The ecosystem is built API-first, vision-first, and deeply governed. Every task produces a traceable evidence bundle.
-          </p>
-        </div>
-        <div class="terminal-box">
-          <br/><br/>
-          <div class="terminal-line"><span class="prompt">▸</span> <span class="label">status:</span> <span class="value">ONLINE</span></div>
-          <div class="terminal-line"><span class="prompt">▸</span> <span class="label">swarm:</span> <span class="value">Active (6/6 hawks)</span></div>
-          <div class="terminal-line"><span class="prompt">▸</span> <span class="label">mode:</span> <span class="value">Ethereal Obsidian</span></div>
-          <div class="terminal-line"><span class="prompt">▸</span> <span class="label">identity:</span> <span class="value">jarrett.risher</span></div>
-          <div class="terminal-line"><span class="prompt">▸</span> <span class="label">project:</span> <span class="value">ai-managed-services</span></div>
-          <div class="terminal-line"><span class="prompt">▸</span> <span class="label">systems:</span> <span class="value" style="color: var(--accent-5);">ALL GO ✓</span></div>
-        </div>
+      <div>
+        <h4 style="color: var(--primary); margin-bottom: 1rem;">Specialized</h4>
+        <ul style="list-style: none; padding: 0; line-height: 2;">
+          <li><a href="https://dia.foai.cloud" style="color: var(--on-surface-variant); text-decoration: none;">Destinations AI</a></li>
+          <li><a href="https://block.foai.cloud" style="color: var(--on-surface-variant); text-decoration: none;">Blockwise</a></li>
+          <li><a href="https://partners.foai.cloud" style="color: var(--on-surface-variant); text-decoration: none;">Partners</a></li>
+        </ul>
       </div>
-    </section>
-
-    <!-- About / Foundation -->
-    <section class="bento-section" id="about" style="padding-top: 2rem;">
-      <div class="section-label">About</div>
-      <h2 class="section-title">The <span style="color: var(--accent-2);">Foundation</span></h2>
-      <p class="section-subtitle" style="max-width: 640px;">
-        FOAI Cloud is the infrastructure backbone of <strong style="color: #fff;">ACHIEVEMOR LLC</strong>. 
-        We build governed, multi-agent AI systems that execute with traceable evidence, 
-        not hallucinated promises. Every platform in our ecosystem is born API-first and rigorously reviewed before release.
-      </p>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-      <div class="logo" style="font-size: 1.1rem;">FOAI <span>Cloud</span></div>
-      <div>&copy; 2026 ACHIEVEMOR LLC. All rights reserved.</div>
-      <div style="display: flex; gap: 1.5rem;">
-        <a href="https://partners.foai.cloud">Partners</a>
-        <a href="https://ok.foai.cloud">Open|Klass</a>
-        <a href="https://admin.shopify.com">Commerce</a>
+      <div>
+        <div class="logo" style="font-size: 1.5rem; margin-bottom: 1rem;">FOAI <span>Cloud</span></div>
+        <div style="color: var(--on-surface-variant); font-size: 0.9rem;">&copy; 2026 ACHIEVEMOR LLC.</div>
       </div>
-    </footer>
+    </div>
+  </footer>
 
-    <script type="module" src="/main.js"></script>
-  </body>
+  <script type="module" src="/main.js"></script>
+</body>
+
 </html>
