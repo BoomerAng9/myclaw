@@ -1,0 +1,16 @@
+services:
+  openclaw:
+    image: ghcr.io/hostinger/hvps-openclaw:latest
+    init: true
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.openclaw-ui.rule=Host(`app.myclaw.foai.cloud`)"
+      - "traefik.http.routers.openclaw-ui.entrypoints=websecure"
+      - "traefik.http.routers.openclaw-ui.tls.certresolver=letsencrypt"
+      - "traefik.http.services.openclaw-ui.loadbalancer.server.port=${PORT}"
+    env_file:
+      - .env
+    restart: unless-stopped
+    volumes:
+      - ./data:/data
+      - ./data/linuxbrew:/home/linuxbrew

@@ -1,0 +1,95 @@
+services:
+  myclaw:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8090:80"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.myclaw.rule=Host(`myclaw.foai.cloud`)
+      - traefik.http.routers.myclaw.entrypoints=websecure
+      - traefik.http.routers.myclaw.tls.certresolver=letsencrypt
+      - traefik.http.services.myclaw.loadbalancer.server.port=80
+
+  studio:
+    build:
+      context: ./acheevy-studio
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.myclawstudio.rule=Host(`studio.myclaw.foai.cloud`)
+      - traefik.http.routers.myclawstudio.entrypoints=websecure
+      - traefik.http.routers.myclawstudio.tls.certresolver=letsencrypt
+      - traefik.http.services.myclawstudio.loadbalancer.server.port=3000
+
+  okai:
+    build:
+      context: ./okai
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file:
+      - ./okai/.env.local
+    ports:
+      - "3001:3000"
+    volumes:
+      - okai-data:/app/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.okai.rule=Host(`klass.foai.cloud`) || Host(`ok.foai.cloud`)
+      - traefik.http.routers.okai.entrypoints=websecure
+      - traefik.http.routers.okai.tls.certresolver=letsencrypt
+      - traefik.http.services.okai.loadbalancer.server.port=3000
+
+  perform:
+    image: nginx:alpine
+    restart: unless-stopped
+    volumes:
+      - ./perform:/usr/share/nginx/html:ro
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.perform.rule=Host(`perform.foai.cloud`)
+      - traefik.http.routers.perform.entrypoints=websecure
+      - traefik.http.routers.perform.tls.certresolver=letsencrypt
+      - traefik.http.services.perform.loadbalancer.server.port=80
+
+  blockwise:
+    image: nginx:alpine
+    restart: unless-stopped
+    volumes:
+      - ./blockwise:/usr/share/nginx/html:ro
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.blockwise.rule=Host(`blockwise.foai.cloud`)
+      - traefik.http.routers.blockwise.entrypoints=websecure
+      - traefik.http.routers.blockwise.tls.certresolver=letsencrypt
+      - traefik.http.services.blockwise.loadbalancer.server.port=80
+
+  partners:
+    image: nginx:alpine
+    restart: unless-stopped
+    volumes:
+      - ./partners:/usr/share/nginx/html:ro
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.partners.rule=Host(`partners.foai.cloud`)
+      - traefik.http.routers.partners.entrypoints=websecure
+      - traefik.http.routers.partners.tls.certresolver=letsencrypt
+      - traefik.http.services.partners.loadbalancer.server.port=80
+
+  foai:
+    image: nginx:alpine
+    restart: unless-stopped
+    volumes:
+      - ./foai/dist:/usr/share/nginx/html:ro
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.foai.rule=Host(`foai.cloud`, `www.foai.cloud`)
+      - traefik.http.routers.foai.entrypoints=websecure
+      - traefik.http.routers.foai.tls.certresolver=letsencrypt
+      - traefik.http.services.foai.loadbalancer.server.port=80
+
+volumes:
+  okai-data:

@@ -14,3 +14,23 @@ vendor/OpenMAIC/
 estatemind-ai/
 the-perform-platform/
 destinations-ai/
+
+# Generated build artifacts / secrets — do not commit
+foai_tmp/
+acheevy-deployment/backend/
+deploy/vps/snapshots/
+deploy/vps/workspace/
+*.tar.gz
+okai-src.tar.gz
+setup_ssh.py
+
+# Static site node scaffolding — only HTML/CSS/JS matters
+blockwise/node_modules/
+blockwise/package-lock.json
+blockwise/package.json
+perform/node_modules/
+perform/package-lock.json
+perform/package.json
+destinations_ai/node_modules/
+destinations_ai/package-lock.json
+destinations_ai/package.json
