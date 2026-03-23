@@ -1,208 +1,215 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth bg-black text-white">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACHEEVY | The Vision-First Action Runtime</title>
-    <!-- Tailwind CSS -->
+    <title>ACHEEVY.DIGITAL | Absolute Structured Intelligence</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        display: ['Space Grotesk', 'sans-serif'],
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'],
+                        mono: ['"Fira Code"', '"SF Mono"', 'Consolas', 'monospace'],
                     },
                     colors: {
-                        obsidian: '#050507',
-                        surface: '#0f0f13',
-                        highlight: '#8c3aeb',
-                        brand: '#a25afd',
-                        glow: 'rgba(140, 58, 235, 0.4)'
+                        obsidian: '#000000',
+                        glass: '#111111',
+                        accent: '#F5F5F7'
                     },
                     animation: {
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in-up': 'fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'spin-slow': 'spin 20s linear infinite',
                     },
                     keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
+                        fadeInUp: {
+                            '0%': { opacity: 0, transform: 'translateY(30px) scale(0.95)' },
+                            '100%': { opacity: 1, transform: 'translateY(0) scale(1)' }
                         }
                     }
                 }
             }
         }
     </script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { background-color: theme('colors.obsidian'); color: white; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: black; -webkit-font-smoothing: antialiased; }
         
-        .glass-panel {
-            background: rgba(15, 15, 19, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #ffffff 0%, #a3a3a3 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .brand-gradient {
-            background: linear-gradient(90deg, #a25afd, #5a88fd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Hex Grid Background */
-        .bg-grid {
-            background-size: 40px 40px;
+        .hardware-grid {
+            background-size: 60px 60px;
             background-image: 
-                linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-            mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-            position: absolute;
-            inset: 0;
-            z-index: -1;
+                linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
         }
 
-        /* Hover Cards glowing border */
-        .glow-card {
-            transition: all 0.4s ease;
+        .text-gradient {
+            background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.4) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link {
+            transition: color 0.2s ease;
+        }
+        .nav-link:hover { color: #fff; }
+
+        .ascii-art {
+            color: #10B981; /* Hacker Green for ASCII */
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+            white-space: pre;
+            line-height: 1.2;
+            overflow-x: auto;
+        }
+
+        /* Typewriter Animation for the verb */
+        .verb-slider-container {
+            display: inline-block;
+            vertical-align: bottom;
+            height: 1.2em;
+            overflow: hidden;
             position: relative;
         }
-        .glow-card::before {
-            content: '';
-            position: absolute;
-            inset: -1px;
-            background: linear-gradient(135deg, var(--tw-colors-highlight), transparent, transparent);
-            border-radius: 1.1rem;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.4s ease;
+        
+        .verb-track {
+            display: block;
+            text-align: left;
+            animation: slideVerbs 12s infinite;
         }
-        .glow-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px var(--tw-colors-glow);
+        
+        .verb-track span {
+            display: block;
+            height: 1.2em;
+            line-height: 1.2em;
+            color: #fff;
+			font-weight: 800;
         }
-        .glow-card:hover::before { opacity: 1; }
+
+        @keyframes slideVerbs {
+            0%, 20% { transform: translateY(0); }
+            25%, 45% { transform: translateY(-1.2em); }
+            50%, 70% { transform: translateY(-2.4em); }
+            75%, 95% { transform: translateY(-3.6em); }
+            100% { transform: translateY(-4.8em); }
+        }
     </style>
 </head>
-<body class="antialiased min-h-screen relative overflow-x-hidden">
+<body class="hardware-grid min-h-screen selection:bg-white selection:text-black">
 
-    <!-- Navbar -->
-    <nav class="fixed top-0 w-full z-50 glass-panel border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-2.5 h-2.5 rounded-full bg-brand shadow-[0_0_15px_rgba(162,90,253,0.8)] animate-pulse-slow"></div>
-                <span class="font-display font-bold text-xl tracking-tight">ACHEEVY</span>
+    <!-- Global Nav -->
+    <nav class="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between text-xs font-semibold tracking-wide text-gray-400">
+            <span class="text-white tracking-widest uppercase">ACHEEVY.DIGITAL</span>
+            <div class="hidden md:flex gap-8">
+                <a href="#home" class="nav-link text-white">Home</a>
+                <a href="#architecture" class="nav-link">Architecture</a>
+                <a href="#heavy-lifting" class="nav-link">Chicken Hawk</a>
             </div>
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
-                <a href="#agents" class="hover:text-white transition-colors">Architecture</a>
-                <a href="#docs" class="hover:text-white transition-colors">Documentation</a>
-                <a href="#status" class="hover:text-white transition-colors">System Status</a>
-            </div>
-            <a href="https://agent.acheevy.digital" class="px-5 py-2.5 rounded-lg font-medium text-sm border border-brand/50 text-brand hover:bg-brand hover:text-white transition-all hidden md:block">
-                Launch Console
+            <a href="https://app.myclaw.foai.cloud" class="text-white hover:opacity-70 transition-opacity flex items-center gap-2">
+                <span>Deploy System</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <main class="relative pt-40 pb-20 lg:pt-48 lg:pb-32 px-6">
-        <div class="bg-grid"></div>
-        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-brand/20 blur-[120px] rounded-full pointer-events-none"></div>
+    <!-- Hero / Home -->
+    <section id="home" class="relative min-h-[100vh] flex flex-col items-center justify-center px-6 pt-20 overflow-hidden">
+        <div class="w-[800px] h-[800px] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 pointer-events-none">
+            <!-- Abstract rotating geometry representing the OS Kernel -->
+            <svg viewBox="0 0 100 100" class="w-full h-full animate-spin-slow">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="white" stroke-width="0.2" stroke-dasharray="2 4"/>
+                <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="0.3" stroke-dasharray="1 6"/>
+                <rect x="45" y="45" width="10" height="10" fill="none" stroke="white" stroke-width="0.5"/>
+            </svg>
+        </div>
 
-        <div class="max-w-4xl mx-auto text-center relative z-10">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs font-semibold uppercase tracking-wider text-gray-300 mb-8">
-                <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                Runtime Online on acheevy.digital
-            </div>
+        <div class="z-10 text-center max-w-5xl mx-auto opacity-0 animate-fade-in-up" style="animation-delay: 0.2s;">
+            <p class="text-gray-400 font-semibold tracking-[0.2em] text-xs uppercase mb-8">Absolute Structured Intelligence</p>
             
-            <h1 class="font-display text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-tight">
-                <span class="gradient-text">Turn Human Intent Into</span> <br/>
-                <span class="brand-gradient">Governed Execution.</span>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-6 text-gradient">
+                The Future of AI is Agentic!
             </h1>
             
-            <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed">
-                ACHEEVY is the API-first, vision-first action runtime. Seamlessly translate intent into multi-role parallel execution using Stepper logic and dynamic Paperform schema.
-            </p>
+            <h2 class="text-2xl md:text-3xl text-gray-300 mx-auto font-medium leading-relaxed mb-6">
+                I am ACHEEVY, What will we deploy today?
+            </h2>
 
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="https://agent.acheevy.digital" class="w-full sm:w-auto px-8 py-4 bg-brand text-white font-semibold rounded-xl hover:bg-[#8640df] transition-colors shadow-lg shadow-brand/30">
-                    Initialize Orchestrator
-                </a>
-                <button class="w-full sm:w-auto px-8 py-4 glass-panel text-white font-semibold rounded-xl hover:bg-white/10 transition-colors">
-                    View Network Logs
-                </button>
-            </div>
-        </div>
-    </main>
-
-    <!-- Core Architecture -->
-    <section id="agents" class="py-24 relative z-10 px-6 border-t border-white/5 bg-gradient-to-b from-transparent to-surface/50">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="font-display text-3xl font-bold mb-4">Autonomous Subsystems</h2>
-                <p class="text-gray-400">Powered by the Intelligent-Internet core models.</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                
-                <!-- Agent -->
-                <div class="glow-card glass-panel p-8 rounded-2xl">
-                    <div class="w-12 h-12 rounded-lg bg-brand/20 flex items-center justify-center border border-brand/30 mb-6">
-                        <svg class="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            <div class="text-xl md:text-2xl text-gray-500 font-medium tracking-wide mt-8">
+                ACHEEVY is your OS, so just Think It. Prompt It. And Let ACHEEVY 
+                <div class="verb-slider-container">
+                    <div class="verb-track">
+                        <span>Manage</span>
+                        <span>Build</span>
+                        <span>Design</span>
+                        <span>Automate</span>
+                        <span>Manage</span> <!-- Duplicated for seamless loop -->
                     </div>
-                    <h3 class="font-display font-semibold text-xl mb-3">ACHEEVY_agent</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">The digital CEO. Interprets intent, manages execution sequences, and coordinates Boomer_Ang deployments.</p>
                 </div>
-
-                <!-- Commons -->
-                <div class="glow-card glass-panel p-8 rounded-2xl">
-                    <div class="w-12 h-12 rounded-lg bg-blue-500/20 flex items-center justify-center border border-blue-500/30 mb-6">
-                        <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
-                    </div>
-                    <h3 class="font-display font-semibold text-xl mb-3">ACHEEVY_commons</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">The unified schema hub. Intercepts frontend requests and powers the Stepper / Paperform UI generation engines.</p>
-                </div>
-
-                <!-- Researcher -->
-                <div class="glow-card glass-panel p-8 rounded-2xl">
-                    <div class="w-12 h-12 rounded-lg bg-emerald-500/20 flex items-center justify-center border border-emerald-500/30 mb-6">
-                        <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                    </div>
-                    <h3 class="font-display font-semibold text-xl mb-3">ACHEEVY_researcher</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">The deep intelligence layer. Ingests and normalizes external data points to arm the orchestrator with validated context.</p>
-                </div>
-
-                <!-- Ground -->
-                <div class="glow-card glass-panel p-8 rounded-2xl">
-                    <div class="w-12 h-12 rounded-lg bg-orange-500/20 flex items-center justify-center border border-orange-500/30 mb-6">
-                        <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
-                    </div>
-                    <h3 class="font-display font-semibold text-xl mb-3">ACHEEVY_ground</h3>
-                    <p class="text-sm text-gray-400 leading-relaxed">The baseline state machine. Persists execution checkpoints and secures the underlying container environment.</p>
-                </div>
-
+                It.
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="border-t border-white/5 py-12 relative z-10 glass-panel">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-2">
-                <div class="w-2 h-2 rounded-full bg-brand"></div>
-                <span class="font-display font-bold tracking-tight">ACHEEVY.DIGITAL</span>
+    <!-- The Tear-Down: Subsystems (ASCII Architecture) -->
+    <section id="architecture" class="py-32 px-6 border-t border-white/5 bg-black">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-center mb-16 text-gradient">System Architecture</h2>
+
+            <div class="bg-[#050505] border border-white/10 rounded-2xl p-8 overflow-hidden shadow-2xl mx-auto">
+                <div class="flex items-center gap-2 mb-8 pb-4 border-b border-white/10">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span class="ml-4 text-xs font-mono text-gray-500 uppercase tracking-widest">Acheevy Network Topology</span>
+                </div>
+<pre class="ascii-art font-mono text-xs sm:text-sm md:text-base">
+      [ INTERNAL MEMORY POOL ]
+             (Vectorized)
+                  │
+                  ▼
+  ┌───────────────────────────────┐
+  │                               │
+  │     [ INTELLIGENCE ARRAY ]    │ ◄── (Web Sensing / Scraping Engine)
+  │      (Deep Verification)      │
+  │                               │
+  └───────────────┬───────────────┘
+                  │ Validated Signal
+                  ▼
+          [ NEURAL ROUTER ] ────────┐
+                  │                 │ (Pass Logic)
+                  ▼                 ▼
+      ┌───────────────────────┐  [ AUTONOMOUS ACTORS ]
+      │  CORE ORCHESTRATOR    │  (Full-Stack Execution)
+      │  (The Digital CEO)    │
+      └───────────────────────┘
+                  │ 
+                  ▼
+      [ LEDGER & LOGIC BOARD ]
+ (Undeniable Tracking & Traceability)
+</pre>
             </div>
-            <p class="text-sm text-gray-500">© 2026 ACHIEVEMOR x AIMS. Powered by OpenClaw Runtime.</p>
         </div>
+    </section>
+
+    <!-- The Execution Bridge / SaaS Portal -->
+    <section id="heavy-lifting" class="py-32 border-t border-white/5 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#111] pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <p class="text-gray-400 font-semibold tracking-[0.2em] text-xs uppercase mb-8">For the Heavy Lifting:</p>
+            <h2 class="text-4xl md:text-6xl font-bold tracking-tight mb-8">Deploy Chicken Hawk.</h2>
+            <p class="text-xl text-gray-400 leading-relaxed mb-12">
+                When you combine the powerful team of ACHEEVY and the Chicken Hawk, you step into a world of accomplishments. Deploy now, and start accomplishing more.
+            </p>
+            
+            <a href="https://app.myclaw.foai.cloud" class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-black font-semibold tracking-wide hover:scale-105 transition-transform duration-300">
+                <span>Deploy Chicken Hawk</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Minimal Footer -->
+    <footer class="py-8 border-t border-white/10 text-center text-xs text-gray-600 font-medium tracking-wide">
+        <p>ACHIEVEMOR x AIMS. Architected by Intelligent Internet. Assembled by Antigravity.</p>
     </footer>
 
 </body>
