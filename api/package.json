@@ -6,11 +6,7 @@
   "scripts": {
     "start": "node dist/server.js",
     "build": "tsc",
-<<<<<<< Updated upstream
-    "dev": "nodemon server.ts"
-=======
     "dev": "nodemon --exec ts-node server.ts"
->>>>>>> Stashed changes
   },
   "dependencies": {
     "express": "^4.18.2",
