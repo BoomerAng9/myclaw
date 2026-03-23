@@ -38,8 +38,8 @@
         "auth": "api-key",
         "models": [
           {
-            "id": "primary-model-id",
-            "name": "Primary Model",
+            "id": "approved-primary-model-id",
+            "name": "Approved Primary Model",
             "reasoning": true,
             "input": [
               "text",
@@ -66,10 +66,10 @@
   "agents": {
     "defaults": {
       "model": {
-        "primary": "Primary Model"
+        "primary": "Approved Primary Model"
       },
       "models": {
-        "nexos/primary-model-id": {}
+        "nexos/approved-primary-model-id": {}
       }
     }
   },

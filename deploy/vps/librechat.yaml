@@ -15,16 +15,6 @@ endpoints:
       summarize: true
       modelDisplayLabel: "Vertex AI"
 
-    - name: "AIMS Native Swarm (Internal)"
-      apiKey: "${ACHEEVY_INTERNAL_KEY}"
-      baseURL: "https://api.myclaw.foai.cloud/v1/acheevy"
-      models:
-        default: ["ACHEEVY-Orchestrator", "SME_NotebookLM_Ang", "SME_Paperform_Ang", "Guide_Ang"]
-        fetch: false
-      titleConvo: true
-      titleModel: "ACHEEVY-Orchestrator"
-      modelDisplayLabel: "Boomer_Ang Swarm"
-
 registration:
   socialLogins: ["google", "github"]
   # Strict policy: Only allowed users can enter OpenClaw
@@ -46,20 +36,11 @@ plugins:
 # ════════════════════════════════════════════════════════════════
 speech:
   tts:
-    # OpenAI-compatible TTS (works with any OpenAI-compatible endpoint)
-    openai:
-      apiKey: "${OPENAI_API_KEY}"
-      model: "tts-1"
-      voices: ["alloy", "echo", "fable", "onyx", "nova", "shimmer"]
     # ElevenLabs TTS (premium voice quality)
     elevenlabs:
       apiKey: "${ELEVENLABS_API_KEY}"
       model: "eleven_multilingual_v2"
       voices: ["rachel", "drew", "clyde", "paul", "domi", "dave"]
-  stt:
-    openai:
-      apiKey: "${OPENAI_API_KEY}"
-      model: "whisper-1"
 
 # Interface: Expose the microphone + speaker UI controls
 interface:
@@ -67,5 +48,5 @@ interface:
   speechTab: true
   # Allow all endpoints to use speech
   parameters:
-    speechToText: true
+    speechToText: false
     textToSpeech: true

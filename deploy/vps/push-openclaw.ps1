@@ -158,7 +158,7 @@ if ($PullCurrent) {
     Copy-FromRemote -RemotePath $remoteComposePath -LocalPath (Join-Path $snapshotDir "docker-compose.yml")
 
     Write-Host "Snapshot written to $snapshotDir" -ForegroundColor Green
-    Write-Host "Note: provider credentials remain in Hostinger env / remote .env and were not copied locally." -ForegroundColor DarkYellow
+    Write-Host "Note: provider credentials remain in Hostinger env / remote .env and were not copied locally. Mirror the approved key set in .env.example when updating the remote env." -ForegroundColor DarkYellow
 }
 
 if ($PushConfig) {
@@ -169,7 +169,7 @@ if ($PushConfig) {
     Write-Host "Validating local OpenClaw config JSON..." -ForegroundColor Yellow
     $localConfig = Get-Content -LiteralPath $LocalConfigPath -Raw | ConvertFrom-Json -AsHashtable
     Assert-NoInlineProviderSecrets -Config $localConfig
-    Write-Host "Provider auth check passed. This push only updates openclaw.json; Hostinger env remains the source of truth for provider secrets." -ForegroundColor DarkYellow
+    Write-Host "Provider auth check passed. This push only updates openclaw.json; Hostinger env remains the source of truth for provider secrets and should match .env.example." -ForegroundColor DarkYellow
 
     $temporaryRemoteConfig = Join-Path ([System.IO.Path]::GetTempPath()) "openclaw.remote.${timestamp}.json"
     $temporaryPushConfig = Join-Path ([System.IO.Path]::GetTempPath()) "openclaw.push.${timestamp}.json"
