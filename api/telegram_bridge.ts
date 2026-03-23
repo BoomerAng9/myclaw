@@ -9,7 +9,7 @@ import { insforge } from './insforge';
  * and receive interrupts or prompts remotely from the user.
  */
 
-const token = process.env.TELEGRAM_BOT_TOKEN || process.env.Telegram_KEY || '';
+const token = process.env.TELEGRAM_BOT_TOKEN || '';
 let bot: TelegramBot | null = null;
 
 if (token) {

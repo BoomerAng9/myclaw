@@ -93,50 +93,6 @@
         "auth": "api-key",
         "models": [
           {
-            "id": "af02f47c-abd2-4c54-97bd-cfa8b0d307be",
-            "name": "Nexos Gpt 5 2",
-            "reasoning": true,
-            "input": [
-              "text",
-              "image"
-            ],
-            "cost": {
-              "input": 0,
-              "output": 0,
-              "cacheRead": 0,
-              "cacheWrite": 0
-            },
-            "maxTokens": 8192,
-            "contextWindow": 200000,
-            "compat": {
-              "supportsStore": true,
-              "supportsDeveloperRole": true,
-              "supportsReasoningEffort": false
-            }
-          },
-          {
-            "id": "29b8b71e-09e3-49be-aeda-ff51972eded1",
-            "name": "Nexos Gpt 4 1",
-            "reasoning": true,
-            "input": [
-              "text",
-              "image"
-            ],
-            "cost": {
-              "input": 0,
-              "output": 0,
-              "cacheRead": 0,
-              "cacheWrite": 0
-            },
-            "maxTokens": 8192,
-            "contextWindow": 200000,
-            "compat": {
-              "supportsStore": true,
-              "supportsDeveloperRole": true,
-              "supportsReasoningEffort": false
-            }
-          },
-          {
             "id": "4e325f69-c34d-4491-b00d-19cc7e72b613",
             "name": "Nexos Gemini 3 Flash Preview",
             "reasoning": true,
@@ -179,72 +135,6 @@
               "supportsDeveloperRole": true,
               "supportsReasoningEffort": false
             }
-          },
-          {
-            "id": "6baa145f-c4f7-43a0-8e4c-2e0c7b239655",
-            "name": "Nexos Anthropic Claude Sonnet 4 5 @ 20250929",
-            "reasoning": true,
-            "input": [
-              "text",
-              "image"
-            ],
-            "cost": {
-              "input": 0,
-              "output": 0,
-              "cacheRead": 0,
-              "cacheWrite": 0
-            },
-            "maxTokens": 8192,
-            "contextWindow": 200000,
-            "compat": {
-              "supportsStore": true,
-              "supportsDeveloperRole": true,
-              "supportsReasoningEffort": false
-            }
-          },
-          {
-            "id": "664519e5-1b90-4058-b121-0b2585180eba",
-            "name": "Nexos Claude Opus 4 20250514",
-            "reasoning": true,
-            "input": [
-              "text",
-              "image"
-            ],
-            "cost": {
-              "input": 0,
-              "output": 0,
-              "cacheRead": 0,
-              "cacheWrite": 0
-            },
-            "maxTokens": 8192,
-            "contextWindow": 200000,
-            "compat": {
-              "supportsStore": true,
-              "supportsDeveloperRole": true,
-              "supportsReasoningEffort": false
-            }
-          },
-          {
-            "id": "1f7cd3f1-1461-40c8-ac93-ec6bd721d57e",
-            "name": "Nexos Grok 4 0709",
-            "reasoning": true,
-            "input": [
-              "text",
-              "image"
-            ],
-            "cost": {
-              "input": 0,
-              "output": 0,
-              "cacheRead": 0,
-              "cacheWrite": 0
-            },
-            "maxTokens": 8192,
-            "contextWindow": 200000,
-            "compat": {
-              "supportsStore": true,
-              "supportsDeveloperRole": true,
-              "supportsReasoningEffort": false
-            }
           }
         ]
       }
@@ -253,29 +143,14 @@
   "agents": {
     "defaults": {
       "model": {
-        "primary": "Nexos Gpt 5 2"
+        "primary": "Nexos Anthropic Claude Opus 4 6 @ Default"
       },
       "models": {
-        "nexos/af02f47c-abd2-4c54-97bd-cfa8b0d307be": {
-          "alias": "Nexos Gpt 5 2"
-        },
-        "nexos/29b8b71e-09e3-49be-aeda-ff51972eded1": {
-          "alias": "Nexos Gpt 4 1"
-        },
         "nexos/4e325f69-c34d-4491-b00d-19cc7e72b613": {
           "alias": "Nexos Gemini 3 Flash Preview"
         },
         "nexos/96824cea-7513-489c-bb97-f282593355a0": {
           "alias": "Nexos Anthropic Claude Opus 4 6 @ Default"
-        },
-        "nexos/6baa145f-c4f7-43a0-8e4c-2e0c7b239655": {
-          "alias": "Nexos Anthropic Claude Sonnet 4 5 @ 20250929"
-        },
-        "nexos/664519e5-1b90-4058-b121-0b2585180eba": {
-          "alias": "Nexos Claude Opus 4 20250514"
-        },
-        "nexos/1f7cd3f1-1461-40c8-ac93-ec6bd721d57e": {
-          "alias": "Nexos Grok 4 0709"
         }
       },
       "compaction": {

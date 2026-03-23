@@ -2,7 +2,7 @@
 # ═══════════════════════════════════════════════════════════════
 # CHICKEN HAWK — Infrastructure & CLI Provisioning
 # "Chicken Hawk is not simply a wrapper for OpenClaw. Chicken Hawk
-# installs open code, killercode CLI, gemini CLI, claude CLI, and
+# installs approved operator CLIs, killercode CLI, gemini CLI, and
 # Agent Zero (wrapped by AVVA NOON)."
 # ═══════════════════════════════════════════════════════════════
 
@@ -15,9 +15,6 @@ echo "[+] Installing Core Open Code CLIs (Node/Python based)..."
 
 # Ensure global node modules can be installed
 if command -v npm &> /dev/null; then
-    echo "  -> Installing Claude Code CLI..."
-    npm install -g @anthropic-ai/claude-cli || true
-
     echo "  -> Installing Gemini CLI..."
     # Assuming standard google gemini cli package mapping
     npm install -g @google/generative-ai-cli || true
@@ -69,7 +66,6 @@ export PATH=$PATH:/opt/achievemor/agent-zero/bin
 
 echo "═══════════════════════════════════════════════════════════════"
 echo "🦅 [CHICKEN HAWK] Provisioning Complete."
-echo "     - Claude CLI  [Installed]"
 echo "     - Gemini CLI  [Installed]"
 echo "     - KillerCode  [Installed]"
 echo "     - Agent Zero  [Wrapped by AVVA NOON]"
