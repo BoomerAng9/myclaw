@@ -9,17 +9,25 @@ import { insforge } from './insforge';
  * and receive interrupts or prompts remotely from the user.
  */
 
-const token = process.env.TELEGRAM_BOT_TOKEN || '';
+const token = process.env.TELEGRAM_BOT_TOKEN || process.env.Telegram_KEY || '';
 let bot: TelegramBot | null = null;
 
 if (token) {
   bot = new TelegramBot(token, { polling: true });
 
+<<<<<<< Updated upstream
   bot.on('polling_error', (error: Error) => {
     console.error(`[Telegram Bridge] Polling error: ${error.message}`);
   });
 
   bot.on('webhook_error', (error: Error) => {
+=======
+  bot.on('polling_error', (error) => {
+    console.error(`[Telegram Bridge] Polling error: ${error.message}`);
+  });
+
+  bot.on('webhook_error', (error) => {
+>>>>>>> Stashed changes
     console.error(`[Telegram Bridge] Webhook error: ${error.message}`);
   });
 
@@ -49,6 +57,10 @@ if (token) {
       }
     } catch (error: any) {
       console.error('[Telegram Bridge] Failed to inject task:', error.message);
+      await bot?.sendMessage(
+        chatId,
+        `🦅 [Chicken Hawk] I received your message, but the task pipeline failed: ${error.message}`,
+      );
     }
   });
 
