@@ -3,12 +3,13 @@
 
 ## Identity (Non-Negotiable)
 **Chicken Hawk = OpenClaw = NemoClaw = MyClaw.**
-One product. One VPS deployment. One runtime container (`openshell-cluster-nemoclaw`).
+One product. One VPS deployment. One execution surface embodied through the OpenClaw stack.
 These names are NOT separate systems. They all refer to the same deployed instance.
 
 ## Architecture
-```
-Chicken Hawk (The Single AI Runtime)
+
+```text
+Chicken Hawk (The Master Execution Agent Acting As OpenClaw)
   │
   ├── VPS Container: openshell-cluster-nemoclaw (port 8080)
   ├── UI Container:  openclaw-sop5-openclaw-1 (behind Traefik)
@@ -33,7 +34,8 @@ Chicken Hawk (The Single AI Runtime)
 ```
 
 ## Rules
-1. **Chicken Hawk is the runtime, not an agent.** It does not appear in the lil_hawks list.
+
+1. **Chicken Hawk is the master agent embodied as the OpenClaw runtime.** It does not appear in the lil_hawks list because it spawns and governs them.
 2. **lil_hawks are stateless and narrow.** One capability per hawk. No routing or approval decisions.
 3. **LUC gates are mandatory.** Every billable action passes `canExecute()` first.
 4. **AVVA NOON is last resort.** Double failure pages the human.
@@ -42,8 +44,9 @@ Chicken Hawk (The Single AI Runtime)
 7. **Evidence required.** Every task produces a traceable bundle before delivery.
 
 ## Skills (Merged Pool)
+
 | Skill | Source |
-|-------|--------|
+| ------- | -------- |
 | systematic-debugging | superpowers |
 | dispatching-parallel-agents | superpowers |
 | test-driven-development | superpowers |

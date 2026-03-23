@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { createHash, randomBytes } from 'node:crypto';
 import { insforge } from './insforge';
+import './telegram_bridge';
 
 // --- MyClaw Internal Types (copied/adapted from governance) ---
 interface KYBPayload {

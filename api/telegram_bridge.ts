@@ -9,11 +9,19 @@ import { insforge } from './insforge';
  * and receive interrupts or prompts remotely from the user.
  */
 
-const token = process.env.TELEGRAM_BOT_TOKEN || '';
+const token = process.env.TELEGRAM_BOT_TOKEN || process.env.Telegram_KEY || '';
 let bot: TelegramBot | null = null;
 
 if (token) {
   bot = new TelegramBot(token, { polling: true });
+
+  bot.on('polling_error', (error: Error) => {
+    console.error(`[Telegram Bridge] Polling error: ${error.message}`);
+  });
+
+  bot.on('webhook_error', (error: Error) => {
+    console.error(`[Telegram Bridge] Webhook error: ${error.message}`);
+  });
 
   // Listen for user intercepts/commands
   bot.on('message', async (msg) => {
@@ -43,6 +51,10 @@ if (token) {
       console.error('[Telegram Bridge] Failed to inject task:', error.message);
     }
   });
+
+  console.log('[Telegram Bridge] Chicken Hawk Telegram bridge started.');
+} else {
+  console.warn('[Telegram Bridge] No Telegram token found. Bridge remains offline.');
 }
 
 /**
