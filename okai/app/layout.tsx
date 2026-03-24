@@ -25,16 +25,21 @@ const display = Syne({
 });
 
 export const metadata: Metadata = {
-  title: 'OPEN|KLASS AI',
+  title: 'OKAI',
   description:
-    'OPEN|KLASS AI \u2014 Secure, multi-agent classroom generation from your source material with governed delivery and enterprise controls.',
+    'OKAI \u2014 Secure, multi-agent classroom generation from your source material with governed delivery and enterprise controls.',
   metadataBase: new URL('https://ok.foai.cloud'),
+  icons: {
+    icon: '/okai-logos/okai-badge-ok.png',
+    shortcut: '/okai-logos/okai-badge-ok.png',
+    apple: '/okai-logos/okai-badge-ok.png',
+  },
   openGraph: {
-    title: 'OPEN|KLASS AI',
+    title: 'OKAI',
     description:
       'Secure interactive classrooms generated from source material with multi-agent instruction and governed outcomes.',
     url: 'https://ok.foai.cloud',
-    siteName: 'OPEN|KLASS AI',
+    siteName: 'OKAI',
     type: 'website',
   },
   robots: {

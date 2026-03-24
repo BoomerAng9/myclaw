@@ -8,8 +8,7 @@ import { db } from '@/lib/utils/database';
 import type { SceneOutline, PdfImage, ImageMapping } from '@/lib/types/generation';
 import type { AgentInfo } from '@/lib/generation/generation-pipeline';
 import type { Scene } from '@/lib/types/stage';
-import type { Action, SpeechAction } from '@/lib/types/action';
-import type { TTSProviderId } from '@/lib/audio/types';
+import type { SpeechAction } from '@/lib/types/action';
 import { splitLongSpeechActions } from '@/lib/audio/tts-utils';
 import { generateMediaForOutlines } from '@/lib/media/media-orchestrator';
 import { createLogger } from '@/lib/logger';
@@ -361,19 +360,16 @@ export function useSceneGenerator(options: UseSceneGeneratorOptions = {}) {
             const scene = actionsResult.scene;
             const settings = useSettingsStore.getState();
 
-            // TTS generation — failure means the whole scene fails
+            // TTS generation is best-effort; content/actions remain the blocking path.
             if (settings.ttsEnabled && settings.ttsProviderId !== 'browser-native-tts') {
               const ttsResult = await generateTTSForScene(scene, signal);
               if (!ttsResult.success) {
-                if (abortRef.current || store.getState().generationEpoch !== startEpoch) {
-                  pausedByFailureOrAbort = true;
-                  break;
-                }
-                store.getState().addFailedOutline(outline);
-                options.onSceneFailed?.(outline, ttsResult.error || 'TTS generation failed');
-                store.getState().setGenerationStatus('paused');
-                pausedByFailureOrAbort = true;
-                break;
+                log.warn('Continuing scene generation after non-blocking TTS failure', {
+                  outlineId: outline.id,
+                  outlineOrder: outline.order,
+                  failedCount: ttsResult.failedCount,
+                  error: ttsResult.error,
+                });
               }
             }
 
@@ -505,13 +501,16 @@ export function useSceneGenerator(options: UseSceneGeneratorOptions = {}) {
           return;
         }
 
-        // Step 3: TTS
+        // Step 3: TTS (best-effort)
         const settings = useSettingsStore.getState();
         if (settings.ttsEnabled && settings.ttsProviderId !== 'browser-native-tts') {
           const ttsResult = await generateTTSForScene(actionsResult.scene, signal);
           if (!ttsResult.success) {
-            store.getState().addFailedOutline(outline);
-            return;
+            log.warn('Retry path continuing after non-blocking TTS failure', {
+              outlineId,
+              failedCount: ttsResult.failedCount,
+              error: ttsResult.error,
+            });
           }
         }
 
