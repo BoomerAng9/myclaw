@@ -17,7 +17,7 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+    <nav className="fixed top-0 left-0 z-50 w-full border-b border-[#184055]/10 bg-[#f6f2ea]/85 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center gap-3 w-48">
@@ -32,7 +32,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
+                className="text-sm font-semibold text-[#28485a] transition-colors hover:text-[#f05a28]"
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}
@@ -43,7 +43,7 @@ export function Navbar() {
           <div className="hidden md:flex w-48 justify-end">
             <Link
               href="/app"
-              className="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500"
+              className="inline-flex items-center justify-center rounded-full bg-[#102c3b] px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0e2531] focus:outline-none focus:ring-2 focus:ring-[#f05a28]/40"
             >
               Enter Classroom
             </Link>
@@ -53,7 +53,7 @@ export function Navbar() {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-slate-400 hover:text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500"
+              className="inline-flex items-center justify-center rounded-md p-2 text-[#2d4f60] hover:bg-white/70 hover:text-[#102c3b] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#f05a28]/50"
             >
               <span className="sr-only">Open main menu</span>
               {isOpen ? <X className="block h-6 w-6" aria-hidden="true" /> : <Menu className="block h-6 w-6" aria-hidden="true" />}
@@ -69,14 +69,14 @@ export function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden overflow-hidden bg-white dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800"
+            className="md:hidden overflow-hidden border-b border-[#184055]/10 bg-[#f6f2ea]"
           >
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors"
+                  className="block rounded-md px-3 py-2 text-base font-semibold text-[#28485a] transition-colors hover:bg-white/80 hover:text-[#f05a28]"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
@@ -85,7 +85,7 @@ export function Navbar() {
               <div className="pt-4 pb-2">
                 <Link
                   href="/app"
-                  className="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500"
+                  className="inline-flex w-full items-center justify-center rounded-full bg-[#102c3b] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#0e2531]"
                   onClick={() => setIsOpen(false)}
                 >
                   Enter Classroom

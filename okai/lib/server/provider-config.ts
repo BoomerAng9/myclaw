@@ -39,6 +39,7 @@ interface ServerConfig {
 
 const LLM_ENV_MAP: Record<string, string> = {
   OPENAI: 'openai',
+  OPENROUTER: 'openrouter',
   ANTHROPIC: 'anthropic',
   GOOGLE: 'google',
   DEEPSEEK: 'deepseek',
@@ -122,10 +123,17 @@ function loadEnvSection(
 ): Record<string, ServerProviderEntry> {
   const result: Record<string, ServerProviderEntry> = {};
 
+  const isPlaceholderKey = (value?: string): boolean => {
+    if (!value) return true;
+    const normalized = value.trim();
+    if (!normalized) return true;
+    return /^(ROTATE_ME|CHANGE_ME|CHANGEME|YOUR_[A-Z0-9_]*KEY)/i.test(normalized);
+  };
+
   // First, add everything from YAML as defaults
   if (yamlSection) {
     for (const [id, entry] of Object.entries(yamlSection)) {
-      if (entry?.apiKey) {
+      if (entry?.apiKey && !isPlaceholderKey(entry.apiKey)) {
         result[id] = {
           apiKey: entry.apiKey,
           baseUrl: entry.baseUrl,
@@ -138,7 +146,8 @@ function loadEnvSection(
 
   // Then, apply env vars (env takes priority over YAML)
   for (const [prefix, providerId] of Object.entries(envMap)) {
-    const envApiKey = process.env[`${prefix}_API_KEY`] || undefined;
+    const rawEnvApiKey = process.env[`${prefix}_API_KEY`] || undefined;
+    const envApiKey = isPlaceholderKey(rawEnvApiKey) ? undefined : rawEnvApiKey;
     const envBaseUrl = process.env[`${prefix}_BASE_URL`] || undefined;
     const envModelsStr = process.env[`${prefix}_MODELS`];
     const envModels = envModelsStr
@@ -235,18 +244,37 @@ export function getServerProviders(): Record<string, { models?: string[]; baseUr
 /** Resolve API key: client key > server key > empty string */
 export function resolveApiKey(providerId: string, clientKey?: string): string {
   if (clientKey) return clientKey;
-  return getConfig().providers[providerId]?.apiKey || '';
+  const providers = getConfig().providers;
+  if (providers[providerId]?.apiKey) return providers[providerId].apiKey;
+
+  // Compatibility: many OpenRouter setups are wired through OpenAI-compatible vars.
+  if (providerId === 'openrouter' && providers.openai?.apiKey) return providers.openai.apiKey;
+  if (providerId === 'openai' && providers.openrouter?.apiKey) return providers.openrouter.apiKey;
+
+  return '';
 }
 
 /** Resolve base URL: client > server > undefined */
 export function resolveBaseUrl(providerId: string, clientBaseUrl?: string): string | undefined {
   if (clientBaseUrl) return clientBaseUrl;
-  return getConfig().providers[providerId]?.baseUrl;
+  const providers = getConfig().providers;
+  if (providers[providerId]?.baseUrl) return providers[providerId].baseUrl;
+
+  if (providerId === 'openrouter') return providers.openai?.baseUrl;
+  if (providerId === 'openai') return providers.openrouter?.baseUrl;
+
+  return undefined;
 }
 
 /** Resolve proxy URL for a provider (server config only) */
 export function resolveProxy(providerId: string): string | undefined {
-  return getConfig().providers[providerId]?.proxy;
+  const providers = getConfig().providers;
+  if (providers[providerId]?.proxy) return providers[providerId].proxy;
+
+  if (providerId === 'openrouter') return providers.openai?.proxy;
+  if (providerId === 'openai') return providers.openrouter?.proxy;
+
+  return undefined;
 }
 
 // ---------------------------------------------------------------------------
