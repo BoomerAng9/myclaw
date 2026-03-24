@@ -829,7 +829,7 @@ export function getTTSProvider(providerId: TTSProviderId): TTSProviderConfig | u
  * Used when switching providers or testing a non-active provider.
  */
 export const DEFAULT_TTS_VOICES: Record<TTSProviderId, string> = {
-  'openai-tts': 'alloy',
+  'openai-tts': 'marin',
   'azure-tts': 'zh-CN-XiaoxiaoNeural',
   'glm-tts': 'tongtong',
   'qwen-tts': 'Cherry',
