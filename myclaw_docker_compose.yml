@@ -38,7 +38,7 @@ services:
       - okai-data:/app/data
     labels:
       - traefik.enable=true
-      - traefik.http.routers.okai.rule=Host(`klass.foai.cloud`) || Host(`ok.foai.cloud`)
+      - traefik.http.routers.okai.rule=Host(`ok.foai.cloud`)
       - traefik.http.routers.okai.entrypoints=websecure
       - traefik.http.routers.okai.tls.certresolver=letsencrypt
       - traefik.http.services.okai.loadbalancer.server.port=3000
