@@ -44,6 +44,7 @@ function GenerationPreviewContent() {
   const [isComplete] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
   const [streamingOutlines, setStreamingOutlines] = useState<SceneOutline[] | null>(null);
+  const [generationNotice, setGenerationNotice] = useState<string | null>(null);
   const [truncationWarnings, setTruncationWarnings] = useState<string[]>([]);
   const [webSearchSources, setWebSearchSources] = useState<Array<{ title: string; url: string }>>(
     [],
@@ -140,6 +141,7 @@ function GenerationPreviewContent() {
     let currentSession = session;
 
     setError(null);
+    setGenerationNotice(null);
     setCurrentStepIndex(0);
 
     try {
@@ -699,7 +701,12 @@ function GenerationPreviewContent() {
         }
 
         if (ttsFailCount > 0 && speechActions.length > 0) {
-          throw new Error(t('generation.speechFailed'));
+          log.warn(
+            `[TTS] ${ttsFailCount}/${speechActions.length} speech clips failed. Continuing without blocking classroom generation.`,
+          );
+          setGenerationNotice(
+            'Voice generation failed for some scenes. Classroom content is still available and can run without audio.',
+          );
         }
       }
 
@@ -751,7 +758,7 @@ function GenerationPreviewContent() {
   // Still loading session from sessionStorage
   if (!sessionLoaded) {
     return (
-      <div className="min-h-[100dvh] w-full bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 flex items-center justify-center p-4">
+      <div className="min-h-dvh w-full bg-linear-to-b from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 flex items-center justify-center p-4">
         <div className="text-center text-muted-foreground">
           <div className="size-8 border-2 border-current border-t-transparent rounded-full animate-spin mx-auto" />
         </div>
@@ -762,7 +769,7 @@ function GenerationPreviewContent() {
   // No session found
   if (!session) {
     return (
-      <div className="min-h-[100dvh] w-full bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 flex items-center justify-center p-4">
+      <div className="min-h-dvh w-full bg-linear-to-b from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 flex items-center justify-center p-4">
         <Card className="p-8 max-w-md w-full">
           <div className="text-center space-y-4">
             <AlertCircle className="size-12 text-muted-foreground mx-auto" />
@@ -784,17 +791,11 @@ function GenerationPreviewContent() {
       : ALL_STEPS[0];
 
   return (
-    <div className="min-h-[100dvh] w-full bg-slate-950 flex flex-col items-center justify-center p-4 relative overflow-hidden text-center">
+    <div className="min-h-dvh w-full bg-[#f6f2ea] flex flex-col items-center justify-center p-4 relative overflow-hidden text-center">
       {/* Background Decor */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-        <div
-          className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-[100px] animate-pulse"
-          style={{ animationDuration: '4s' }}
-        />
-        <div
-          className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-[100px] animate-pulse"
-          style={{ animationDuration: '6s' }}
-        />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#7cc5b3]/30 rounded-full blur-[100px] animate-pulse" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#f05a28]/20 rounded-full blur-[100px] animate-pulse" />
       </div>
 
       {/* Back button */}
@@ -803,7 +804,7 @@ function GenerationPreviewContent() {
         animate={{ opacity: 1, y: 0 }}
         className="absolute top-4 left-4 z-20"
       >
-        <Button variant="ghost" size="sm" onClick={goBackToHome}>
+        <Button variant="ghost" size="sm" onClick={goBackToHome} className="text-[#1f3c4b] hover:bg-white/70">
           <ArrowLeft className="size-4 mr-2" />
           {t('generation.backToHome')}
         </Button>
@@ -816,7 +817,7 @@ function GenerationPreviewContent() {
           transition={{ duration: 0.5 }}
           className="w-full"
         >
-          <Card className="relative overflow-hidden border-muted/40 shadow-2xl bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl min-h-[400px] flex flex-col items-center justify-center p-8 md:p-12">
+          <Card className="relative overflow-hidden border-[#1e4154]/20 shadow-2xl bg-[#102c3b]/95 text-white backdrop-blur-xl min-h-100 flex flex-col items-center justify-center p-8 md:p-12">
             {/* Progress Dots */}
             <div className="absolute top-6 left-0 right-0 flex justify-center gap-2">
               {activeSteps.map((step, idx) => (
@@ -825,10 +826,10 @@ function GenerationPreviewContent() {
                   className={cn(
                     'h-1.5 rounded-full transition-all duration-500',
                     idx < currentStepIndex
-                      ? 'w-1.5 bg-blue-500/30'
+                      ? 'w-1.5 bg-[#7cc5b3]/30'
                       : idx === currentStepIndex
-                        ? 'w-8 bg-blue-500'
-                        : 'w-1.5 bg-muted/50',
+                        ? 'w-8 bg-[#7cc5b3]'
+                        : 'w-1.5 bg-white/20',
                   )}
                 />
               ))}
@@ -893,13 +894,17 @@ function GenerationPreviewContent() {
                           ? t('generation.generationComplete')
                           : t(activeStep.title)}
                     </h2>
-                    <p className="text-muted-foreground text-base">
+                    <p className="text-white/75 text-base">
                       {error
                         ? error
                         : isComplete
                           ? t('generation.classroomReady')
                           : statusMessage || t(activeStep.description)}
                     </p>
+
+                    {!error && generationNotice && (
+                      <p className="text-sm text-amber-300/90">{generationNotice}</p>
+                    )}
                   </motion.div>
                 </AnimatePresence>
 
@@ -934,7 +939,7 @@ function GenerationPreviewContent() {
                               ease: 'easeInOut',
                             }}
                             className="relative size-7 rounded-full flex items-center justify-center cursor-default
-                                       bg-gradient-to-br from-amber-400/15 to-orange-400/10
+                                       bg-linear-to-br from-amber-400/15 to-orange-400/10
                                        border border-amber-400/25 hover:border-amber-400/40
                                        hover:from-amber-400/20 hover:to-orange-400/15
                                        transition-colors duration-300
@@ -1018,7 +1023,7 @@ export default function GenerationPreviewPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-[100dvh] w-full bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 flex items-center justify-center">
+        <div className="min-h-dvh w-full bg-linear-to-b from-slate-50 to-slate-100 dark:from-slate-950 dark:to-slate-900 flex items-center justify-center">
           <div className="animate-pulse space-y-4 text-center">
             <div className="h-8 w-48 bg-muted rounded mx-auto" />
             <div className="h-4 w-64 bg-muted rounded mx-auto" />

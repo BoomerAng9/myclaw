@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/server.js",
     "build": "tsc",
-    "dev": "nodemon server.ts"
+    "dev": "nodemon --exec ts-node server.ts"
   },
   "dependencies": {
     "express": "^4.18.2",
