@@ -1,0 +1,32 @@
+{
+  "node": "myclaw",
+  "role": "hub",
+  "network": "boomerang9-ecosystem",
+  "version": "1.0.0",
+  "description": "Central registry, orchestration hub, and shared assets for the entire ecosystem",
+  "provides": [
+    { "name": "registry", "path": "ecosystem-network.json", "description": "Master network manifest" },
+    { "name": "shared-skills", "path": "skills/", "description": "Reusable Claude Code skills" },
+    { "name": "docker-orchestration", "path": "docker-compose.yml", "description": "Multi-service Docker compose" },
+    { "name": "firebase-config", "path": "firebase.json", "description": "Firebase project configuration" },
+    { "name": "deployment-scripts", "path": "deploy/", "description": "Shared deployment automation" },
+    { "name": "aims-tools", "path": "aims-tools/", "description": "AIMS platform tooling" }
+  ],
+  "consumes": [],
+  "connections": {
+    "aims": { "type": "submodule", "purpose": "Main platform inherits shared config" },
+    "chicken-hawk": { "type": "orchestrates", "purpose": "Docker compose launches gateway" },
+    "agent-acheevy-009": { "type": "orchestrates", "purpose": "Docker compose launches agent" },
+    "grammar": { "type": "orchestrates", "purpose": "Docker compose launches chat service" },
+    "destinations-ai": { "type": "orchestrates", "purpose": "Docker compose launches vertical" },
+    "estatemind-ai": { "type": "orchestrates", "purpose": "Docker compose launches vertical" },
+    "acheevy-whisper-build": { "type": "references", "purpose": "Shared voice UI assets" },
+    "acheevy-digital": { "type": "references", "purpose": "Marketing site deployment" }
+  },
+  "file_index": {
+    "entrypoints": ["index.html", "docker-compose.yml"],
+    "config": ["firebase.json", ".env.example", "aims_default.conf"],
+    "agents": ["_agents/", "AGENTS.md"],
+    "shared": ["skills/", "aims-tools/", "vendor/"]
+  }
+}
