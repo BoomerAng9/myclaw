@@ -14,6 +14,7 @@ import { createStageAPI } from '@/lib/api/stage-api';
 import { useCanvasStore } from '@/lib/store/canvas';
 import { useWhiteboardHistoryStore } from '@/lib/store/whiteboard-history';
 import { useMediaGenerationStore, isMediaPlaceholder } from '@/lib/store/media-generation';
+import { useSettingsStore } from '@/lib/store/settings';
 import { getClientTranslation } from '@/lib/i18n';
 import type { AudioPlayer } from '@/lib/utils/audio-player';
 import type {
@@ -53,6 +54,7 @@ function delay(ms: number): Promise<void> {
 
 /** Default duration (ms) before fire-and-forget effects auto-clear */
 const EFFECT_AUTO_CLEAR_MS = 5000;
+const CJK_LANG_THRESHOLD = 0.3;
 
 export class ActionEngine {
   private stageStore: StageStore;
@@ -165,15 +167,120 @@ export class ActionEngine {
   // ==================== Synchronous — Speech ====================
 
   private async executeSpeech(action: SpeechAction): Promise<void> {
-    if (!this.audioPlayer) return;
+    if (!this.audioPlayer) {
+      await this.playSpeechFallback(action.text);
+      return;
+    }
 
     return new Promise<void>((resolve) => {
       this.audioPlayer!.onEnded(() => resolve());
       this.audioPlayer!.play(action.audioId || '', action.audioUrl)
         .then((audioStarted) => {
-          if (!audioStarted) resolve();
+          if (!audioStarted) {
+            this.playSpeechFallback(action.text).finally(resolve);
+          }
         })
-        .catch(() => resolve());
+        .catch(() => {
+          this.playSpeechFallback(action.text).finally(resolve);
+        });
+    });
+  }
+
+  private splitSpeechIntoChunks(text: string): string[] {
+    const chunks = text
+      .split(/(?<=[.!?。！？\n])\s*/)
+      .map((segment) => segment.trim())
+      .filter((segment) => segment.length > 0);
+
+    return chunks.length > 0 ? chunks : [text];
+  }
+
+  private estimateReadingMs(text: string): number {
+    const cjkCount = (
+      text.match(/[\u4e00-\u9fff\u3400-\u4dbf\u3040-\u309f\u30a0-\u30ff\uac00-\ud7af]/g) || []
+    ).length;
+    const isCjk = cjkCount > text.length * CJK_LANG_THRESHOLD;
+
+    return isCjk
+      ? Math.max(2000, text.length * 150)
+      : Math.max(2000, text.split(/\s+/).filter(Boolean).length * 240);
+  }
+
+  private async ensureVoicesLoaded(): Promise<SpeechSynthesisVoice[]> {
+    if (typeof window === 'undefined' || !window.speechSynthesis) return [];
+
+    const voices = window.speechSynthesis.getVoices();
+    if (voices.length > 0) return voices;
+
+    return new Promise((resolve) => {
+      const timeoutId = window.setTimeout(() => resolve(window.speechSynthesis.getVoices()), 1200);
+      const handleVoicesChanged = () => {
+        window.clearTimeout(timeoutId);
+        window.speechSynthesis.removeEventListener('voiceschanged', handleVoicesChanged);
+        resolve(window.speechSynthesis.getVoices());
+      };
+
+      window.speechSynthesis.addEventListener('voiceschanged', handleVoicesChanged, { once: true });
+    });
+  }
+
+  private async playSpeechFallback(text: string): Promise<void> {
+    if (typeof window === 'undefined' || !window.speechSynthesis || !text.trim()) {
+      await delay(this.estimateReadingMs(text));
+      return;
+    }
+
+    const settings = useSettingsStore.getState();
+    const chunks = this.splitSpeechIntoChunks(text);
+    const voices = await this.ensureVoicesLoaded();
+
+    if (voices.length === 0) {
+      await delay(this.estimateReadingMs(text));
+      return;
+    }
+
+    await new Promise<void>((resolve) => {
+      let index = 0;
+
+      const speakNext = () => {
+        if (index >= chunks.length) {
+          resolve();
+          return;
+        }
+
+        const utterance = new SpeechSynthesisUtterance(chunks[index]);
+        utterance.rate = settings.playbackSpeed || 1;
+        utterance.volume = settings.ttsMuted ? 0 : (settings.ttsVolume ?? 1);
+
+        if (settings.ttsVoice && settings.ttsVoice !== 'default') {
+          const matchedVoice = voices.find((voice) => voice.voiceURI === settings.ttsVoice);
+          if (matchedVoice) {
+            utterance.voice = matchedVoice;
+            utterance.lang = matchedVoice.lang;
+          }
+        }
+
+        if (!utterance.lang) {
+          const cjkRatio =
+            (chunks[index].match(/[\u4e00-\u9fff\u3400-\u4dbf]/g) || []).length / chunks[index].length;
+          utterance.lang = cjkRatio > CJK_LANG_THRESHOLD ? 'zh-CN' : 'en-US';
+        }
+
+        utterance.onend = () => {
+          index += 1;
+          speakNext();
+        };
+
+        utterance.onerror = () => {
+          index += 1;
+          speakNext();
+        };
+
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(utterance);
+      };
+
+      speakNext();
     });
   }
 

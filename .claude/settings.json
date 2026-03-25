@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Edit",
+      "MultiEdit",
+      "Write",
+      "Bash(*)",
+      "WebFetch(*)",
+      "TodoRead",
+      "TodoWrite",
+      "mcp__*"
+    ],
+    "deny": []
+  },
+  "enableRemoteConnections": true
+}

@@ -93,12 +93,12 @@ export default function LandingPage() {
                 <ArrowRight className="ml-2 size-4 transition group-hover:translate-x-1" aria-hidden="true" />
               </Link>
               <Link
-                href="https://github.com/THU-MAIC/OpenMAIC"
+                href="https://catalog.mindedge.com/achievemor"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex h-13 items-center justify-center rounded-full border border-[#102c3b]/25 bg-white/80 px-8 text-sm font-semibold uppercase tracking-[0.12em] text-[#102c3b] transition hover:bg-white"
               >
-                View Source
+                MindEdge Catalog
               </Link>
             </div>
           </motion.div>
@@ -200,8 +200,10 @@ export default function LandingPage() {
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-6 text-sm text-[#365567] sm:flex-row sm:items-center sm:justify-between lg:px-8">
           <p className="font-semibold tracking-[0.09em] text-[#102029]">OPEN|KLASS AI</p>
           <div className="flex items-center gap-5">
+            <Link href="/lms" className="transition hover:text-[#f05a28]">LMS</Link>
             <Link href="/about" className="transition hover:text-[#f05a28]">About</Link>
             <Link href="/career" className="transition hover:text-[#f05a28]">Careers</Link>
+            <Link href="/certificate-courses" className="transition hover:text-[#f05a28]">Certificates</Link>
             <Link href="/app" className="transition hover:text-[#f05a28]">Launch</Link>
           </div>
           <p>© 2026 ACHIEVEMOR</p>
