@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /event/
+Disallow: /event/success.html
+Sitemap: https://foai.cloud/event/sitemap.xml

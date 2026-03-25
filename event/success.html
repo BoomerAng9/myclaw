@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>You're In! | Coastal Tech Innovation Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/event.css">
+  <style>
+    body { background: #0a0e27; color: #e2e8f0; }
+    .glow-cyan { text-shadow: 0 0 20px rgba(0,212,255,0.5); }
+    .glow-gold { color: #ffd700; text-shadow: 0 0 20px rgba(255,215,0,0.5); }
+    .btn-primary { background: linear-gradient(135deg, #00d4ff, #0088cc); color: #fff; padding: 0.75rem 2rem; border-radius: 0.5rem; font-weight: 700; text-decoration: none; display: inline-block; transition: transform 0.2s, box-shadow 0.2s; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,212,255,0.4); }
+    @keyframes checkDraw {
+      0% { stroke-dashoffset: 100; }
+      100% { stroke-dashoffset: 0; }
+    }
+    @keyframes circleGrow {
+      0% { transform: scale(0); opacity: 0; }
+      60% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .check-circle { animation: circleGrow 0.6s ease-out forwards; }
+    .check-mark { stroke-dasharray: 100; stroke-dashoffset: 100; animation: checkDraw 0.5s 0.4s ease-out forwards; }
+    .countdown-unit { background: #111638; border: 1px solid rgba(0,212,255,0.2); border-radius: 0.75rem; padding: 1rem; min-width: 80px; }
+  </style>
+</head>
+<body class="min-h-screen font-sans">
+  <!-- Navbar -->
+  <nav class="fixed top-0 w-full z-50 bg-[#0a0e27]/90 backdrop-blur border-b border-cyan-500/20">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="index.html" class="text-2xl font-bold text-[#00d4ff]">CTIH</a>
+      <div class="flex gap-6 text-sm font-medium">
+        <a href="index.html" class="text-gray-300 hover:text-[#00d4ff] transition">Home</a>
+        <a href="index.html#schedule" class="text-gray-300 hover:text-[#00d4ff] transition">Schedule</a>
+        <a href="register.html" class="text-gray-300 hover:text-[#00d4ff] transition">Register</a>
+        <a href="sponsors.html" class="text-gray-300 hover:text-[#00d4ff] transition">Sponsors</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-28 pb-20 px-4 max-w-4xl mx-auto text-center">
+    <!-- Animated Checkmark -->
+    <div class="mb-8 flex justify-center">
+      <svg width="120" height="120" viewBox="0 0 120 120" class="check-circle">
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#00d4ff" stroke-width="4" opacity="0.3"/>
+        <circle cx="60" cy="60" r="54" fill="none" stroke="#00d4ff" stroke-width="4"/>
+        <polyline class="check-mark" points="38,62 52,76 82,46" fill="none" stroke="#ffd700" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h1 class="text-4xl md:text-6xl font-extrabold glow-gold mb-4">You're In!</h1>
+    <p class="text-lg text-gray-400 mb-12 max-w-xl mx-auto">Thank you for registering for the Coastal Tech Innovation Hub. We can't wait to see you there!</p>
+
+    <!-- Countdown -->
+    <div class="mb-16">
+      <h2 class="text-xl font-bold text-white mb-6">Event Starts In</h2>
+      <div id="countdown" data-target="2026-09-01T09:00:00" class="flex justify-center gap-4 flex-wrap">
+        <div class="countdown-unit text-center">
+          <div class="text-3xl font-extrabold text-[#00d4ff]" id="cd-days">--</div>
+          <div class="text-xs text-gray-400 mt-1">Days</div>
+        </div>
+        <div class="countdown-unit text-center">
+          <div class="text-3xl font-extrabold text-[#00d4ff]" id="cd-hours">--</div>
+          <div class="text-xs text-gray-400 mt-1">Hours</div>
+        </div>
+        <div class="countdown-unit text-center">
+          <div class="text-3xl font-extrabold text-[#00d4ff]" id="cd-mins">--</div>
+          <div class="text-xs text-gray-400 mt-1">Minutes</div>
+        </div>
+        <div class="countdown-unit text-center">
+          <div class="text-3xl font-extrabold text-[#00d4ff]" id="cd-secs">--</div>
+          <div class="text-xs text-gray-400 mt-1">Seconds</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- What's Next -->
+    <h2 class="text-2xl font-bold text-white mb-8">What's Next</h2>
+    <div class="grid sm:grid-cols-2 gap-6 mb-16 text-left">
+      <div class="bg-[#111638] rounded-xl p-6 border border-cyan-500/10">
+        <h3 class="text-lg font-bold text-[#00d4ff] mb-2">Check Your Email</h3>
+        <p class="text-gray-400 text-sm">Your confirmation and ticket details are on the way.</p>
+      </div>
+      <div class="bg-[#111638] rounded-xl p-6 border border-cyan-500/10">
+        <h3 class="text-lg font-bold text-[#00d4ff] mb-2">Join Our Discord</h3>
+        <p class="text-gray-400 text-sm">Connect with fellow attendees before the event.</p>
+      </div>
+      <div class="bg-[#111638] rounded-xl p-6 border border-cyan-500/10">
+        <h3 class="text-lg font-bold text-[#00d4ff] mb-2">Explore Your Track</h3>
+        <p class="text-gray-400 text-sm">Dive into your chosen track and plan your sessions.</p>
+      </div>
+      <div class="bg-[#111638] rounded-xl p-6 border border-cyan-500/10">
+        <h3 class="text-lg font-bold text-[#00d4ff] mb-2">Share on Social</h3>
+        <p class="text-gray-400 text-sm">Let the world know you're attending CTIH 2026!</p>
+      </div>
+    </div>
+
+    <!-- Social Share -->
+    <div class="flex justify-center gap-4 mb-12">
+      <a href="https://twitter.com/intent/tweet?text=I%20just%20registered%20for%20the%20Coastal%20Tech%20Innovation%20Hub%202026!%20%F0%9F%8C%8A%20%23CTIH2026&url=https://foai.cloud/event/" target="_blank" rel="noopener" class="bg-[#111638] hover:bg-[#1a2050] border border-cyan-500/20 rounded-lg px-6 py-3 text-sm font-medium text-[#00d4ff] transition">Share on Twitter</a>
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://foai.cloud/event/" target="_blank" rel="noopener" class="bg-[#111638] hover:bg-[#1a2050] border border-cyan-500/20 rounded-lg px-6 py-3 text-sm font-medium text-[#00d4ff] transition">Share on LinkedIn</a>
+    </div>
+
+    <a href="index.html" class="btn-primary">Back to Event Home</a>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-cyan-500/20 py-8 text-center text-gray-500 text-sm">
+    Powered by <a href="https://foai.cloud" class="text-[#00d4ff] hover:underline">foai.cloud</a>
+  </footer>
+
+  <script>
+    (function() {
+      const el = document.getElementById('countdown');
+      const target = new Date(el.dataset.target).getTime();
+      function tick() {
+        const now = Date.now();
+        const diff = Math.max(0, target - now);
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        document.getElementById('cd-days').textContent = d;
+        document.getElementById('cd-hours').textContent = h;
+        document.getElementById('cd-mins').textContent = m;
+        document.getElementById('cd-secs').textContent = s;
+      }
+      tick();
+      setInterval(tick, 1000);
+    })();
+  </script>
+  <script src="assets/event.js"></script>
+</body>
+</html>
