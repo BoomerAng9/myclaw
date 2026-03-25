@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | Coastal Tech Innovation Hub</title>
+  <meta name="description" content="Register for CTIH — secure your in-person or virtual pass to the premier coastal tech conference.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/event.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Offer",
+    "name": "CTIH 2026 Conference Pass",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": "https://foai.cloud/event/register.html",
+    "validFrom": "2026-03-25",
+    "offers": [
+      {"@type": "Offer", "name": "In-Person Pass", "price": "149.00"},
+      {"@type": "Offer", "name": "Virtual Pass", "price": "49.00"}
+    ]
+  }
+  </script>
+  <style>
+    body { background: #0a0e27; color: #e2e8f0; }
+    .btn-primary { background: linear-gradient(135deg, #00d4ff, #0088cc); color: #fff; padding: 0.75rem 2rem; border-radius: 0.5rem; font-weight: 700; border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0,212,255,0.4); }
+    .ticket-card { border: 2px solid rgba(0,212,255,0.2); transition: border-color 0.3s, box-shadow 0.3s; }
+    .ticket-card.selected { border-color: #ffd700; box-shadow: 0 0 30px rgba(255,215,0,0.3); }
+    .glow-cyan { text-shadow: 0 0 20px rgba(0,212,255,0.5); }
+    .glow-gold { color: #ffd700; text-shadow: 0 0 20px rgba(255,215,0,0.5); }
+    .in-person-field { display: none; }
+    .in-person-field.visible { display: block; }
+  </style>
+</head>
+<body class="min-h-screen font-sans">
+  <!-- Navbar -->
+  <nav class="fixed top-0 w-full z-50 bg-[#0a0e27]/90 backdrop-blur border-b border-cyan-500/20">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <a href="index.html" class="text-2xl font-bold text-[#00d4ff]">CTIH</a>
+      <div class="flex gap-6 text-sm font-medium">
+        <a href="index.html" class="text-gray-300 hover:text-[#00d4ff] transition">Home</a>
+        <a href="index.html#schedule" class="text-gray-300 hover:text-[#00d4ff] transition">Schedule</a>
+        <a href="register.html" class="text-[#00d4ff]">Register</a>
+        <a href="sponsors.html" class="text-gray-300 hover:text-[#00d4ff] transition">Sponsors</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="pt-28 pb-16 text-center px-4">
+    <h1 class="text-4xl md:text-6xl font-extrabold glow-cyan mb-4">Secure Your Spot</h1>
+    <p class="text-lg text-gray-400 max-w-2xl mx-auto">Join innovators, creators, and changemakers at the Coastal Tech Innovation Hub. Choose your experience below.</p>
+  </section>
+
+  <!-- Ticket Cards -->
+  <section class="max-w-5xl mx-auto px-4 pb-12">
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- In-Person -->
+      <div class="ticket-card rounded-2xl bg-[#111638] p-8 cursor-pointer" data-ticket="in-person" onclick="selectTicket('in-person')">
+        <h3 class="text-2xl font-bold text-[#00d4ff] mb-2">In-Person Pass</h3>
+        <p class="text-4xl font-extrabold text-white mb-1">$149</p>
+        <p class="text-sm glow-gold mb-6">Early Bird: $99</p>
+        <ul class="space-y-2 text-gray-300 text-sm mb-8">
+          <li class="flex items-center gap-2"><span class="text-[#00d4ff]">&#10003;</span> Full venue access</li>
+          <li class="flex items-center gap-2"><span class="text-[#00d4ff]">&#10003;</span> Meals included</li>
+          <li class="flex items-center gap-2"><span class="text-[#00d4ff]">&#10003;</span> Exclusive swag bag</li>
+          <li class="flex items-center gap-2"><span class="text-[#00d4ff]">&#10003;</span> In-person networking</li>
+          <li class="flex items-center gap-2"><span class="text-[#00d4ff]">&#10003;</span> Virtual access included</li>
+        </ul>
+        <button class="btn-primary w-full" type="button">Select</button>
+      </div>
+      <!-- Virtual -->
+      <div class="ticket-card rounded-2xl bg-[#111638] p-8 cursor-pointer" data-ticket="virtual" onclick="selectTicket('virtual')">
+        <h3 class="text-2xl font-bold text-[#00d4ff] mb-2">Virtual Pass</h3>
+        <p class="text-4xl font-extrabold text-white mb-1">$49</p>
+        <p class="text-sm glow-gold mb-6">Early Bird: $29</p>
+        <ul class="space-y-2 text-gray-300 text-sm mb-8">
+          <li class="flex items-center gap-2"><span class="text-[#00d4ff]">&#10003;</span> Full livestream access</li>
+          <li class="flex items-center gap-2"><span class="text-[#00d4ff]">&#10003;</span> Virtual networking rooms</li>
+          <li class="flex items-center gap-2"><span class="text-[#00d4ff]">&#10003;</span> Digital swag pack</li>
+          <li class="flex items-center gap-2"><span class="text-[#00d4ff]">&#10003;</span> Session recordings</li>
+        </ul>
+        <button class="btn-primary w-full" type="button">Select</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration Form -->
+  <section class="max-w-2xl mx-auto px-4 pb-20">
+    <h2 class="text-3xl font-bold text-center text-white mb-8">Complete Registration</h2>
+    <form id="registration-form" class="space-y-6 bg-[#111638] rounded-2xl p-8 border border-cyan-500/20">
+      <input type="hidden" name="ticketType" id="ticketType" value="">
+      <div>
+        <label class="block text-sm font-medium text-gray-300 mb-1">Full Name *</label>
+        <input type="text" name="name" required class="w-full bg-[#0a0e27] border border-cyan-500/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#00d4ff]">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-300 mb-1">Email *</label>
+        <input type="email" name="email" required class="w-full bg-[#0a0e27] border border-cyan-500/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#00d4ff]">
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-300 mb-1">Phone</label>
+        <input type="tel" name="phone" class="w-full bg-[#0a0e27] border border-cyan-500/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#00d4ff]">
+      </div>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-1">Company</label>
+          <input type="text" name="company" class="w-full bg-[#0a0e27] border border-cyan-500/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#00d4ff]">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-1">Role</label>
+          <input type="text" name="role" class="w-full bg-[#0a0e27] border border-cyan-500/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#00d4ff]">
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-300 mb-1">Track Interest</label>
+        <select name="trackInterest" class="w-full bg-[#0a0e27] border border-cyan-500/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#00d4ff]">
+          <option value="">Select a track</option>
+          <option value="AI & Machine Learning">AI &amp; Machine Learning</option>
+          <option value="Web3 & Blockchain">Web3 &amp; Blockchain</option>
+          <option value="Social Impact Tech">Social Impact Tech</option>
+          <option value="Creative Technology">Creative Technology</option>
+        </select>
+      </div>
+      <div class="in-person-field" id="dietaryField">
+        <label class="block text-sm font-medium text-gray-300 mb-1">Dietary Restrictions</label>
+        <input type="text" name="dietaryRestrictions" class="w-full bg-[#0a0e27] border border-cyan-500/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#00d4ff]" placeholder="e.g. Vegetarian, Gluten-free">
+      </div>
+      <div class="in-person-field" id="tshirtField">
+        <label class="block text-sm font-medium text-gray-300 mb-1">T-Shirt Size</label>
+        <select name="tshirtSize" class="w-full bg-[#0a0e27] border border-cyan-500/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#00d4ff]">
+          <option value="">Select size</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+          <option value="2XL">2XL</option>
+          <option value="3XL">3XL</option>
+        </select>
+      </div>
+      <button type="submit" class="btn-primary w-full text-center">Register &amp; Pay</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-cyan-500/20 py-8 text-center text-gray-500 text-sm">
+    Powered by <a href="https://foai.cloud" class="text-[#00d4ff] hover:underline">foai.cloud</a>
+  </footer>
+
+  <script>
+    function selectTicket(type) {
+      document.querySelectorAll('.ticket-card').forEach(c => c.classList.remove('selected'));
+      document.querySelector('[data-ticket="' + type + '"]').classList.add('selected');
+      document.getElementById('ticketType').value = type;
+      const inPersonFields = document.querySelectorAll('.in-person-field');
+      inPersonFields.forEach(f => {
+        if (type === 'in-person') f.classList.add('visible');
+        else f.classList.remove('visible');
+      });
+    }
+  </script>
+  <script src="assets/event.js"></script>
+</body>
+</html>
