@@ -1,0 +1,147 @@
+{
+  "$schema": "ecosystem-network/v1",
+  "name": "boomerang9-ecosystem",
+  "version": "1.0.0",
+  "hub": "myclaw",
+  "updated": "2026-03-25",
+  "description": "Dynamic repo network connecting the ACHEEVY/AIMS ecosystem",
+  "nodes": {
+    "myclaw": {
+      "role": "hub",
+      "description": "Central registry, orchestration hub, and shared assets",
+      "repo": "BoomerAng9/myclaw",
+      "provides": ["registry", "shared-skills", "docker-orchestration", "firebase-config", "deployment-scripts"],
+      "consumes": [],
+      "ports": { "firebase-hosting": 5000 },
+      "tags": ["core", "infrastructure"]
+    },
+    "aims": {
+      "role": "platform",
+      "description": "A.I.M.S. — main platform frontend, backend, and services",
+      "repo": "BoomerAng9/AIMS",
+      "provides": ["web-app", "api-backend", "firebase-functions", "ai-plugs", "luc-engine", "mcp-tools", "blockwise-ai"],
+      "consumes": ["chicken-hawk/gateway", "agent-acheevy-009/agent-api", "grammar/chat-api", "myclaw/shared-skills"],
+      "ports": { "frontend": 3000, "backend": 8080, "functions": 5001 },
+      "tags": ["core", "platform", "frontend", "backend"]
+    },
+    "chicken-hawk": {
+      "role": "gateway",
+      "description": "API gateway and reverse proxy routing traffic across services",
+      "repo": "BoomerAng9/Chicken-Hawk",
+      "provides": ["gateway", "rate-limiting", "auth-proxy", "service-routing"],
+      "consumes": ["aims/api-backend", "agent-acheevy-009/agent-api", "grammar/chat-api", "destinations-ai/api", "estatemind-ai/api"],
+      "ports": { "gateway": 8443, "admin": 9090 },
+      "tags": ["core", "infrastructure", "networking"]
+    },
+    "acheevy-whisper-build": {
+      "role": "app",
+      "description": "Voice-first UI for ACHEEVY — Whisper-powered speech interface",
+      "repo": "BoomerAng9/acheevy-whisper-build",
+      "provides": ["whisper-ui", "voice-components", "supabase-auth"],
+      "consumes": ["agent-acheevy-009/agent-api", "aims/api-backend", "chicken-hawk/gateway"],
+      "ports": { "dev": 5173 },
+      "tags": ["app", "voice", "frontend"]
+    },
+    "acheevy-digital": {
+      "role": "marketing",
+      "description": "acheevy.digital — public marketing site and landing pages",
+      "repo": "BoomerAng9/acheevy.digital",
+      "provides": ["landing-pages", "marketing-site"],
+      "consumes": ["aims/web-app", "destinations-ai/api", "estatemind-ai/api"],
+      "ports": { "web": 80, "ssl": 443 },
+      "tags": ["marketing", "frontend"]
+    },
+    "destinations-ai": {
+      "role": "vertical",
+      "description": "AI-powered travel & destinations vertical",
+      "repo": "BoomerAng9/destinations-ai",
+      "provides": ["api", "destination-components", "travel-data"],
+      "consumes": ["aims/ai-plugs", "agent-acheevy-009/agent-api", "chicken-hawk/gateway"],
+      "ports": { "next": 3001 },
+      "tags": ["vertical", "ai", "frontend"]
+    },
+    "estatemind-ai": {
+      "role": "vertical",
+      "description": "AI-powered real estate intelligence vertical",
+      "repo": "BoomerAng9/estatemind-ai",
+      "provides": ["api", "estate-components", "property-data"],
+      "consumes": ["aims/ai-plugs", "agent-acheevy-009/agent-api", "chicken-hawk/gateway"],
+      "ports": { "next": 3002 },
+      "tags": ["vertical", "ai", "frontend"]
+    },
+    "agent-acheevy-009": {
+      "role": "agent",
+      "description": "ACHEEVY AI Agent — Python backend for intelligent task execution",
+      "repo": "BoomerAng9/Agent-ACHEEVY-009",
+      "provides": ["agent-api", "chat-server", "sandbox-runtime", "mcp-bridge"],
+      "consumes": ["aims/luc-engine", "grammar/chat-api", "chicken-hawk/gateway"],
+      "ports": { "api": 8000, "ws": 8001, "sandbox": 8002 },
+      "tags": ["core", "ai", "backend", "agent"]
+    },
+    "grammar": {
+      "role": "service",
+      "description": "GRAMMAR — Chat UI, LibreChat integration, and Remotion video engine",
+      "repo": "BoomerAng9/GRAMMAR",
+      "provides": ["chat-api", "chat-ui", "video-engine", "librechat-bridge"],
+      "consumes": ["agent-acheevy-009/agent-api", "aims/ai-plugs", "chicken-hawk/gateway"],
+      "ports": { "next": 3003, "librechat": 3080 },
+      "tags": ["service", "chat", "video", "frontend"]
+    }
+  },
+  "edges": [
+    { "from": "aims", "to": "chicken-hawk", "type": "routes-through", "protocol": "https" },
+    { "from": "aims", "to": "agent-acheevy-009", "type": "invokes", "protocol": "rest+ws" },
+    { "from": "aims", "to": "grammar", "type": "embeds", "protocol": "iframe+api" },
+    { "from": "aims", "to": "myclaw", "type": "inherits", "protocol": "git-submodule" },
+    { "from": "chicken-hawk", "to": "aims", "type": "proxies", "protocol": "https" },
+    { "from": "chicken-hawk", "to": "agent-acheevy-009", "type": "proxies", "protocol": "https+ws" },
+    { "from": "chicken-hawk", "to": "grammar", "type": "proxies", "protocol": "https" },
+    { "from": "chicken-hawk", "to": "destinations-ai", "type": "proxies", "protocol": "https" },
+    { "from": "chicken-hawk", "to": "estatemind-ai", "type": "proxies", "protocol": "https" },
+    { "from": "acheevy-whisper-build", "to": "agent-acheevy-009", "type": "streams", "protocol": "ws" },
+    { "from": "acheevy-whisper-build", "to": "aims", "type": "authenticates", "protocol": "rest" },
+    { "from": "acheevy-digital", "to": "aims", "type": "links-to", "protocol": "https" },
+    { "from": "acheevy-digital", "to": "destinations-ai", "type": "links-to", "protocol": "https" },
+    { "from": "acheevy-digital", "to": "estatemind-ai", "type": "links-to", "protocol": "https" },
+    { "from": "destinations-ai", "to": "aims", "type": "uses-plugs", "protocol": "rest" },
+    { "from": "destinations-ai", "to": "agent-acheevy-009", "type": "invokes", "protocol": "rest" },
+    { "from": "estatemind-ai", "to": "aims", "type": "uses-plugs", "protocol": "rest" },
+    { "from": "estatemind-ai", "to": "agent-acheevy-009", "type": "invokes", "protocol": "rest" },
+    { "from": "agent-acheevy-009", "to": "grammar", "type": "delegates-chat", "protocol": "rest" },
+    { "from": "grammar", "to": "agent-acheevy-009", "type": "invokes", "protocol": "rest+ws" }
+  ],
+  "shared_contracts": {
+    "auth": {
+      "provider": "aims",
+      "method": "firebase-auth",
+      "token_format": "jwt",
+      "consumers": ["all"]
+    },
+    "agent_protocol": {
+      "provider": "agent-acheevy-009",
+      "method": "rest+websocket",
+      "endpoints": {
+        "chat": "/api/v1/chat",
+        "stream": "/ws/v1/stream",
+        "tasks": "/api/v1/tasks"
+      },
+      "consumers": ["aims", "acheevy-whisper-build", "grammar", "destinations-ai", "estatemind-ai"]
+    },
+    "gateway_routing": {
+      "provider": "chicken-hawk",
+      "routes": {
+        "/api/aims/*": "aims:8080",
+        "/api/agent/*": "agent-acheevy-009:8000",
+        "/api/chat/*": "grammar:3003",
+        "/api/destinations/*": "destinations-ai:3001",
+        "/api/estate/*": "estatemind-ai:3002"
+      }
+    },
+    "event_bus": {
+      "provider": "myclaw",
+      "method": "firebase-pubsub",
+      "topics": ["user.action", "agent.task", "vertical.update", "deploy.status"],
+      "consumers": ["aims", "agent-acheevy-009", "grammar"]
+    }
+  }
+}
