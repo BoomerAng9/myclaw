@@ -1,9 +1,9 @@
 {
   "$schema": "aims-ecosystem/v1",
   "name": "AIMS Ecosystem",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "hub": "BoomerAng9/myclaw",
-  "description": "A.I.M.S. (AI-Integrated Management System) — the unified platform connecting ACHEEVY, aiPLUGS, Locale, GRAMMAR, Destinations AI, Perform, and the full Boomer_Ang agent network.",
+  "description": "A.I.M.S. (AI-Integrated Management System) — the unified platform connecting ACHEEVY, aiPLUGS, Locale, GRAMMAR, Destinations AI, Perform, Hawk3D, and the full Boomer_Ang agent network.",
   "branding": {
     "logo": "assets/branding/aims-logo.png",
     "icon": "assets/branding/acheevy-helmet.png",
@@ -32,14 +32,14 @@
       "label": "A.I.M.S. — Platform Core",
       "description": "Primary Next.js frontend + Firebase backend, ACHEEVY chat, aiPLUGS system, CRM, command center.",
       "provides": ["aims-frontend", "aims-backend", "acheevy-chat", "aiplugs-system", "crm", "command-center"],
-      "consumes": ["luc-engine", "grammar-engine", "whisper-stt", "destinations-data", "perform-analytics", "agent-framework"]
+      "consumes": ["luc-engine", "grammar-engine", "whisper-stt", "destinations-data", "perform-analytics", "agent-framework", "hawk3d-visualization"]
     },
     "chicken-hawk": {
       "repo": "BoomerAng9/Chicken-Hawk",
       "role": "intelligence",
-      "label": "Chicken-Hawk — Intelligence Layer",
-      "description": "Market intelligence, competitive analysis, and data aggregation engine.",
-      "provides": ["market-intel", "competitive-analysis", "data-aggregation"],
+      "label": "Chicken-Hawk — Intelligence Layer + Hawk3D",
+      "description": "Sovereign AI operations layer with Lil_Hawks fleet, market intelligence, and Hawk3D 3D agent visualization.",
+      "provides": ["market-intel", "competitive-analysis", "data-aggregation", "hawk3d-visualization", "lil-hawks-fleet", "gateway-monitoring"],
       "consumes": ["aims-backend", "grammar-engine", "destinations-data"]
     },
     "acheevy-whisper-build": {
@@ -123,15 +123,19 @@
     {"from": "aims", "to": "luc", "type": "consumes", "label": "financial calc"},
     {"from": "aims", "to": "agent-acheevy-009", "type": "consumes", "label": "agent tasks"},
     {"from": "aims", "to": "the-perform-platform", "type": "consumes", "label": "analytics"},
+    {"from": "aims", "to": "chicken-hawk", "type": "consumes", "label": "hawk3d visualization"},
     {"from": "acheevy-digital", "to": "aims", "type": "consumes", "label": "platform API"},
     {"from": "chicken-hawk", "to": "aims", "type": "consumes", "label": "market data"},
     {"from": "chicken-hawk", "to": "destinations-ai", "type": "consumes", "label": "geo intel"},
+    {"from": "chicken-hawk", "to": "agent-acheevy-009", "type": "visualizes", "label": "hawk3d agent monitoring"},
+    {"from": "chicken-hawk", "to": "acheevy-whisper-build", "type": "integrates", "label": "voice commands to hawks"},
     {"from": "locale-v2", "to": "luc", "type": "consumes", "label": "calc engine"},
     {"from": "locale-v2", "to": "destinations-ai", "type": "consumes", "label": "location data"},
     {"from": "the-perform-platform", "to": "luc", "type": "consumes", "label": "financial metrics"},
     {"from": "agent-acheevy-009", "to": "grammar", "type": "consumes", "label": "text processing"},
     {"from": "agent-acheevy-009", "to": "acheevy-whisper-build", "type": "consumes", "label": "voice commands"},
     {"from": "ch-docs", "to": "aims", "type": "documents", "label": "platform docs"},
-    {"from": "ch-docs", "to": "myclaw", "type": "documents", "label": "infra docs"}
+    {"from": "ch-docs", "to": "myclaw", "type": "documents", "label": "infra docs"},
+    {"from": "ch-docs", "to": "chicken-hawk", "type": "documents", "label": "hawk3d docs"}
   ]
 }
