@@ -1,0 +1,25 @@
+{
+  "$schema": "aims-ecosystem-node/v1",
+  "nodeId": "myclaw",
+  "repo": "BoomerAng9/myclaw",
+  "tier": 1,
+  "role": "infrastructure",
+  "label": "MyClaw — Infra & Runtime Substrate",
+  "description": "Hub for OpenClaw and Foai.cloud. Container templates, Docker compositions, deployment scripts, ACHEEVY chat widget, Shopify themes. Serves the ecosystem but does not define it. AIMS owns the registry.",
+  "provides": ["openclaw-runtime", "docker-templates", "container-deployments", "foai-hosting", "acheevy-chat-widget"],
+  "consumes": ["aims-backend", "acheevy-chat"],
+  "endpoints": {
+    "foai": "https://foai.cloud"
+  },
+  "hub": "BoomerAng9/AIMS",
+  "peers": [
+    "BoomerAng9/AIMS",
+    "BoomerAng9/Chicken-Hawk",
+    "BoomerAng9/acheevy.digital",
+    "BoomerAng9/Agent-ACHEEVY-009"
+  ],
+  "chatIcon": {
+    "asset": "assets/branding/acheevy-helmet.png",
+    "rule": "ACHEEVY Helmet is the ONLY primary chat avatar. aiPLUGs get secondary badges only."
+  }
+}
