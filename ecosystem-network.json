@@ -1,10 +1,10 @@
 {
   "$schema": "ecosystem-network/v1",
   "name": "boomerang9-ecosystem",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "hub": "myclaw",
   "updated": "2026-03-25",
-  "description": "Dynamic repo network connecting the ACHEEVY/AIMS ecosystem",
+  "description": "Dynamic repo network connecting the ACHEEVY/AIMS ecosystem with Hawk3D visualization",
   "nodes": {
     "myclaw": {
       "role": "hub",
@@ -20,18 +20,18 @@
       "description": "A.I.M.S. — main platform frontend, backend, and services",
       "repo": "BoomerAng9/AIMS",
       "provides": ["web-app", "api-backend", "firebase-functions", "ai-plugs", "luc-engine", "mcp-tools", "blockwise-ai"],
-      "consumes": ["chicken-hawk/gateway", "agent-acheevy-009/agent-api", "grammar/chat-api", "myclaw/shared-skills"],
+      "consumes": ["chicken-hawk/gateway", "chicken-hawk/hawk3d", "agent-acheevy-009/agent-api", "grammar/chat-api", "myclaw/shared-skills"],
       "ports": { "frontend": 3000, "backend": 8080, "functions": 5001 },
       "tags": ["core", "platform", "frontend", "backend"]
     },
     "chicken-hawk": {
       "role": "gateway",
-      "description": "API gateway and reverse proxy routing traffic across services",
+      "description": "API gateway, Lil_Hawks fleet, and Hawk3D 3D agent visualization system",
       "repo": "BoomerAng9/Chicken-Hawk",
-      "provides": ["gateway", "rate-limiting", "auth-proxy", "service-routing"],
-      "consumes": ["aims/api-backend", "agent-acheevy-009/agent-api", "grammar/chat-api", "destinations-ai/api", "estatemind-ai/api"],
-      "ports": { "gateway": 8443, "admin": 9090 },
-      "tags": ["core", "infrastructure", "networking"]
+      "provides": ["gateway", "rate-limiting", "auth-proxy", "service-routing", "hawk3d", "lil-hawks-fleet", "3d-visualization", "agent-monitoring"],
+      "consumes": ["aims/api-backend", "agent-acheevy-009/agent-api", "grammar/chat-api", "destinations-ai/api", "acheevy-whisper-build/whisper-ui"],
+      "ports": { "gateway": 8443, "admin": 9090, "hawk3d": 3000 },
+      "tags": ["core", "infrastructure", "networking", "visualization", "3d"]
     },
     "acheevy-whisper-build": {
       "role": "app",
@@ -47,7 +47,7 @@
       "description": "acheevy.digital — public marketing site and landing pages",
       "repo": "BoomerAng9/acheevy.digital",
       "provides": ["landing-pages", "marketing-site"],
-      "consumes": ["aims/web-app", "destinations-ai/api", "estatemind-ai/api"],
+      "consumes": ["aims/web-app", "destinations-ai/api"],
       "ports": { "web": 80, "ssl": 443 },
       "tags": ["marketing", "frontend"]
     },
@@ -58,15 +58,6 @@
       "provides": ["api", "destination-components", "travel-data"],
       "consumes": ["aims/ai-plugs", "agent-acheevy-009/agent-api", "chicken-hawk/gateway"],
       "ports": { "next": 3001 },
-      "tags": ["vertical", "ai", "frontend"]
-    },
-    "estatemind-ai": {
-      "role": "vertical",
-      "description": "AI-powered real estate intelligence vertical",
-      "repo": "BoomerAng9/estatemind-ai",
-      "provides": ["api", "estate-components", "property-data"],
-      "consumes": ["aims/ai-plugs", "agent-acheevy-009/agent-api", "chicken-hawk/gateway"],
-      "ports": { "next": 3002 },
       "tags": ["vertical", "ai", "frontend"]
     },
     "agent-acheevy-009": {
@@ -86,6 +77,41 @@
       "consumes": ["agent-acheevy-009/agent-api", "aims/ai-plugs", "chicken-hawk/gateway"],
       "ports": { "next": 3003, "librechat": 3080 },
       "tags": ["service", "chat", "video", "frontend"]
+    },
+    "the-perform-platform": {
+      "role": "service",
+      "description": "PERFORM — Performance tracking, KPI analytics, and business intelligence",
+      "repo": "BoomerAng9/the-perform-platform",
+      "provides": ["perform-analytics", "kpi-tracking", "business-intel"],
+      "consumes": ["aims/api-backend", "aims/luc-engine"],
+      "ports": { "next": 3004 },
+      "tags": ["service", "analytics"]
+    },
+    "luc": {
+      "role": "service",
+      "description": "LUC — Locale Universal Calculator for multi-locale financial computation",
+      "repo": "BoomerAng9/LUC-Locale-Universal-Calculator",
+      "provides": ["luc-engine", "currency-conversion", "cost-of-living"],
+      "consumes": ["aims/api-backend", "destinations-ai/travel-data"],
+      "ports": { "api": 3005 },
+      "tags": ["service", "finance"]
+    },
+    "locale-v2": {
+      "role": "frontend",
+      "description": "Locale by ACHIEVEMOR v2 — Next-gen locale frontend",
+      "repo": "BoomerAng9/Locale-by-ACHIEVEMOR-2",
+      "provides": ["locale-frontend", "locale-ui"],
+      "consumes": ["luc/luc-engine", "destinations-ai/travel-data"],
+      "ports": { "next": 3006 },
+      "tags": ["frontend", "locale"]
+    },
+    "ch-docs": {
+      "role": "documentation",
+      "description": "Centralized documentation for the entire AIMS ecosystem",
+      "repo": "BoomerAng9/CH-Docs",
+      "provides": ["documentation", "api-docs", "architecture-guides"],
+      "consumes": [],
+      "tags": ["docs"]
     }
   },
   "edges": [
@@ -93,20 +119,19 @@
     { "from": "aims", "to": "agent-acheevy-009", "type": "invokes", "protocol": "rest+ws" },
     { "from": "aims", "to": "grammar", "type": "embeds", "protocol": "iframe+api" },
     { "from": "aims", "to": "myclaw", "type": "inherits", "protocol": "git-submodule" },
+    { "from": "aims", "to": "chicken-hawk", "type": "embeds", "protocol": "hawk3d-iframe", "label": "Hawk3D visualization" },
     { "from": "chicken-hawk", "to": "aims", "type": "proxies", "protocol": "https" },
     { "from": "chicken-hawk", "to": "agent-acheevy-009", "type": "proxies", "protocol": "https+ws" },
     { "from": "chicken-hawk", "to": "grammar", "type": "proxies", "protocol": "https" },
     { "from": "chicken-hawk", "to": "destinations-ai", "type": "proxies", "protocol": "https" },
-    { "from": "chicken-hawk", "to": "estatemind-ai", "type": "proxies", "protocol": "https" },
+    { "from": "chicken-hawk", "to": "agent-acheevy-009", "type": "monitors", "protocol": "ws", "label": "Hawk3D agent monitoring" },
+    { "from": "chicken-hawk", "to": "acheevy-whisper-build", "type": "integrates", "protocol": "ws", "label": "voice to hawks" },
     { "from": "acheevy-whisper-build", "to": "agent-acheevy-009", "type": "streams", "protocol": "ws" },
     { "from": "acheevy-whisper-build", "to": "aims", "type": "authenticates", "protocol": "rest" },
     { "from": "acheevy-digital", "to": "aims", "type": "links-to", "protocol": "https" },
     { "from": "acheevy-digital", "to": "destinations-ai", "type": "links-to", "protocol": "https" },
-    { "from": "acheevy-digital", "to": "estatemind-ai", "type": "links-to", "protocol": "https" },
     { "from": "destinations-ai", "to": "aims", "type": "uses-plugs", "protocol": "rest" },
     { "from": "destinations-ai", "to": "agent-acheevy-009", "type": "invokes", "protocol": "rest" },
-    { "from": "estatemind-ai", "to": "aims", "type": "uses-plugs", "protocol": "rest" },
-    { "from": "estatemind-ai", "to": "agent-acheevy-009", "type": "invokes", "protocol": "rest" },
     { "from": "agent-acheevy-009", "to": "grammar", "type": "delegates-chat", "protocol": "rest" },
     { "from": "grammar", "to": "agent-acheevy-009", "type": "invokes", "protocol": "rest+ws" }
   ],
@@ -125,7 +150,7 @@
         "stream": "/ws/v1/stream",
         "tasks": "/api/v1/tasks"
       },
-      "consumers": ["aims", "acheevy-whisper-build", "grammar", "destinations-ai", "estatemind-ai"]
+      "consumers": ["aims", "acheevy-whisper-build", "grammar", "destinations-ai", "chicken-hawk"]
     },
     "gateway_routing": {
       "provider": "chicken-hawk",
@@ -134,14 +159,26 @@
         "/api/agent/*": "agent-acheevy-009:8000",
         "/api/chat/*": "grammar:3003",
         "/api/destinations/*": "destinations-ai:3001",
-        "/api/estate/*": "estatemind-ai:3002"
+        "/hawk3d/*": "chicken-hawk:3000"
       }
+    },
+    "hawk3d_protocol": {
+      "provider": "chicken-hawk",
+      "method": "rest+websocket",
+      "description": "Hawk3D 3D visualization of Lil_Hawks fleet and ecosystem topology",
+      "endpoints": {
+        "status": "/api/gateway",
+        "agents": "/api/agents",
+        "ui": "/hawk3d/"
+      },
+      "features": ["3d-office", "agent-avatars", "vps-topology", "activity-feed", "janitor-system", "setup-wizard"],
+      "consumers": ["aims", "acheevy-digital"]
     },
     "event_bus": {
       "provider": "myclaw",
       "method": "firebase-pubsub",
-      "topics": ["user.action", "agent.task", "vertical.update", "deploy.status"],
-      "consumers": ["aims", "agent-acheevy-009", "grammar"]
+      "topics": ["user.action", "agent.task", "vertical.update", "deploy.status", "hawk3d.agent-status"],
+      "consumers": ["aims", "agent-acheevy-009", "grammar", "chicken-hawk"]
     }
   }
 }
