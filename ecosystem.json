@@ -1,0 +1,137 @@
+{
+  "$schema": "aims-ecosystem/v1",
+  "name": "AIMS Ecosystem",
+  "version": "1.0.0",
+  "hub": "BoomerAng9/myclaw",
+  "description": "A.I.M.S. (AI-Integrated Management System) — the unified platform connecting ACHEEVY, aiPLUGS, Locale, GRAMMAR, Destinations AI, Perform, and the full Boomer_Ang agent network.",
+  "branding": {
+    "logo": "assets/branding/aims-logo.png",
+    "icon": "assets/branding/acheevy-helmet.png",
+    "chatIcon": "assets/branding/acheevy-helmet.png",
+    "colors": {
+      "primary": "#C8A84E",
+      "primaryDark": "#8B7635",
+      "surface": "#1A1A2E",
+      "surfaceGlass": "rgba(26,26,46,0.85)",
+      "accent": "#FFD700",
+      "text": "#FFFFFF"
+    }
+  },
+  "nodes": {
+    "myclaw": {
+      "repo": "BoomerAng9/myclaw",
+      "role": "hub",
+      "label": "MyClaw — Central Hub",
+      "description": "Orchestration hub, Docker deployments, central API gateway, and ecosystem registry.",
+      "provides": ["docker-compose", "api-gateway", "ecosystem-registry", "deployment-scripts"],
+      "consumes": ["aims-frontend", "aims-backend", "acheevy-chat", "luc-engine", "destinations-data", "perform-analytics"]
+    },
+    "aims": {
+      "repo": "BoomerAng9/AIMS",
+      "role": "platform-core",
+      "label": "A.I.M.S. — Platform Core",
+      "description": "Primary Next.js frontend + Firebase backend, ACHEEVY chat, aiPLUGS system, CRM, command center.",
+      "provides": ["aims-frontend", "aims-backend", "acheevy-chat", "aiplugs-system", "crm", "command-center"],
+      "consumes": ["luc-engine", "grammar-engine", "whisper-stt", "destinations-data", "perform-analytics", "agent-framework"]
+    },
+    "chicken-hawk": {
+      "repo": "BoomerAng9/Chicken-Hawk",
+      "role": "intelligence",
+      "label": "Chicken-Hawk — Intelligence Layer",
+      "description": "Market intelligence, competitive analysis, and data aggregation engine.",
+      "provides": ["market-intel", "competitive-analysis", "data-aggregation"],
+      "consumes": ["aims-backend", "grammar-engine", "destinations-data"]
+    },
+    "acheevy-whisper-build": {
+      "repo": "BoomerAng9/acheevy-whisper-build",
+      "role": "service",
+      "label": "ACHEEVY Whisper — Speech-to-Text",
+      "description": "Whisper-based STT service powering voice input across the AIMS platform.",
+      "provides": ["whisper-stt", "voice-transcription", "audio-processing"],
+      "consumes": ["aims-backend"]
+    },
+    "acheevy-digital": {
+      "repo": "BoomerAng9/acheevy.digital",
+      "role": "frontend",
+      "label": "ACHEEVY.digital — Public Portal",
+      "description": "Public-facing ACHEEVY website and marketing portal.",
+      "provides": ["public-website", "marketing-portal", "user-onboarding"],
+      "consumes": ["aims-frontend", "acheevy-chat", "aiplugs-system"]
+    },
+    "destinations-ai": {
+      "repo": "BoomerAng9/destinations-ai",
+      "role": "service",
+      "label": "Destinations AI — Location Intelligence",
+      "description": "AI-powered location, travel, and destination intelligence engine.",
+      "provides": ["destinations-data", "location-intel", "travel-ai"],
+      "consumes": ["aims-backend", "grammar-engine"]
+    },
+    "agent-acheevy-009": {
+      "repo": "BoomerAng9/Agent-ACHEEVY-009",
+      "role": "agent",
+      "label": "Agent ACHEEVY-009 — Boomer_Ang Agent",
+      "description": "Autonomous AI agent framework — the Boomer_Ang that powers ACHEEVY interactions.",
+      "provides": ["agent-framework", "boomer-ang-runtime", "autonomous-tasks"],
+      "consumes": ["aims-backend", "acheevy-chat", "grammar-engine", "whisper-stt"]
+    },
+    "grammar": {
+      "repo": "BoomerAng9/GRAMMAR",
+      "role": "service",
+      "label": "GRAMMAR — NLP Engine",
+      "description": "Natural language processing, grammar analysis, and text intelligence engine.",
+      "provides": ["grammar-engine", "nlp-processing", "text-analysis"],
+      "consumes": ["aims-backend"]
+    },
+    "the-perform-platform": {
+      "repo": "BoomerAng9/the-perform-platform",
+      "role": "service",
+      "label": "PERFORM — Analytics Platform",
+      "description": "Performance tracking, KPI analytics, and business intelligence dashboard.",
+      "provides": ["perform-analytics", "kpi-tracking", "business-intel"],
+      "consumes": ["aims-backend", "luc-engine"]
+    },
+    "ch-docs": {
+      "repo": "BoomerAng9/CH-Docs",
+      "role": "documentation",
+      "label": "CH-Docs — Documentation Hub",
+      "description": "Centralized documentation for the entire AIMS ecosystem.",
+      "provides": ["documentation", "api-docs", "architecture-guides"],
+      "consumes": []
+    },
+    "luc": {
+      "repo": "BoomerAng9/LUC-Locale-Universal-Calculator",
+      "role": "service",
+      "label": "LUC — Locale Universal Calculator",
+      "description": "Multi-locale financial calculator, currency conversion, and cost-of-living engine.",
+      "provides": ["luc-engine", "currency-conversion", "cost-of-living", "financial-calc"],
+      "consumes": ["aims-backend", "destinations-data"]
+    },
+    "locale-v2": {
+      "repo": "BoomerAng9/Locale-by-ACHIEVEMOR-2",
+      "role": "frontend",
+      "label": "Locale by ACHIEVEMOR v2 — Locale Frontend",
+      "description": "Next-gen Locale frontend with ACHIEVEMOR integration and LUC calculator UI.",
+      "provides": ["locale-frontend", "locale-ui", "achievemor-integration"],
+      "consumes": ["luc-engine", "aims-frontend", "destinations-data", "currency-conversion"]
+    }
+  },
+  "edges": [
+    {"from": "myclaw", "to": "aims", "type": "orchestrates", "label": "deploys & routes"},
+    {"from": "aims", "to": "grammar", "type": "consumes", "label": "NLP processing"},
+    {"from": "aims", "to": "acheevy-whisper-build", "type": "consumes", "label": "voice input"},
+    {"from": "aims", "to": "destinations-ai", "type": "consumes", "label": "location data"},
+    {"from": "aims", "to": "luc", "type": "consumes", "label": "financial calc"},
+    {"from": "aims", "to": "agent-acheevy-009", "type": "consumes", "label": "agent tasks"},
+    {"from": "aims", "to": "the-perform-platform", "type": "consumes", "label": "analytics"},
+    {"from": "acheevy-digital", "to": "aims", "type": "consumes", "label": "platform API"},
+    {"from": "chicken-hawk", "to": "aims", "type": "consumes", "label": "market data"},
+    {"from": "chicken-hawk", "to": "destinations-ai", "type": "consumes", "label": "geo intel"},
+    {"from": "locale-v2", "to": "luc", "type": "consumes", "label": "calc engine"},
+    {"from": "locale-v2", "to": "destinations-ai", "type": "consumes", "label": "location data"},
+    {"from": "the-perform-platform", "to": "luc", "type": "consumes", "label": "financial metrics"},
+    {"from": "agent-acheevy-009", "to": "grammar", "type": "consumes", "label": "text processing"},
+    {"from": "agent-acheevy-009", "to": "acheevy-whisper-build", "type": "consumes", "label": "voice commands"},
+    {"from": "ch-docs", "to": "aims", "type": "documents", "label": "platform docs"},
+    {"from": "ch-docs", "to": "myclaw", "type": "documents", "label": "infra docs"}
+  ]
+}
