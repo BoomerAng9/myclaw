@@ -468,14 +468,8 @@ export class PlaybackEngine {
           .play(speechAction.audioId || '', speechAction.audioUrl)
           .then((audioStarted) => {
             if (!audioStarted) {
-              // No pre-generated audio — try browser-native TTS if selected
-              const settings = useSettingsStore.getState();
-              if (
-                settings.ttsEnabled &&
-                settings.ttsProviderId === 'browser-native-tts' &&
-                typeof window !== 'undefined' &&
-                window.speechSynthesis
-              ) {
+              // No pre-generated audio — fall back to browser TTS when available
+              if (typeof window !== 'undefined' && window.speechSynthesis) {
                 this.playBrowserTTS(speechAction);
               } else {
                 scheduleReadingTimer();
