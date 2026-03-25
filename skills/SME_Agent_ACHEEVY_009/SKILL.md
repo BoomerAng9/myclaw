@@ -108,7 +108,7 @@ curl http://localhost:8000/bridge/health
 | `fastapi` | HTTP/WebSocket server |
 | `uvicorn` | ASGI server |
 | `openai` | OpenRouter / LLM access |
-| `litellm` | Multi-provider LLM routing |
+| ~~`litellm`~~ | **BLOCKED** — see SECURITY-LITELLM-BLOCKED.md. Use Gemini API + direct provider SDKs instead. |
 | `anthropic[vertex]` | Claude via Vertex |
 | `google-genai` | Gemini API |
 | `google-cloud-aiplatform` | Vertex AI |
