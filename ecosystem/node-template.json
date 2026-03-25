@@ -1,0 +1,13 @@
+{
+  "$schema": "aims-ecosystem-node/v1",
+  "nodeId": "__NODE_ID__",
+  "repo": "BoomerAng9/__REPO__",
+  "role": "__ROLE__",
+  "label": "__LABEL__",
+  "description": "__DESCRIPTION__",
+  "provides": [],
+  "consumes": [],
+  "endpoints": {},
+  "hub": "BoomerAng9/myclaw",
+  "peers": []
+}
